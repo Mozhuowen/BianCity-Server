@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 指定Hibernate的DTD信息 -->
+<!DOCTYPE hibernate-mapping
+	PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="domain">
+	<class name="comment" table="pt_comment">
+	<!-- 映射标识属性staid -->
+	<id name="commentid" column="comment_id">
+		<!-- 定义主键生成器策略 -->
+		<generator class="identity"/>
+	</id>
+	<property name="content" type="string"/>
+	<property name="time" type="calendar"/>
+	<property name="goods" type="integer"/>
+	<!-- 指向用户 -->
+	<many-to-one name="user" class="users" column="users_id"/>
+	<!-- 指向葡萄 -->
+	<many-to-one name="putaox" class="putao" column="putao_id"/>	
+	<!-- 指向小镇 -->
+	<many-to-one name="townx" class="town" column="town_id"/>
+	<!-- 影射点赞的用户 -->
+	<set name="dogoodusers" table="pt_dogood_users_comment">
+		<key column="comment_id"/>
+		<many-to-many class="users" column="users_id"/>
+	</set>
+	</class>
+</hibernate-mapping>

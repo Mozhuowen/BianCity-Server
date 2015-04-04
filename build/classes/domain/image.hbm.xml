@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 指定Hibernate的DTD信息 -->
+<!DOCTYPE hibernate-mapping
+	PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="domain">
+	<class name="Image" table="pt_image">
+	<!-- 映射标识属性staid -->
+	<id name="imageid" column="image_id">
+		<!-- 定义主键生成器策略 -->
+		<generator class="identity"/>
+	</id>
+	<property name="imagename" type="string"/>
+	<property name="md5" type="string"/>
+	<property name="size" type="integer"/>
+	<property name="viewtimes" type="integer"/>
+	<property name="isvisible" type="integer"/>
+	<property name="list_index" type="integer"/>
+	<many-to-one name="p" class="putao" column="putao_id" not-null="true"/>
+	</class>
+</hibernate-mapping> 

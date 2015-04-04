@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 指定Hibernate的DTD信息 -->
+<!DOCTYPE hibernate-mapping
+	PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="domain">
+	<class name="WeiboUser" table="wb_user">
+	<!-- 映射标识属性staid -->
+	<id name="weibouserid" column="weibouser_id">
+		<!-- 定义主键生成器策略 -->
+		<generator class="identity"/>
+	</id>
+	<property name="id" type="string"/>
+	<property name="idstr" type="string"/>
+	<property name="screen_name" type="string"/>
+	<property name="name" type="string"/>
+	<property name="province" type="integer"/>
+	<property name="city" type="integer"/>
+	<property name="location" type="string"/>
+	<property name="descri" type="string"/>
+	<property name="url" type="string"/>
+	<property name="profile_image_url" type="string"/>
+	<property name="profile_url" type="string"/>
+	<property name="domain" type="string"/>
+	<property name="weihao" type="string"/>
+	<property name="gender" type="string"/>
+	<property name="followers_count" type="integer"/>
+	<property name="friends_count" type="integer"/>
+	<property name="statuses_count" type="integer"/>
+	<property name="favourites_count" type="integer"/>
+	<property name="created_at" type="string"/>
+	<property name="allow_all_act_msg" type="boolean"/>
+	<property name="geo_enabled" type="boolean"/>
+	<property name="verified" type="boolean"/>
+	<property name="allow_all_comment" type="boolean"/>
+	<property name="remark" type="string"/>
+	<property name="avatar_large" type="string"/>
+	<property name="avatar_hd" type="string"/>
+	<property name="verified_reason" type="string"/>
+	<property name="follow_me" type="boolean"/>
+	<property name="online_status" type="integer"/>
+	<property name="bi_followers_count" type="integer"/>
+	<!-- 影射ptuser -->
+	<many-to-one name="ptuser" unique="true" column="users_id" not-null="true"/>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 指定Struts 2配置文件的DTD信息 -->
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+	"http://struts.apache.org/dtds/struts-2.1.7.dtd">
+<!-- Struts 2配置文件的根元素 -->
+<struts>
+	<!-- 配置了系列常量 -->
+	<constant name="struts.i18n.encoding" value="UTF-8"/>	
+	<constant name="struts.devMode" value="false"/>
+	<constant name="struts.configuration.xml.reload" value="true"/>
+	<!-- 开启动态方法调用 -->
+	<constant name="struts.enable.DynamicMethodInvocation" value="true"/>
+	<constant name="struts.multipart.maxSize" value="5242880"/>
+	
+	<package name="mo" extends="struts-default,json-default" namespace="/">
+	<!-- 配置拦截器 -->
+	<interceptors>
+		<interceptor name="authority" class="authority_action"/>
+	</interceptors>
+	<!-- actions -->
+	<action name="hello" class="hello_action">
+		<result name="success">/WEB-INF/jsp/success.jsp</result>
+		<result name="error">/WEB-INF/jsp/error.jsp</result>
+	</action>
+	<action name="registe" class="registe_action">
+		<interceptor-ref name="json">
+            <param name="contentType">application/json</param>
+       </interceptor-ref>
+		<result name="success">/WEB-INF/jsp/success.jsp</result>
+		<result name="error">/WEB-INF/jsp/error.jsp</result>
+	</action>
+	<action name="login" class="login_action">
+		<interceptor-ref name="json">
+            <param name="contentType">application/json</param>
+       </interceptor-ref>
+		<result name="success">/WEB-INF/jsp/success.jsp</result>
+		<result name="error">/WEB-INF/jsp/error.jsp</result>
+	</action>
+	<action name="applytown" class="applytown_action">
+		<interceptor-ref name="json">
+            <param name="contentType">application/json</param>
+       </interceptor-ref>
+       <interceptor-ref name="authority"/>
+		<result name="success">/WEB-INF/jsp/success.jsp</result>
+		<result name="error">/WEB-INF/jsp/error.jsp</result>
+	</action>
+	<action name="createputao" class="createputao_action">
+		<interceptor-ref name="json">
+            <param name="contentType">application/json</param>
+       </interceptor-ref>
+       <interceptor-ref name="authority"/>
+       <result name="success">/WEB-INF/jsp/success.jsp</result>
+		 <result name="error">/WEB-INF/jsp/error.jsp</result>
+	</action>
+	<action name="getputao" class="getputao_action">
+		<interceptor-ref name="json">
+            <param name="contentType">application/json</param>
+       </interceptor-ref>
+       <interceptor-ref name="authority"/>
+       <result name="success">/WEB-INF/jsp/success.jsp</result>
+		 <result name="error">/WEB-INF/jsp/error.jsp</result>
+	</action>
+	<action name="submitcomment" class="submitcomment_action">
+		<interceptor-ref name="json">
+            <param name="contentType">application/json</param>
+       </interceptor-ref>
+       <interceptor-ref name="authority"/>
+       <result name="success">/WEB-INF/jsp/success.jsp</result>
+		 <result name="error">/WEB-INF/jsp/error.jsp</result>
+	</action>
+	<action name="getcomment" class="getcomment_action">
+		<interceptor-ref name="json">
+            <param name="contentType">application/json</param>
+       </interceptor-ref>
+       <interceptor-ref name="authority"/>
+       <result name="success">/WEB-INF/jsp/success.jsp</result>
+		 <result name="error">/WEB-INF/jsp/error.jsp</result>
+	</action>
+	<action name="cname" class="cname_action">
+		<interceptor-ref name="json">
+            <param name="contentType">application/json</param>
+       </interceptor-ref>
+       <interceptor-ref name="authority"/>
+       <result name="success">/WEB-INF/jsp/success.jsp</result>
+		 <result name="error">/WEB-INF/jsp/error.jsp</result>
+	</action>
+	<action name="getmess" class="getmess_action">
+		<interceptor-ref name="json">
+            <param name="contentType">application/json</param>
+       </interceptor-ref>
+       <interceptor-ref name="authority"/>
+       <result name="success">/WEB-INF/jsp/success.jsp</result>
+		 <result name="error">/WEB-INF/jsp/error.jsp</result>
+	</action>
+	<action name="submitmess" class="submitmess_action">
+		<interceptor-ref name="json">
+            <param name="contentType">application/json</param>
+       </interceptor-ref>
+       <interceptor-ref name="authority"/>
+       <result name="success">/WEB-INF/jsp/success.jsp</result>
+		 <result name="error">/WEB-INF/jsp/error.jsp</result>
+	</action>
+	<action name="dogood" class="dogood_action">
+		<interceptor-ref name="json">
+            <param name="contentType">application/json</param>
+       </interceptor-ref>
+       <interceptor-ref name="authority"/>
+       <result name="success">/WEB-INF/jsp/success.jsp</result>
+		 <result name="error">/WEB-INF/jsp/error.jsp</result>
+	</action>
+	<action name="getgoods" class="getgoods_action">
+		<interceptor-ref name="json">
+            <param name="contentType">application/json</param>
+       </interceptor-ref>
+       <interceptor-ref name="authority"/>
+       <result name="success">/WEB-INF/jsp/success.jsp</result>
+		 <result name="error">/WEB-INF/jsp/error.jsp</result>
+	</action>
+	<action name="getsubscri" class="getsubscri_action">
+		<interceptor-ref name="json">
+            <param name="contentType">application/json</param>
+       </interceptor-ref>
+       <interceptor-ref name="authority"/>
+       <result name="success">/WEB-INF/jsp/success.jsp</result>
+		 <result name="error">/WEB-INF/jsp/error.jsp</result>
+	</action>
+	<action name="dosubscri" class="dosubscri_action">
+		<interceptor-ref name="json">
+            <param name="contentType">application/json</param>
+       </interceptor-ref>
+       <interceptor-ref name="authority"/>
+       <result name="success">/WEB-INF/jsp/success.jsp</result>
+		 <result name="error">/WEB-INF/jsp/error.jsp</result>
+	</action>
+	<action name="getfavorite" class="getfavorite_action">
+		<interceptor-ref name="json">
+            <param name="contentType">application/json</param>
+       </interceptor-ref>
+       <interceptor-ref name="authority"/>
+       <result name="success">/WEB-INF/jsp/success.jsp</result>
+		 <result name="error">/WEB-INF/jsp/error.jsp</result>
+	</action>
+	<action name="dofavorite" class="dofavorite_action">
+		<interceptor-ref name="json">
+            <param name="contentType">application/json</param>
+       </interceptor-ref>
+       <interceptor-ref name="authority"/>
+       <result name="success">/WEB-INF/jsp/success.jsp</result>
+		 <result name="error">/WEB-INF/jsp/error.jsp</result>
+	</action>
+	<action name="getfans" class="getfans_action">
+		<interceptor-ref name="json">
+            <param name="contentType">application/json</param>
+       </interceptor-ref>
+       <interceptor-ref name="authority"/>
+       <result name="success">/WEB-INF/jsp/success.jsp</result>
+		 <result name="error">/WEB-INF/jsp/error.jsp</result>
+	</action>
+	<action name="getuserinfo" class="getuserinfo_action">
+		<interceptor-ref name="json">
+            <param name="contentType">application/json</param>
+       </interceptor-ref>
+       <interceptor-ref name="authority"/>
+       <result name="success">/WEB-INF/jsp/success.jsp</result>
+		 <result name="error">/WEB-INF/jsp/error.jsp</result>
+	</action>
+	<action name="getsubslist" class="getsubslist_action">
+		<interceptor-ref name="json">
+            <param name="contentType">application/json</param>
+       </interceptor-ref>
+       <interceptor-ref name="authority"/>
+       <result name="success">/WEB-INF/jsp/success.jsp</result>
+		 <result name="error">/WEB-INF/jsp/error.jsp</result>
+	</action>
+	<action name="getfavolist" class="getfavolist_action">
+		<interceptor-ref name="json">
+            <param name="contentType">application/json</param>
+       </interceptor-ref>
+       <interceptor-ref name="authority"/>
+       <result name="success">/WEB-INF/jsp/success.jsp</result>
+		 <result name="error">/WEB-INF/jsp/error.jsp</result>
+	</action>
+	<action name="gethot" class="gethot_action">
+		<interceptor-ref name="json">
+            <param name="contentType">application/json</param>
+       </interceptor-ref>
+       <interceptor-ref name="authority"/>
+       <result name="success">/WEB-INF/jsp/success.jsp</result>
+		 <result name="error">/WEB-INF/jsp/error.jsp</result>
+	</action>
+	<action name="getnear" class="getnear_action">
+		<interceptor-ref name="json">
+            <param name="contentType">application/json</param>
+       </interceptor-ref>
+       <interceptor-ref name="authority"/>
+       <result name="success">/WEB-INF/jsp/success.jsp</result>
+		 <result name="error">/WEB-INF/jsp/error.jsp</result>
+	</action>
+	<action name="cwall" class="cwall_action">
+		<interceptor-ref name="json">
+            <param name="contentType">application/json</param>
+       </interceptor-ref>
+       <interceptor-ref name="authority"/>
+       <result name="success">/WEB-INF/jsp/success.jsp</result>
+		 <result name="error">/WEB-INF/jsp/error.jsp</result>
+	</action>
+	
+	<action name="">
+   		<result name="success">/WEB-INF/jsp/index.jsp</result>
+   </action>
+	<action name="*">
+		<result>/WEB-INF/jsp/{1}.jsp</result>
+	</action>
+	
+	</package>
+
+
+</struts>

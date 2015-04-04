@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 指定Hibernate的DTD信息 -->
+<!DOCTYPE hibernate-mapping
+	PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="domain">
+	<class name="users" table="pt_users">
+	<!-- 映射标识属性staid -->
+	<id name="usersid" column="users_id">
+		<!-- 定义主键生成器策略 -->
+		<generator class="identity"/>
+	</id>
+	<property name="name" type="string"/>
+	<property name="password" type="string"/>
+	<property name="email" type="string"/>
+	<property name="phonenumber" type="string"/>
+	<property name="wechat" type="string"/>
+	<property name="qq" type="string"/>
+	<property name="extend" type="string"/>
+	<property name="cover" type="string"/>
+	<property name="ptoken" type="string"/>
+	<property name="imei" type="string"/>
+	<property name="sv" type="string"/>
+	<property name="phonemodel" type="string"/>
+	<property name="brand" type="string"/>
+	<property name="exist" type="integer"/>
+	<property name="registetime" type="calendar"/>
+	<property name="lastlogin" type="calendar"/>
+	<property name="wbtoken" type="string"/>
+	<property name="expirestime" type="calendar"/>
+	<property name="logintype" type="integer"/>
+	<property name="fans" type="integer"/>
+	<property name="wallimage" type="string"/>
+	<!-- 影射town集合 -->
+	<set name="mytowns" inverse="true" order-by="createtime desc">
+		<!-- 关联的外键列 -->
+		<key column="users_id"/>
+		<!-- 影射到的关联类属性 -->
+		<one-to-many class="town"/>
+	</set>
+	<!-- 影射评论 -->
+	<set name="comments" inverse="true" order-by="time desc">
+		<key column="users_id"/>
+		<one-to-many class="comment"/>
+	</set>
+	<!-- 影射留言 -->
+	<set name="mess" inverse="true" order-by="time desc">
+		<key column="users_id"/>
+		<one-to-many class="MessBoard"/>
+	</set>
+	<!-- 影射weibo -->
+	<one-to-one name="weibo" property-ref="ptuser"/>
+	<!-- 影射点赞的town -->
+	<set name="dogoodtown" table="pt_dogood_users_town">
+		<key column="users_id"/>
+		<many-to-many class="town" column="town_id"/>
+	</set>
+	<!-- 影射点赞的putao -->
+	<set name="dogoodputao" table="pt_dogood_users_putao">
+		<key column="users_id"/>
+		<many-to-many class="putao" column="putao_id"/>
+	</set>
+	<!-- 影射点赞的comment -->
+	<set name="dogoodcomment" table="pt_dogood_users_comment">
+		<key column="users_id"/>
+		<many-to-many class="comment" column="comment_id"/>
+	</set>
+	<!-- 影射点赞的mess -->
+	<set name="dogoodmess" table="pt_dogood_users_mess">
+		<key column="users_id"/>
+		<many-to-many class="MessBoard" column="messboard_id"/>
+	</set>
+	<!-- 影射订阅的town -->
+	<set name="subscritown" table="pt_subscri_users_town">
+		<key column="users_id"/>
+		<many-to-many class="town" column="town_id"/>
+	</set>
+	<!-- 影射收藏的putao -->
+	<set name="favorite" table="pt_favorite_users_putao">
+		<key column="users_id"/>
+		<many-to-many class="putao" column="putao_id"/>
+	</set>
+	<!-- 影射我创建的葡萄 -->
+	<set name="myputao" inverse="true" order-by="createtime desc">
+		<!-- 关联的外键列 -->
+		<key column="users_id"/>
+		<!-- 影射到的关联类属性 -->
+		<one-to-many class="putao"/>
+	</set>
+	</class>
+</hibernate-mapping>

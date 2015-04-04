@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 指定Hibernate的DTD信息 -->
+<!DOCTYPE hibernate-mapping
+	PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="domain">
+	<class name="MessBoard" table="pt_messboard">
+	<!-- 映射标识属性staid -->
+	<id name="messboardid" column="messboard_id">
+		<!-- 定义主键生成器策略 -->
+		<generator class="identity"/>
+	</id>
+	<property name="content" type="text"/>
+	<property name="time" type="calendar"/>
+	<property name="goods" type="integer"/>
+	<property name="distance" type="integer"/>
+	<!-- 指向用户 -->
+	<many-to-one name="user" class="users" column="users_id"/>
+	<!-- 指向小镇 -->
+	<many-to-one name="townx" class="town" column="town_id"/>
+	<component name="geoinfo" class="GeoInfo">
+		<parent name="parentmess" />
+		<property name="longitude" />
+		<property name="latitude" />
+		<property name="address" />
+		<property name="country" />
+		<property name="province" />
+		<property name="city" />
+		<property name="district" />	
+		<property name="citycode" />	
+		<property name="accuracy" />	
+		<property name="street" />	
+		<property name="road" />	
+		<property name="freeaddr" />	
+		<property name="screenpng" />	
+	</component>
+	<!-- 影射点赞的用户 -->
+	<set name="dogoodusers" table="pt_dogood_users_mess">
+		<key column="messboard_id"/>
+		<many-to-many class="users" column="users_id"/>
+	</set>
+	</class>
+</hibernate-mapping>
