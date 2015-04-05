@@ -191,6 +191,9 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 	<bean id="cwall_action" class="action.cwall" scope="prototype">
 		<property name="user" ref="usersService"/>
 	</bean>
+	<bean id="cuserinfo_action" class="action.cuserinfo" scope="prototype">
+		<property name="user" ref="usersService"/>
+	</bean>
 	
 	<!-- 配置事务相关 -->
 	<bean id="transactionManager" 

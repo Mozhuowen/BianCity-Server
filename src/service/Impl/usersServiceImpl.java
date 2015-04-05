@@ -472,4 +472,10 @@ public class usersServiceImpl implements usersService
 		user.update(u);
 		return resobj;
 	}
+	@Override
+	public ResponseSimple cuserinfo(int userid, String cover, String username,
+			String location, String sex) {
+		
+		return null;
+	}
 }

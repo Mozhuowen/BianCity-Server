@@ -205,6 +205,14 @@
        <result name="success">/WEB-INF/jsp/success.jsp</result>
 		 <result name="error">/WEB-INF/jsp/error.jsp</result>
 	</action>
+	<action name="cuserinfo" class="cuserinfo_action">
+		<interceptor-ref name="json">
+            <param name="contentType">application/json</param>
+       </interceptor-ref>
+       <interceptor-ref name="authority"/>
+       <result name="success">/WEB-INF/jsp/success.jsp</result>
+		 <result name="error">/WEB-INF/jsp/error.jsp</result>
+	</action>
 	
 	<action name="">
    		<result name="success">/WEB-INF/jsp/index.jsp</result>

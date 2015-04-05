@@ -33,4 +33,5 @@ public interface usersService
 	public ResponseSubscri getSubscris(int userid);
 	public ResponsePutao getFavorite(int userid);
 	public ResponseSimple cwall(int userid,String wall);
+	public ResponseSimple cuserinfo(int userid,String cover,String username,String location,String sex);
 }
