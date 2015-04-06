@@ -1,7 +1,9 @@
 package action;
 
 import service.usersService;
+import tools.objects.ResponseSimple;
 
+import com.google.gson.Gson;
 import com.opensymphony.xwork2.Action;
 
 public class cuserinfo extends BaseAction implements Action
@@ -9,7 +11,7 @@ public class cuserinfo extends BaseAction implements Action
 	private usersService user;
 	private String ptoken;
 	private int ptuserid;
-	private String username;
+	private String name;
 	private String location;
 	private String sex;
 	private String cover;
@@ -36,11 +38,11 @@ public class cuserinfo extends BaseAction implements Action
 	public void setPtuserid(int ptuserid) {
 		this.ptuserid = ptuserid;
 	}
-	public String getUsername() {
-		return username;
+	public String getName() {
+		return name;
 	}
-	public void setUsername(String username) {
-		this.username = username;
+	public void setName(String username) {
+		this.name = username;
 	}
 	public String getLocation() {
 		return location;
@@ -63,8 +65,10 @@ public class cuserinfo extends BaseAction implements Action
 
 	@Override
 	public String execute() throws Exception {
-
-		return null;
+		ResponseSimple res = user.cuserinfo(ptuserid, cover, name, location, sex);
+		jsonstr = new Gson().toJson(res);
+		
+		return SUCCESS;
 	}
 	
 }

@@ -10,6 +10,7 @@ import dao.*;
 import service.*;
 import tools.CharacterUtil;
 import tools.CopyObject;
+import tools.LogUtil;
 import tools.MD5Util;
 import tools.NetErrorUtil;
 import tools.objects.ApplyTown;
@@ -475,7 +476,25 @@ public class usersServiceImpl implements usersService
 	@Override
 	public ResponseSimple cuserinfo(int userid, String cover, String username,
 			String location, String sex) {
+		LogUtil.v("Start to change info: "+cover+" "+username+" "+location+" "+sex);
+		ResponseSimple res = new ResponseSimple();
+		res.setStat(true);
+		try{
+			users u = user.get(userid);
+			if (cover != null && cover.length()>0)
+				u.setCover(cover);
+			if (username != null && username.length() > 0)
+				u.setName(username);
+			if (location !=null && location.length() > 0)
+				u.getWeibo().setLocation(location);
+			if (sex != null && sex.length()>0)
+				u.getWeibo().setGender(sex);
+			user.update(u);
+		}catch(Exception e) {
+			res.setStat(false);
+			e.printStackTrace();
+		}
 		
-		return null;
+		return res;
 	}
 }
