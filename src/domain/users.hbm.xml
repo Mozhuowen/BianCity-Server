@@ -27,6 +27,7 @@
 	<property name="registetime" type="calendar"/>
 	<property name="lastlogin" type="calendar"/>
 	<property name="wbtoken" type="string"/>
+	<property name="qqtoken" type="string"/>
 	<property name="expirestime" type="calendar"/>
 	<property name="logintype" type="integer"/>
 	<property name="fans" type="integer"/>
@@ -50,6 +51,8 @@
 	</set>
 	<!-- 影射weibo -->
 	<one-to-one name="weibo" property-ref="ptuser"/>
+	<!-- 影射qqinfo -->
+	<one-to-one name="qqinfo" property-ref="ptuser"/>
 	<!-- 影射点赞的town -->
 	<set name="dogoodtown" table="pt_dogood_users_town">
 		<key column="users_id"/>

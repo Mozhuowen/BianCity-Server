@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 指定Hibernate的DTD信息 -->
+<!DOCTYPE hibernate-mapping
+	PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="domain">
+	<class name="QQUser" table="qq_user">
+	<!-- 映射标识属性staid -->
+	<id name="qquserid" column="qquser_id">
+		<!-- 定义主键生成器策略 -->
+		<generator class="identity"/>
+	</id>
+	<property name="is_yellow_year_vip" type="string"/>
+	<property name="figureurl_qq_1" type="string"/>
+	<property name="figureurl_qq_2" type="string"/>
+	<property name="nickname" type="string"/>
+	<property name="yellow_vip_level" type="string"/>
+	<property name="msg" type="string"/>
+	<property name="city" type="string"/>
+	<property name="figureurl_1" type="string"/>
+	<property name="vip" type="string"/>
+	<property name="level" type="string"/>
+	<property name="figureurl_2" type="string"/>
+	<property name="province" type="string"/>
+	<property name="is_yellow_vip" type="string"/>
+	<property name="gender" type="string"/>
+	<property name="figureurl" type="string"/>
+	<property name="ret" type="integer"/>
+	<property name="is_lost" type="integer"/>
+	<!-- 影射ptuser -->
+	<many-to-one name="ptuser" unique="true" column="users_id" not-null="true"/>
+	</class>
+</hibernate-mapping>

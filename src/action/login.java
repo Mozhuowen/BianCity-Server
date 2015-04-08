@@ -111,10 +111,15 @@ public class login implements Action
 		this.jsonstr = gson.toJson(resobj);
 		System.out.println("login Response info: "+jsonstr.toString());*/
 		LogUtil.v("login info: uid: "+uid+" token: "+token+" expire: "+new Date(expire)+" logintype: "+logintype);
+		ResponseLogin resobj = null;
 		Calendar exp = Calendar.getInstance();
 		exp.setTimeInMillis(expire);
-		ResponseLogin resobj = user.checkloginByWb(uid, token,exp, imei, sv, phonemodel, brand);
-		this.jsonstr = new Gson().toJson(resobj);
+		if (logintype == 0)
+			resobj = user.checkloginByWb(uid, token,exp, imei, sv, phonemodel, brand);
+		else if (logintype == 1)
+			resobj = user.checkloginByQQ(uid, token, exp, imei, sv, phonemodel, brand);
+		if (resobj != null)
+			this.jsonstr = new Gson().toJson(resobj);
 		return SUCCESS;
 	}
 	

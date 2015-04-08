@@ -14,6 +14,7 @@ import tools.LogUtil;
 import tools.MD5Util;
 import tools.NetErrorUtil;
 import tools.objects.ApplyTown;
+import tools.objects.ModelRegisteQQ;
 import tools.objects.ModelRegisteWb;
 import tools.objects.ModelUser;
 import tools.objects.PackagePutao;
@@ -33,7 +34,14 @@ public class usersServiceImpl implements usersService
 {
 	private usersDao user;
 	private WeiboUserDao weibo;
+	private QQUserDao qquser;
 	
+	public void setQquser(QQUserDao q){
+		this.qquser = q;
+	}
+	public QQUserDao getQquser() {
+		return this.qquser;
+	}
 	public void setWeibo(WeiboUserDao wb) {
 		this.weibo = wb;
 	}
@@ -177,9 +185,49 @@ public class usersServiceImpl implements usersService
 			return true;
 		else
 			return false;
+	}	
+	@Override
+	public ResponseLogin checkloginByQQ(String openid,String qqtoken,Calendar expire,String imei,String sv,String phonemodel,String brand)
+	{
+		ResponseLogin resobj = new ResponseLogin();
+		if (checkQQExiste(openid)) {			//用户存在
+			if (checkQQToken(openid,qqtoken,expire)) {	//token 合法
+				
+			} else {
+				resobj.setStat(false);
+				resobj.setErrcode(NetErrorUtil.TOKEN_ERROR);
+			}
+			
+		} else {				//用户不存在，
+			//生成putao user
+			String token = CharacterUtil.getRandomString(32);
+			Calendar registetime = Calendar.getInstance();
+			users u = new users();
+			u.setQqtoken(qqtoken);
+			u.setExpirestime(expire);
+			u.setLogintype(1);
+			u.setPtoken(token);
+			u.setImei(imei);
+			u.setSv(sv);
+			u.setBrand(brand);
+			u.setPhonemodel(phonemodel);
+			u.setRegistetime(registetime);
+			u.setLastlogin(registetime);
+			if(user.save(u)>0){
+				resobj.setStat(true);
+				resobj.setNeedregiste(true);
+				resobj.setLogintype(0);
+				resobj.setPtuserid(u.getUsersid());
+				resobj.setPtoken(token);
+			}
+			else{
+				resobj.setErrcode(NetErrorUtil.SERVER_ERROR);
+				resobj.setStat(false);
+			}
+		}
+		
+		return null;
 	}
-	
-	
 	@Override
 	public ResponseLogin checkloginByWb(String uid,String wbtoken,
 			Calendar expire, String imei, String sv, String phonemodel,
@@ -272,6 +320,14 @@ public class usersServiceImpl implements usersService
 			return false;
 	}
 	
+	public boolean checkQQExiste(String openid) {
+		QQUser qq = qquser.getByOpenid(openid);
+		if (qq != null)
+			return true;
+		else
+			return false;
+	}
+	
 	public boolean checkWeiboToken(String uid,String wbtoken,Calendar expirestime) {
 		WeiboUser wb = weibo.getByUid(uid);
 		users u = wb.getPtuser();
@@ -284,6 +340,37 @@ public class usersServiceImpl implements usersService
 		} else 
 				return true;
 		return false;		
+	}
+	public boolean checkQQToken(String openid,String qqtoken,Calendar expirestime) {
+		QQUser qq = qquser.getByOpenid(openid);
+		users u = qq.getPtuser();
+		String servqqToken = u.getQqtoken();
+		String servpToken = u.getPtoken();
+		Calendar tokenExpire = u.getExpirestime();
+		if (tokenExpire.getTimeInMillis()>Calendar.getInstance().getTimeInMillis()) {	//weibo token 没有过期
+			if (qqtoken.equals(servpToken))
+				return true;
+		} else 
+			return true;
+		return false;
+	}
+	@Override
+	public ResponseRegiste regByQQ(ModelRegisteQQ userinfo, int puid) {
+		ResponseRegiste resobj = new ResponseRegiste();
+		users u = user.get(puid);
+		QQUser qq = new QQUser();
+		qq = (QQUser)CopyObject.copyProperties(qq,userinfo);
+		qq.setPtuser(u);
+		//persist
+		qquser.save(qq);
+		//检查用户名
+		if(checkNeedCName(userinfo.getNickname())) {	//需要修改设置用户名
+
+		} else {
+			
+		}
+		
+		return resobj;
 	}
 	@Override
 	public ResponseRegiste regByWb(ModelRegisteWb userinfo,int puid) {
@@ -355,6 +442,7 @@ public class usersServiceImpl implements usersService
 	public int getFans(int userid) {
 		return user.getFans(userid);
 	}
+	
 	@Override
 	public ResponseUser getUserInfo(int userid,boolean onlystatis) {
 		ResponseUser resobj = new ResponseUser();
@@ -497,4 +585,5 @@ public class usersServiceImpl implements usersService
 		
 		return res;
 	}
+	
 }

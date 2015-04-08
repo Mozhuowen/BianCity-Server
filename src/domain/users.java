@@ -25,8 +25,10 @@ public class users
 	private String extend;
 	public Set<town> mytowns = new HashSet<town>();	//1-N双向
 	private Set<comment> comments = new HashSet<comment>();	//1-N双向
-	private WeiboUser weibo;
+	private WeiboUser weibo;	//1-1双向影射微博信息
 	private String wbtoken;
+	private QQUser qqinfo;
+	private String qqtoken;
 	private Calendar expirestime;
 	private int logintype;
 	private Set<MessBoard> mess;	//1-N双向
@@ -39,6 +41,19 @@ public class users
 	private int fans;
 	private Set<putao> myputao;	//1-N双向
 	private String wallimage;	//墙纸
+	
+	public QQUser getQqinfo() {
+		return qqinfo;
+	}
+	public void setQqinfo(QQUser qqinfo) {
+		this.qqinfo = qqinfo;
+	}
+	public String getQqtoken() {
+		return qqtoken;
+	}
+	public void setQqtoken(String qqtoken) {
+		this.qqtoken = qqtoken;
+	}
 	public void setWallimage(String w) {
 		this.wallimage = w;
 	}

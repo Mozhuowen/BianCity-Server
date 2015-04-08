@@ -50,6 +50,7 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 				<value>domain/comment.hbm.xml</value>		
 				<value>domain/WeiboUser.hbm.xml</value>	
 				<value>domain/MessBoard.hbm.xml</value>
+				<value>domain/QQUser.hbm.xml</value>
 			</list>
 		</property>
 		<!-- 定义Hibernate的SessionFactory的属性 -->
@@ -76,11 +77,13 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 	<bean id="commentDao" class="dao.Impl.commentDaoImpl" parent="daoTemplate"/>
 	<bean id="WeiboUserDao" class="dao.Impl.WeiboUserDaoImpl" parent="daoTemplate"/>
 	<bean id="MessBoardDao" class="dao.Impl.MessBoardDaoImpl" parent="daoTemplate"/>
+	<bean id="QQUserDao" class="dao.Impl.QQUserDaoImpl" parent="daoTemplate"/>
 	
 	<!-- 定义service业务逻辑组件，并注入dao -->
 	<bean id="usersService" class="service.Impl.usersServiceImpl">
 		<property name="user" ref="usersDao"/>
 		<property name="weibo" ref="WeiboUserDao"/>
+		<property name="qquser" ref="QQUserDao"/>
 	</bean>
 	<bean id="townService" class="service.Impl.townServiceImpl">
 		<property name="user" ref="usersDao"/>
