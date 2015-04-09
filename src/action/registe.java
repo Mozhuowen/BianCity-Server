@@ -12,6 +12,8 @@ import com.google.gson.Gson;
 import com.opensymphony.xwork2.Action;
 
 import tools.CharacterUtil;
+import tools.LogUtil;
+import tools.objects.ModelRegisteQQ;
 import tools.objects.ModelRegisteWb;
 import tools.objects.ResponseRegiste;
 
@@ -24,8 +26,15 @@ public class registe implements Action
 	public String ptoken;
 	public int logintype;
 	public ModelRegisteWb registInfo;	
+	public ModelRegisteQQ registqqInfo;
 	//VIEW
 	public String jsonstr;
+	public void setRegistqqInfo(ModelRegisteQQ m) {
+		this.registqqInfo = m;
+	}
+	public ModelRegisteQQ getRegistqqInfo(){
+		return this.registqqInfo;
+	}
 	public usersService getUser() {
 		return user;
 	}
@@ -65,12 +74,14 @@ public class registe implements Action
 	
 	@Override
 	public String execute() throws Exception {
-		/*System.out.println("registe info: username: "+name+" email: "+email+"\n"+"auth: "+auth);
-		ResponseRegiste resobj = user.registe(name, password, email, cover,imei,sv,phonemodel,brand);
-		Gson gson = new Gson();
-		this.jsonstr = gson.toJson(resobj);*/
-		ResponseRegiste resobj = user.regByWb(registInfo, ptuserid);
-		this.jsonstr = new Gson().toJson(resobj);
+		LogUtil.v("registeQQinfo: "+registqqInfo.getOpenid());
+		ResponseRegiste resobj = null;
+		if (logintype == 0)
+			resobj = user.regByWb(registInfo, ptuserid);
+		else if (logintype == 1)
+			resobj = user.regByQQ(registqqInfo, ptuserid);
+		if (resobj != null)
+			this.jsonstr = new Gson().toJson(resobj);
 		return SUCCESS;
 
 	}

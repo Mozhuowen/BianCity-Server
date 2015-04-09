@@ -2,6 +2,7 @@ package tools.objects;
 
 public class ModelRegisteQQ
 {
+	private String openid;
 	private String is_yellow_year_vip;
 	private int ret;
 	private String figureurl_qq_1;
@@ -22,7 +23,12 @@ public class ModelRegisteQQ
 	/**性别*/
 	private String gender;
 	private String figureurl;
-	
+	public void setOpenid(String o){
+		this.openid = o;
+	}
+	public String getOpenid() {
+		return this.openid;
+	}
 	public String getIs_yellow_year_vip() {
 		return is_yellow_year_vip;
 	}

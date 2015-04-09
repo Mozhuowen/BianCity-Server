@@ -192,7 +192,48 @@ public class usersServiceImpl implements usersService
 		ResponseLogin resobj = new ResponseLogin();
 		if (checkQQExiste(openid)) {			//用户存在
 			if (checkQQToken(openid,qqtoken,expire)) {	//token 合法
-				
+				//更新token后获取用户信息反馈到客户端
+				String token = CharacterUtil.getRandomString(32);
+				QQUser qq = qquser.getByOpenid(openid);
+				users u = qq.getPtuser();
+				u.setPtoken(token);
+				u.setLogintype(1);
+				u.setLastlogin(Calendar.getInstance());
+				user.update(u);
+				resobj.setStat(true);
+				resobj.setNeedregiste(false);
+				resobj.setLogintype(1);
+				resobj.setPtuserid(u.getUsersid());
+				resobj.setPtoken(token);
+				if (u.getName()==null || u.getName().equals("")) {
+					resobj.setNeedcname(true);
+					resobj.setName("");
+				}
+				else {
+					resobj.setNeedcname(false);
+					resobj.setName(u.getName());
+				}
+				resobj.setCover(u.getCover());
+				resobj.setUid(qq.getOpenid());
+				resobj.setSex(qq.getGender());
+				resobj.setLocation(qq.getGender());
+				List<town> townlist = new ArrayList<town>(u.getMytowns());
+				//遍历处理整合出town列表
+				List<ApplyTown> returnlist  = new ArrayList<ApplyTown>();
+				for (int i=0;i<townlist.size();i++) {
+					ApplyTown at = new ApplyTown();
+					town t = townlist.get(i);
+					at.setTownid(t.getTownid());
+					at.setTownname(t.getName());
+					at.setCover(t.getCover());
+					at.setDescri(t.getDescri());
+					at.setCreatetime(getFormatDate(t.getCreatetime()));
+					at.setGeoinfo(new ResGeoInfo(t.getGeo()));
+					at.setGood(t.getGoods());
+					at.setUserid(u.getUsersid());
+					returnlist.add(at);
+				}
+				resobj.setMytowns(returnlist);
 			} else {
 				resobj.setStat(false);
 				resobj.setErrcode(NetErrorUtil.TOKEN_ERROR);
@@ -216,7 +257,7 @@ public class usersServiceImpl implements usersService
 			if(user.save(u)>0){
 				resobj.setStat(true);
 				resobj.setNeedregiste(true);
-				resobj.setLogintype(0);
+				resobj.setLogintype(1);
 				resobj.setPtuserid(u.getUsersid());
 				resobj.setPtoken(token);
 			}
@@ -226,7 +267,7 @@ public class usersServiceImpl implements usersService
 			}
 		}
 		
-		return null;
+		return resobj;
 	}
 	@Override
 	public ResponseLogin checkloginByWb(String uid,String wbtoken,
@@ -348,7 +389,7 @@ public class usersServiceImpl implements usersService
 		String servpToken = u.getPtoken();
 		Calendar tokenExpire = u.getExpirestime();
 		if (tokenExpire.getTimeInMillis()>Calendar.getInstance().getTimeInMillis()) {	//weibo token 没有过期
-			if (qqtoken.equals(servpToken))
+			if (qqtoken.equals(servqqToken))
 				return true;
 		} else 
 			return true;
@@ -365,9 +406,27 @@ public class usersServiceImpl implements usersService
 		qquser.save(qq);
 		//检查用户名
 		if(checkNeedCName(userinfo.getNickname())) {	//需要修改设置用户名
-
+			u.setCover(userinfo.getFigureurl_qq_1());
+			user.update(u);
+			//set response
+			resobj.setStat(true);
+			resobj.setNeedchangename(true);
+			resobj.setCover(u.getCover());
+			resobj.setUid(userinfo.getOpenid());
+			resobj.setSex(userinfo.getGender());
+			resobj.setLocation(userinfo.getCity());
 		} else {
-			
+			u.setName(userinfo.getNickname());
+			u.setCover(userinfo.getFigureurl_qq_1());
+			user.update(u);
+			//设置response用户信息
+			resobj.setStat(true);
+			resobj.setNeedchangename(false);
+			resobj.setName(u.getName());
+			resobj.setCover(u.getCover());
+			resobj.setUid(userinfo.getOpenid());
+			resobj.setSex(userinfo.getGender());
+			resobj.setLocation(userinfo.getCity());
 		}
 		
 		return resobj;
@@ -452,8 +511,13 @@ public class usersServiceImpl implements usersService
 			mu.setUserid(u.getUsersid());
 			mu.setCover(u.getCover());
 			mu.setName(u.getName());
-			mu.setSex(u.getWeibo().getGender());
-			mu.setLocation(u.getWeibo().getLocation());
+			if (u.getLogintype() == 0) {
+				mu.setSex(u.getWeibo().getGender());
+				mu.setLocation(u.getWeibo().getLocation());
+			} else {
+				mu.setSex(u.getQqinfo().getGender());
+				mu.setLocation(u.getQqinfo().getCity());
+			}
 			mu.setTowncount(u.getMytowns().size());
 			mu.setPutaocount(u.getMyputao().size());
 			mu.setFans(u.getFans());
@@ -574,9 +638,15 @@ public class usersServiceImpl implements usersService
 			if (username != null && username.length() > 0)
 				u.setName(username);
 			if (location !=null && location.length() > 0)
-				u.getWeibo().setLocation(location);
+				if (u.getLogintype() == 0)
+					u.getWeibo().setLocation(location);
+				else
+					u.getQqinfo().setCity(location);
 			if (sex != null && sex.length()>0)
-				u.getWeibo().setGender(sex);
+				if (u.getLogintype() ==0)
+					u.getWeibo().setGender(sex);
+				else
+					u.getQqinfo().setGender(sex);
 			user.update(u);
 		}catch(Exception e) {
 			res.setStat(false);

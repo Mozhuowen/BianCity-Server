@@ -54,15 +54,15 @@ public class subscriServiceImpl implements subscriService
 			t.setSubscris(++tmp);
 			set.add(u);
 			subscri.setDosubscri(true);
-			int f = u.getFans();
-			u.setFans(++f);
+			int f = t.getOwner().getFans();
+			t.getOwner().setFans(++f);
 		} else if (action==1) {
 			int tmp = t.getSubscris();
 			t.setSubscris(--tmp);
 			set.remove(u);
 			subscri.setDosubscri(false);
-			int f = u.getFans();
-			u.setFans(--f);
+			int f = t.getOwner().getFans();
+			t.getOwner().setFans(--f);
 		}
 		t.setSubscriusers(set);
 		townx.update(t);

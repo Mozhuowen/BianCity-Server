@@ -10,6 +10,7 @@
 		<!-- 定义主键生成器策略 -->
 		<generator class="identity"/>
 	</id>
+	<property name="openid" type="string"/>
 	<property name="is_yellow_year_vip" type="string"/>
 	<property name="figureurl_qq_1" type="string"/>
 	<property name="figureurl_qq_2" type="string"/>
