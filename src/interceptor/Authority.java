@@ -1,6 +1,18 @@
 package interceptor;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.Reader;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.struts2.ServletActionContext;
+
 import service.usersService;
+import tools.LogUtil;
 import tools.NetErrorUtil;
 import tools.objects.ResponseSimple;
 import action.BaseAction;
@@ -28,6 +40,20 @@ public class Authority extends AbstractInterceptor
 		int userid = targetaction.getPtuserid();
 		String token = targetaction.getPtoken();
 		ResponseSimple res = new ResponseSimple();
+		
+		HttpServletRequest request = ServletActionContext.getRequest();
+//		Map<String,String[]> tmpmap = request.getParameterMap();
+//		Set keyset = tmpmap.keySet();
+//		for (Iterator<String> it = keyset.iterator();it.hasNext();) {
+//			String[] arr = tmpmap.get(it.next());
+//			System.out.println(arr);
+// 		}
+		
+//		BufferedReader br = request.getReader();
+//		String toread = this.getPostData(br);		
+//		br.close();
+//		LogUtil.v("post data: "+toread.trim());
+		
 		//校验
 		if (targetaction.needInterceptCheck()) {
 			System.out.println("Enter interceptor,userid: "+userid+" token: "+token);
@@ -56,5 +82,22 @@ public class Authority extends AbstractInterceptor
 		}
 		
 	}
+	
+	public String getPostData(Reader reader)
+		  {
+		    BufferedReader bufferReader = new BufferedReader(reader);
+
+		    StringBuilder buffer = new StringBuilder();
+		    try
+		    {
+		      String line;
+		      while ((line = bufferReader.readLine()) != null)
+		        buffer.append(line);
+		    }
+		    catch (IOException e) {		      
+		    }
+
+		    return buffer.toString();
+		  }
 	
 }

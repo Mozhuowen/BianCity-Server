@@ -1,6 +1,11 @@
 package action;
 
+import java.io.BufferedReader;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.struts2.ServletActionContext;
 
 import service.townService;
 import tools.LogUtil;
@@ -15,7 +20,22 @@ public class gethot extends BaseAction implements Action
 	private String ptoken;
 	private int ptuserid;
 	private List<Integer> rejectid;
-	public String jsonstr;
+	public String jsonstr;	
+	
+	private HttpServletRequest request;
+
+	@Override
+	public String execute() throws Exception {
+		this.request = ServletActionContext.getRequest();
+		String signature = request.getHeader("signature");
+		String timestamp = request.getHeader("timestamp");
+		System.out.println("signature: "+signature+" timestamp: "+timestamp);
+		
+		ResponseHotTown res = town.getHotTown(rejectid);
+		jsonstr = new Gson().toJson(res);
+		return SUCCESS;
+	}
+	
 	@Override
 	public boolean needInterceptCheck() {
 		return false;
@@ -43,17 +63,6 @@ public class gethot extends BaseAction implements Action
 	}
 	public void setRejectid(List<Integer> rejectid) {
 		this.rejectid = rejectid;
-	}
-
-	@Override
-	public String execute() throws Exception {
-//		for (Integer i:rejectid) {
-//			LogUtil.v("reject id: "+i);
-//		}
-		
-		ResponseHotTown res = town.getHotTown(rejectid);
-		jsonstr = new Gson().toJson(res);
-		return SUCCESS;
 	}
 	
 }

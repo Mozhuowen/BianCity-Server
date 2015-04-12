@@ -16,8 +16,10 @@
 	<package name="mo" extends="struts-default,json-default" namespace="/">
 	<!-- 配置拦截器 -->
 	<interceptors>
+		<interceptor name="jsoncheck" class="jsoncheck"/>
 		<interceptor name="authority" class="authority_action"/>
 	</interceptors>
+
 	<!-- actions -->
 	<action name="hello" class="hello_action">
 		<result name="success">/WEB-INF/jsp/success.jsp</result>
@@ -182,7 +184,7 @@
 		 <result name="error">/WEB-INF/jsp/error.jsp</result>
 	</action>
 	<action name="gethot" class="gethot_action">
-		<interceptor-ref name="json">
+		<interceptor-ref name="jsoncheck">
             <param name="contentType">application/json</param>
        </interceptor-ref>
        <interceptor-ref name="authority"/>

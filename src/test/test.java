@@ -37,7 +37,7 @@ public class test
 		List<String> list = new ArrayList<String>();
 		list.add("test");
 		list.add("fewr3");
-		p.setImages(list);
+//		p.setImages(list);
 		System.out.println(session.save(p));
 		tx.commit();
 		HibernateUtil.closeSession();
