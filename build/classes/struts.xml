@@ -13,10 +13,11 @@
 	<constant name="struts.enable.DynamicMethodInvocation" value="true"/>
 	<constant name="struts.multipart.maxSize" value="5242880"/>
 	
-	<package name="mo" extends="struts-default,json-default" namespace="/">
+	<package name="mo" extends="struts-default" namespace="/">
 	<!-- 配置拦截器 -->
 	<interceptors>
-		<interceptor name="jsoncheck" class="jsoncheck"/>
+	<interceptor name="json" class="json_default"/>
+		<interceptor name="jsoncheck" class="jsoncheck_action"/>
 		<interceptor name="authority" class="authority_action"/>
 	</interceptors>
 
@@ -26,21 +27,21 @@
 		<result name="error">/WEB-INF/jsp/error.jsp</result>
 	</action>
 	<action name="registe" class="registe_action">
-		<interceptor-ref name="json">
+		<interceptor-ref name="jsoncheck">
             <param name="contentType">application/json</param>
        </interceptor-ref>
 		<result name="success">/WEB-INF/jsp/success.jsp</result>
 		<result name="error">/WEB-INF/jsp/error.jsp</result>
 	</action>
 	<action name="login" class="login_action">
-		<interceptor-ref name="json">
+		<interceptor-ref name="jsoncheck">
             <param name="contentType">application/json</param>
        </interceptor-ref>
 		<result name="success">/WEB-INF/jsp/success.jsp</result>
 		<result name="error">/WEB-INF/jsp/error.jsp</result>
 	</action>
 	<action name="applytown" class="applytown_action">
-		<interceptor-ref name="json">
+		<interceptor-ref name="jsoncheck">
             <param name="contentType">application/json</param>
        </interceptor-ref>
        <interceptor-ref name="authority"/>
@@ -48,7 +49,7 @@
 		<result name="error">/WEB-INF/jsp/error.jsp</result>
 	</action>
 	<action name="createputao" class="createputao_action">
-		<interceptor-ref name="json">
+		<interceptor-ref name="jsoncheck">
             <param name="contentType">application/json</param>
        </interceptor-ref>
        <interceptor-ref name="authority"/>
@@ -56,7 +57,7 @@
 		 <result name="error">/WEB-INF/jsp/error.jsp</result>
 	</action>
 	<action name="getputao" class="getputao_action">
-		<interceptor-ref name="json">
+		<interceptor-ref name="jsoncheck">
             <param name="contentType">application/json</param>
        </interceptor-ref>
        <interceptor-ref name="authority"/>
@@ -64,7 +65,7 @@
 		 <result name="error">/WEB-INF/jsp/error.jsp</result>
 	</action>
 	<action name="submitcomment" class="submitcomment_action">
-		<interceptor-ref name="json">
+		<interceptor-ref name="jsoncheck">
             <param name="contentType">application/json</param>
        </interceptor-ref>
        <interceptor-ref name="authority"/>
@@ -72,7 +73,7 @@
 		 <result name="error">/WEB-INF/jsp/error.jsp</result>
 	</action>
 	<action name="getcomment" class="getcomment_action">
-		<interceptor-ref name="json">
+		<interceptor-ref name="jsoncheck">
             <param name="contentType">application/json</param>
        </interceptor-ref>
        <interceptor-ref name="authority"/>
@@ -80,7 +81,7 @@
 		 <result name="error">/WEB-INF/jsp/error.jsp</result>
 	</action>
 	<action name="cname" class="cname_action">
-		<interceptor-ref name="json">
+		<interceptor-ref name="jsoncheck">
             <param name="contentType">application/json</param>
        </interceptor-ref>
        <interceptor-ref name="authority"/>
@@ -88,7 +89,7 @@
 		 <result name="error">/WEB-INF/jsp/error.jsp</result>
 	</action>
 	<action name="getmess" class="getmess_action">
-		<interceptor-ref name="json">
+		<interceptor-ref name="jsoncheck">
             <param name="contentType">application/json</param>
        </interceptor-ref>
        <interceptor-ref name="authority"/>
@@ -96,7 +97,7 @@
 		 <result name="error">/WEB-INF/jsp/error.jsp</result>
 	</action>
 	<action name="submitmess" class="submitmess_action">
-		<interceptor-ref name="json">
+		<interceptor-ref name="jsoncheck">
             <param name="contentType">application/json</param>
        </interceptor-ref>
        <interceptor-ref name="authority"/>
@@ -104,7 +105,7 @@
 		 <result name="error">/WEB-INF/jsp/error.jsp</result>
 	</action>
 	<action name="dogood" class="dogood_action">
-		<interceptor-ref name="json">
+		<interceptor-ref name="jsoncheck">
             <param name="contentType">application/json</param>
        </interceptor-ref>
        <interceptor-ref name="authority"/>
@@ -112,7 +113,7 @@
 		 <result name="error">/WEB-INF/jsp/error.jsp</result>
 	</action>
 	<action name="getgoods" class="getgoods_action">
-		<interceptor-ref name="json">
+		<interceptor-ref name="jsoncheck">
             <param name="contentType">application/json</param>
        </interceptor-ref>
        <interceptor-ref name="authority"/>
@@ -120,7 +121,7 @@
 		 <result name="error">/WEB-INF/jsp/error.jsp</result>
 	</action>
 	<action name="getsubscri" class="getsubscri_action">
-		<interceptor-ref name="json">
+		<interceptor-ref name="jsoncheck">
             <param name="contentType">application/json</param>
        </interceptor-ref>
        <interceptor-ref name="authority"/>
@@ -128,7 +129,7 @@
 		 <result name="error">/WEB-INF/jsp/error.jsp</result>
 	</action>
 	<action name="dosubscri" class="dosubscri_action">
-		<interceptor-ref name="json">
+		<interceptor-ref name="jsoncheck">
             <param name="contentType">application/json</param>
        </interceptor-ref>
        <interceptor-ref name="authority"/>
@@ -136,7 +137,7 @@
 		 <result name="error">/WEB-INF/jsp/error.jsp</result>
 	</action>
 	<action name="getfavorite" class="getfavorite_action">
-		<interceptor-ref name="json">
+		<interceptor-ref name="jsoncheck">
             <param name="contentType">application/json</param>
        </interceptor-ref>
        <interceptor-ref name="authority"/>
@@ -144,7 +145,7 @@
 		 <result name="error">/WEB-INF/jsp/error.jsp</result>
 	</action>
 	<action name="dofavorite" class="dofavorite_action">
-		<interceptor-ref name="json">
+		<interceptor-ref name="jsoncheck">
             <param name="contentType">application/json</param>
        </interceptor-ref>
        <interceptor-ref name="authority"/>
@@ -152,7 +153,7 @@
 		 <result name="error">/WEB-INF/jsp/error.jsp</result>
 	</action>
 	<action name="getfans" class="getfans_action">
-		<interceptor-ref name="json">
+		<interceptor-ref name="jsoncheck">
             <param name="contentType">application/json</param>
        </interceptor-ref>
        <interceptor-ref name="authority"/>
@@ -160,7 +161,7 @@
 		 <result name="error">/WEB-INF/jsp/error.jsp</result>
 	</action>
 	<action name="getuserinfo" class="getuserinfo_action">
-		<interceptor-ref name="json">
+		<interceptor-ref name="jsoncheck">
             <param name="contentType">application/json</param>
        </interceptor-ref>
        <interceptor-ref name="authority"/>
@@ -168,7 +169,7 @@
 		 <result name="error">/WEB-INF/jsp/error.jsp</result>
 	</action>
 	<action name="getsubslist" class="getsubslist_action">
-		<interceptor-ref name="json">
+		<interceptor-ref name="jsoncheck">
             <param name="contentType">application/json</param>
        </interceptor-ref>
        <interceptor-ref name="authority"/>
@@ -176,7 +177,7 @@
 		 <result name="error">/WEB-INF/jsp/error.jsp</result>
 	</action>
 	<action name="getfavolist" class="getfavolist_action">
-		<interceptor-ref name="json">
+		<interceptor-ref name="jsoncheck">
             <param name="contentType">application/json</param>
        </interceptor-ref>
        <interceptor-ref name="authority"/>
@@ -192,7 +193,7 @@
 		 <result name="error">/WEB-INF/jsp/error.jsp</result>
 	</action>
 	<action name="getnear" class="getnear_action">
-		<interceptor-ref name="json">
+		<interceptor-ref name="jsoncheck">
             <param name="contentType">application/json</param>
        </interceptor-ref>
        <interceptor-ref name="authority"/>
@@ -200,7 +201,7 @@
 		 <result name="error">/WEB-INF/jsp/error.jsp</result>
 	</action>
 	<action name="cwall" class="cwall_action">
-		<interceptor-ref name="json">
+		<interceptor-ref name="jsoncheck">
             <param name="contentType">application/json</param>
        </interceptor-ref>
        <interceptor-ref name="authority"/>
@@ -208,7 +209,7 @@
 		 <result name="error">/WEB-INF/jsp/error.jsp</result>
 	</action>
 	<action name="cuserinfo" class="cuserinfo_action">
-		<interceptor-ref name="json">
+		<interceptor-ref name="jsoncheck">
             <param name="contentType">application/json</param>
        </interceptor-ref>
        <interceptor-ref name="authority"/>

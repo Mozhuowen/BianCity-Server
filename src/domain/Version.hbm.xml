@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 指定Hibernate的DTD信息 -->
+<!DOCTYPE hibernate-mapping
+	PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="domain">
+	<class name="Version" table="pt_version">
+	<!-- 映射标识属性staid -->
+	<id name="versionid" column="version_id">
+		<!-- 定义主键生成器策略 -->
+		<generator class="identity"/>
+	</id>
+	<property name="versioncode" type="integer"/>
+	<property name="versionname" type="string"/>
+	<property name="updateinfo" type="string"/>
+	<property name="downloadurl" type="string"/>
+	</class>
+</hibernate-mapping>

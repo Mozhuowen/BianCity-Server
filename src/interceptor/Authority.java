@@ -63,16 +63,16 @@ public class Authority extends AbstractInterceptor
 				res.setErrcode(NetErrorUtil.NAME_NOTEXIST);
 				
 				String jsonstr = new Gson().toJson(res);
-				targetaction.setJsonstr(jsonstr);
-				return Action.SUCCESS;
+				ServletActionContext.getResponse().getOutputStream().print(jsonstr);
+				return null;
 			} else if(!user.checkToken(userid, token)) {
 				System.out.println("net pass auth check! token not correct!");
 				res.setStat(false);
 				res.setErrcode(NetErrorUtil.LOGIN_ANOTHERPLACE);
 				
 				String jsonstr = new Gson().toJson(res);
-				targetaction.setJsonstr(jsonstr);
-				return Action.SUCCESS;
+				ServletActionContext.getResponse().getOutputStream().print(jsonstr);
+				return null;
 			} else {
 				System.out.println("pass authority check!");
 				return arg0.invoke();

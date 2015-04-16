@@ -51,6 +51,7 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 				<value>domain/WeiboUser.hbm.xml</value>	
 				<value>domain/MessBoard.hbm.xml</value>
 				<value>domain/QQUser.hbm.xml</value>
+				<value>domain/Version.hbm.xml</value>
 			</list>
 		</property>
 		<!-- 定义Hibernate的SessionFactory的属性 -->
@@ -134,6 +135,10 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 	<bean id="authority_action" class="interceptor.Authority" scope="prototype">
 		<property name="user" ref="usersService"/>
 	</bean>
+	<bean id="jsoncheck_action" class="interceptor.JsonCheck" scope="prototype">
+	</bean>
+	<bean id="json_default" class="org.apache.struts2.json.JSONInterceptor" scope="prototype">
+	</bean>
 	<bean id="createputao_action" class="action.createputao" scope="prototype">
 		<property name="putao" ref="putaoService"/>
 	</bean>
@@ -196,8 +201,6 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 	</bean>
 	<bean id="cuserinfo_action" class="action.cuserinfo" scope="prototype">
 		<property name="user" ref="usersService"/>
-	</bean>
-	<bean id="jsoncheck" class="interceptor.JsonCheck" scope="prototype">
 	</bean>
 	
 	<!-- 配置事务相关 -->
