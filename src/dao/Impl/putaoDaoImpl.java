@@ -45,7 +45,9 @@ public class putaoDaoImpl extends HibernateDaoSupport implements putaoDao
 	@Override
 	public List<putao> loadMorePutao(town townx, int position) {
 		DetachedCriteria criteria = DetachedCriteria.forClass(putao.class);
-		criteria.add(Restrictions.eq("parenttown", townx)).addOrder(Order.desc("createtime"));
+		criteria.add(Restrictions.eq("parenttown", townx))
+			.add(Restrictions.eq("visible", 0))
+			.addOrder(Order.desc("createtime"));
 		List<putao> list = this.getHibernateTemplate().findByCriteria(criteria, position, 10);
 		return list;
 	}

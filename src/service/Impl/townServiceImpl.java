@@ -73,6 +73,7 @@ public class townServiceImpl implements townService
 				resobj.setCover(cover);
 				resobj.setGeoinfo(geoinfo);
 				resobj.setCreatetime(getFormatDate(t.getCreatetime()));
+				resobj.setStorycount(0);
 			} else {
 				resobj.setErrcode(NetErrorUtil.SERVER_ERROR);
 				resobj.setStat(false);
@@ -159,6 +160,7 @@ public class townServiceImpl implements townService
 				at.setUserid(u.getUsersid());		
 				at.setUsername(u.getName());
 				at.setUsercover(u.getCover());
+				at.setStorycount(t.getPutao().size());
 				returnlist.add(at);
 			} 
 			resobj.setTowns(returnlist);
@@ -224,6 +226,7 @@ public class townServiceImpl implements townService
 				at.setUserid(u.getUsersid());		
 				at.setUsername(u.getName());
 				at.setUsercover(u.getCover());
+				at.setStorycount(t.getPutao().size());
 				returnlist.add(at);
 			} 
 			resobj.setTowns(returnlist);

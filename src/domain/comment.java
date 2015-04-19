@@ -13,6 +13,13 @@ public class comment
 	private putao putaox;
 	private town townx;
 	public Set<users> dogoodusers;
+	private int visible;
+	public void setVisible(int v) {
+		this.visible = v;
+	}
+	public int getVisible() {
+		return visible;
+	}
 	public void setDogoodusers(Set<users> u) {
 		this.dogoodusers = u;
 	}

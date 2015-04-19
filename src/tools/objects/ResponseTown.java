@@ -16,6 +16,7 @@ public class ResponseTown
 	private int subscriptions = 0;
 	private GeoInfo geoinfo;
 	private boolean dosubscri;
+	private int storycount;
 	public void setDosubscri(boolean s) {
 		this.dosubscri = s;
 	}
@@ -75,6 +76,12 @@ public class ResponseTown
 	}
 	public void setGeoinfo(GeoInfo geoinfo) {
 		this.geoinfo = geoinfo;
+	}
+	public int getStorycount() {
+		return storycount;
+	}
+	public void setStorycount(int storycount) {
+		this.storycount = storycount;
 	}
 	
 	

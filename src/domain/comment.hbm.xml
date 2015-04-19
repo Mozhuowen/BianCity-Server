@@ -13,6 +13,7 @@
 	<property name="content" type="string"/>
 	<property name="time" type="calendar"/>
 	<property name="goods" type="integer"/>
+	<property name="visible" type="integer"/>
 	<!-- 指向用户 -->
 	<many-to-one name="user" class="users" column="users_id"/>
 	<!-- 指向葡萄 -->

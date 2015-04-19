@@ -126,5 +126,41 @@ public class usersDaoImpl extends HibernateDaoSupport implements usersDao
 		LogUtil.v("SQL result : "+i);
 		return i;
 	}
+
+	@Override
+	public Boolean checkOwnTown(int userid, int townid) {
+		List<town> list = this.getHibernateTemplate().find("from users u,town t where u.usersid=? and t.townid=? and t in elements(u.mytowns)",userid,townid);
+		if (list.size() == 0)
+			return false;
+		else
+			return true;
+	}
+
+	@Override
+	public Boolean checkOwnPutao(int userid, int putaoid) {
+		List<town> list = this.getHibernateTemplate().find("from users u,putao p where u.usersid=? and p.putaoid=? and p in elements(u.myputao)",userid,putaoid);
+		if (list.size() == 0)
+			return false;
+		else
+			return true;
+	}
+
+	@Override
+	public Boolean checkOwnComment(int userid, int commentid) {
+		List<town> list = this.getHibernateTemplate().find("from users u,comment c where u.usersid=? and c.commentid=? and c in elements(u.comments)",userid,commentid);
+		if (list.size() == 0)
+			return false;
+		else
+			return true;
+	}
+
+	@Override
+	public Boolean checkOwnMess(int userid, int messid) {
+		List<town> list = this.getHibernateTemplate().find("from users u,MessBoard m where u.usersid=? and m.messboardid=? and m in elements(u.mess)",userid,messid);
+		if (list.size() == 0)
+			return false;
+		else
+			return true;
+	}
 	
 }

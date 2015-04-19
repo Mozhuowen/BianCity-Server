@@ -19,6 +19,13 @@ public class putao
 	public Set<users> dogoodusers;
 	public Set<users> favoriteusers;
 	private users owner;
+	private int visible;
+	public void setVisible(int v) {
+		this.visible = v;
+	}
+	public int getVisible() {
+		return visible;
+	}
 	public void setOwner(users o) {
 		this.owner = o;
 	}

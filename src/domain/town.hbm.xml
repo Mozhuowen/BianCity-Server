@@ -22,17 +22,17 @@
 	<!-- 关联users -->
 	<many-to-one name="owner" class="users" column="users_id" not-null="true"/>
 	<!-- 关联putao集合 -->
-	<set name="putao" inverse="true" order-by="createtime desc">
+	<set name="putao" inverse="true" order-by="createtime desc" where="visible=0">
 		<key column="town_id"/>
 		<one-to-many class="putao" />
 	</set>
 	<!-- 影射评论 -->
-	<set name="comments" inverse="true" order-by="time desc">
+	<set name="comments" inverse="true" order-by="time desc" where="visible=0">
 		<key column="town_id"/>
 		<one-to-many class="comment"/>
 	</set>
 	<!-- 影射留言 -->
-	<set name="mess" inverse="true" order-by="time desc">
+	<set name="mess" inverse="true" order-by="time desc" where="visible=0">
 		<key column="town_id"/>
 		<one-to-many class="MessBoard"/>
 	</set>

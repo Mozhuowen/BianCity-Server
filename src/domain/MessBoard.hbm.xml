@@ -14,6 +14,7 @@
 	<property name="time" type="calendar"/>
 	<property name="goods" type="integer"/>
 	<property name="distance" type="integer"/>
+	<property name="visible" type="integer"/>
 	<!-- 指向用户 -->
 	<many-to-one name="user" class="users" column="users_id"/>
 	<!-- 指向小镇 -->

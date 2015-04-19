@@ -15,4 +15,9 @@ public interface usersDao
 	Boolean checkFavorite(int userid,int putaoid);
 	Integer getFans(int userid);
 	Integer getBegoodCount(int userid);
+	//检测是否拥有这些内容
+	Boolean checkOwnTown(int userid,int townid);
+	Boolean checkOwnPutao(int userid,int putaoid);
+	Boolean checkOwnComment(int userid,int commentid);
+	Boolean checkOwnMess(int userid,int messid);
 }

@@ -23,6 +23,7 @@ public class ApplyTown
 	private int userid;
 	private String username;
 	private String usercover;
+	private int storycount;
 	public String getUsername() {
 		return username;
 	}
@@ -112,5 +113,11 @@ public class ApplyTown
 		String tmpstr = "E"+geoinfo.getLon_degree()+"°"+geoinfo.getLon_minute()+"'"+lon_second_2+"''  "+"N"+geoinfo.getLat_degree()+"°"+geoinfo.getLat_minute()+"'"+lat_second_2+"''";
 		return tmpstr;*/
 		return null;
+	}
+	public int getStorycount() {
+		return storycount;
+	}
+	public void setStorycount(int storycount) {
+		this.storycount = storycount;
 	}
 }

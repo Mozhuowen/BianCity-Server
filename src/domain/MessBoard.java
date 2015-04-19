@@ -14,6 +14,13 @@ public class MessBoard
 	private GeoInfo geoinfo;
 	private int distance;
 	public Set<users> dogoodusers;
+	private int visible;
+	public void setVisible(int v) {
+		this.visible = v;
+	}
+	public int getVisible() {
+		return visible;
+	}
 	public void setDogoodusers(Set<users> u) {
 		this.dogoodusers = u;
 	}

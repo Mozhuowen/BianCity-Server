@@ -79,6 +79,7 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 	<bean id="WeiboUserDao" class="dao.Impl.WeiboUserDaoImpl" parent="daoTemplate"/>
 	<bean id="MessBoardDao" class="dao.Impl.MessBoardDaoImpl" parent="daoTemplate"/>
 	<bean id="QQUserDao" class="dao.Impl.QQUserDaoImpl" parent="daoTemplate"/>
+	<bean id="VersionDao" class="dao.Impl.VersionDaoImpl" parent="daoTemplate"/>
 	
 	<!-- 定义service业务逻辑组件，并注入dao -->
 	<bean id="usersService" class="service.Impl.usersServiceImpl">
@@ -119,6 +120,16 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 	<bean id="favoriteService" class="service.Impl.favoriteServiceImpl">
 		<property name="user" ref="usersDao"/>
 		<property name="putaox" ref="putaoDao"/>
+	</bean>
+	<bean id="versionService" class="service.Impl.versionServiceImpl">
+		<property name="version" ref="VersionDao"/>
+	</bean>
+	<bean id="generalService" class="service.Impl.generalServiceImpl">
+		<property name="townx" ref="townDao"/>
+		<property name="mess" ref="MessBoardDao"/>
+		<property name="putaox" ref="putaoDao"/>
+		<property name="commentx" ref="commentDao"/>
+		<property name="userx" ref="usersDao"/>
 	</bean>
 	
 	<!-- Spring 管理action并为其注入业务组件  -->
@@ -201,6 +212,12 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 	</bean>
 	<bean id="cuserinfo_action" class="action.cuserinfo" scope="prototype">
 		<property name="user" ref="usersService"/>
+	</bean>
+	<bean id="update_action" class="action.update" scope="prototype">
+		<property name="version" ref="versionService"/>
+	</bean>
+	<bean id="invisible_action" class="action.invisible" scope="prototype">
+		<property name="tools" ref="generalService"/>
 	</bean>
 	
 	<!-- 配置事务相关 -->

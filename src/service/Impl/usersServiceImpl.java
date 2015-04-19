@@ -216,7 +216,7 @@ public class usersServiceImpl implements usersService
 				resobj.setCover(u.getCover());
 				resobj.setUid(qq.getOpenid());
 				resobj.setSex(qq.getGender());
-				resobj.setLocation(qq.getGender());
+				resobj.setLocation(qq.getCity());
 				List<town> townlist = new ArrayList<town>(u.getMytowns());
 				//遍历处理整合出town列表
 				List<ApplyTown> returnlist  = new ArrayList<ApplyTown>();

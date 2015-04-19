@@ -75,7 +75,7 @@ public class townDaoImpl extends HibernateDaoSupport implements townDao
 
 	@Override
 	public List<TownSort> getHotTownByTime() {
-		final String hql = "select new tools.TownSort(t.townid,0,0) from town t order by t.createtime desc";
+		final String hql = "select new tools.TownSort(t.townid,0,0) from town t where t.exist=0 order by t.createtime desc";
 		@SuppressWarnings("unchecked")
 		List<TownSort> t = this.getHibernateTemplate().executeFind(new HibernateCallback(){
 			@Override
@@ -92,7 +92,7 @@ public class townDaoImpl extends HibernateDaoSupport implements townDao
 
 	@Override
 	public List<TownSort> getHotTownByGood() {
-		final String hql = "select new tools.TownSort(t.townid,1,t.goods) from town t order by t.goods desc";
+		final String hql = "select new tools.TownSort(t.townid,1,t.goods) from town t where t.exist=0 order by t.goods desc";
 		@SuppressWarnings("unchecked")
 		List<TownSort> t = this.getHibernateTemplate().executeFind(new HibernateCallback(){
 			@Override
@@ -109,7 +109,7 @@ public class townDaoImpl extends HibernateDaoSupport implements townDao
 
 	@Override
 	public List<TownSort> getHotTownByFans() {
-		final String hql = "select new tools.TownSort(t.townid,2,t.subscris) from town t order by t.subscris desc";
+		final String hql = "select new tools.TownSort(t.townid,2,t.subscris) from town t where t.exist=0 order by t.subscris desc";
 		@SuppressWarnings("unchecked")
 		List<TownSort> t = this.getHibernateTemplate().executeFind(new HibernateCallback(){
 			@Override
@@ -147,7 +147,7 @@ public class townDaoImpl extends HibernateDaoSupport implements townDao
 	@Override
 	public List<TownSort> getNearTown(String geohash) {
 		final String geostr = geohash + "%";
-		final String hql = "select new tools.TownSort(t.townid,3,t.subscris+t.goods) from town t where t.geohash like :geohash order by (t.subscris+t.goods) desc";
+		final String hql = "select new tools.TownSort(t.townid,3,t.subscris+t.goods) from town t where t.geohash like :geohash and t.exist=0 order by (t.subscris+t.goods) desc";
 		@SuppressWarnings("unchecked")
 		List<TownSort> t = this.getHibernateTemplate().executeFind(new HibernateCallback(){
 			@Override

@@ -33,19 +33,19 @@
 	<property name="fans" type="integer"/>
 	<property name="wallimage" type="string"/>
 	<!-- 影射town集合 -->
-	<set name="mytowns" inverse="true" order-by="createtime desc">
+	<set name="mytowns" inverse="true" order-by="createtime desc" where="exist=0">
 		<!-- 关联的外键列 -->
 		<key column="users_id"/>
 		<!-- 影射到的关联类属性 -->
 		<one-to-many class="town"/>
 	</set>
 	<!-- 影射评论 -->
-	<set name="comments" inverse="true" order-by="time desc">
+	<set name="comments" inverse="true" order-by="time desc" where="visible=0">
 		<key column="users_id"/>
 		<one-to-many class="comment"/>
 	</set>
 	<!-- 影射留言 -->
-	<set name="mess" inverse="true" order-by="time desc">
+	<set name="mess" inverse="true" order-by="time desc" where="visible=0">
 		<key column="users_id"/>
 		<one-to-many class="MessBoard"/>
 	</set>
