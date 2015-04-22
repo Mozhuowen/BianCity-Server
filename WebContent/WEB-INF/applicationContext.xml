@@ -62,12 +62,11 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 			hibernate.show_sql=true
 			<!-- hibernate.dialect=org.hibernate.dialect.MySQLInnoDBDialect -->
 			hibernate.dialect=org.hibernate.dialect.MySQLDialect
-			hibernate.hbm2ddl.auto=update
+			hibernate.hbm2ddl.auto=validate
 			hibernate.format_sql=true;
 			</value>
 		</property>
-	</bean>
-	
+	</bean>	
 	<!-- 配置DAO组件模板 -->
 	<bean id="daoTemplate" abstract="true" lazy-init="true"
 		p:sessionFactory-ref="sessionFactory"/>

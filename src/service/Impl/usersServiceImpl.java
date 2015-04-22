@@ -543,6 +543,7 @@ public class usersServiceImpl implements usersService
 					at.setUserid(u.getUsersid());					
 					at.setUsercover(u.getCover());
 					at.setUsername(u.getName());
+					at.setStorycount(t.getPutao().size());
 					returnlist.add(at);
 				} 
 				mu.setOnlystatis(false);
@@ -577,6 +578,7 @@ public class usersServiceImpl implements usersService
 			at.setUserid(u.getUsersid());		
 			at.setUsername(u.getName());
 			at.setUsercover(u.getCover());
+			at.setStorycount(t.getPutao().size());
 			returnlist.add(at);
 		} 
 		resobj.setStat(true);
