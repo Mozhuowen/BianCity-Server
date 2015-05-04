@@ -22,7 +22,7 @@ public class getuserinfo extends BaseAction implements Action
 	}
 	@Override
 	public boolean needInterceptCheck() {
-		return false;
+		return true;
 	}
 	public usersService getUser() {
 		return user;

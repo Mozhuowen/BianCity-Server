@@ -29,7 +29,7 @@ public class gethot extends BaseAction implements Action
 		this.request = ServletActionContext.getRequest();
 		String signature = request.getHeader("signature");
 		String timestamp = request.getHeader("timestamp");
-		System.out.println("signature: "+signature+" timestamp: "+timestamp);
+		LogUtil.v("signature: "+signature+" timestamp: "+timestamp);
 		
 		ResponseHotTown res = town.getHotTown(rejectid);
 		jsonstr = new Gson().toJson(res);

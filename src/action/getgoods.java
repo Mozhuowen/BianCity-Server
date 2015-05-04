@@ -19,7 +19,7 @@ public class getgoods extends BaseAction implements Action
 	private int ptuserid;
 	@Override
 	public boolean needInterceptCheck() {
-		return false;
+		return true;
 	}
 	public String getPtoken() {
 		return ptoken;

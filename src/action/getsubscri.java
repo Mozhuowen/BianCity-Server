@@ -19,7 +19,7 @@ public class getsubscri extends BaseAction implements Action
 
 	@Override
 	public boolean needInterceptCheck() {
-		return false;
+		return true;
 	}
 	public subscriService getSubscri() {
 		return subscri;

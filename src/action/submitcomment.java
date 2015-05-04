@@ -19,7 +19,7 @@ public class submitcomment extends BaseAction implements Action
 	
 	@Override
 	public boolean needInterceptCheck() {
-		return false;
+		return true;
 	}
 	public String getPtoken() {
 		return ptoken;

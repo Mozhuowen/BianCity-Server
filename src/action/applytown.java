@@ -24,7 +24,7 @@ public class applytown extends BaseAction implements Action
 
 	@Override
 	public boolean needInterceptCheck() {
-		return false;
+		return true;
 	}
 	public void setJsonstr(String j) {
 		this.jsonstr = j;

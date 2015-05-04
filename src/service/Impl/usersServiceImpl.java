@@ -405,7 +405,7 @@ public class usersServiceImpl implements usersService
 		//persist
 		qquser.save(qq);
 		//检查用户名
-		if(checkNeedCName(userinfo.getNickname())) {	//需要修改设置用户名
+		if(checkNeedCName(puid,userinfo.getNickname())) {	//需要修改设置用户名
 			u.setCover(userinfo.getFigureurl_qq_1());
 			user.update(u);
 			//set response
@@ -441,7 +441,7 @@ public class usersServiceImpl implements usersService
 		//持久化weibo user
 		weibo.save(wbuser);
 		//检查用户名
-		if(checkNeedCName(userinfo.getScreen_name())) {	//需要修改设置用户名
+		if(checkNeedCName(puid,userinfo.getScreen_name())) {	//需要修改设置用户名
 			u.setCover(userinfo.getAvatar_hd());
 			user.update(u);
 			//set response
@@ -467,10 +467,12 @@ public class usersServiceImpl implements usersService
 		
 		return resobj;
 	}
-	
-	public boolean checkNeedCName(String name) {
+	/**检查是否需要修改用户名*/
+	public boolean checkNeedCName(int userid,String name) {
 		users u = user.getByUsername(name);
 		if (u == null)
+			return false;
+		else if (u.getUsersid() == userid)
 			return false;
 		else
 			return true;
@@ -632,27 +634,32 @@ public class usersServiceImpl implements usersService
 			String location, String sex) {
 		LogUtil.v("Start to change info: "+cover+" "+username+" "+location+" "+sex);
 		ResponseSimple res = new ResponseSimple();
-		res.setStat(true);
-		try{
-			users u = user.get(userid);
-			if (cover != null && cover.length()>0)
-				u.setCover(cover);
-			if (username != null && username.length() > 0)
-				u.setName(username);
-			if (location !=null && location.length() > 0)
-				if (u.getLogintype() == 0)
-					u.getWeibo().setLocation(location);
-				else
-					u.getQqinfo().setCity(location);
-			if (sex != null && sex.length()>0)
-				if (u.getLogintype() ==0)
-					u.getWeibo().setGender(sex);
-				else
-					u.getQqinfo().setGender(sex);
-			user.update(u);
-		}catch(Exception e) {
+		if(this.checkNeedCName(userid,username)) {
 			res.setStat(false);
-			e.printStackTrace();
+			res.setErrcode(NetErrorUtil.NAME_EXIST);
+		} else {
+			res.setStat(true);
+			try{
+				users u = user.get(userid);
+				if (cover != null && cover.length()>0)
+					u.setCover(cover);
+				if (username != null && username.length() > 0)
+					u.setName(username);
+				if (location !=null && location.length() > 0)
+					if (u.getLogintype() == 0)
+						u.getWeibo().setLocation(location);
+					else
+						u.getQqinfo().setCity(location);
+				if (sex != null && sex.length()>0)
+					if (u.getLogintype() ==0)
+						u.getWeibo().setGender(sex);
+					else
+						u.getQqinfo().setGender(sex);
+				user.update(u);
+			}catch(Exception e) {
+				res.setStat(false);
+				e.printStackTrace();
+			}
 		}
 		
 		return res;

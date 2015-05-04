@@ -17,6 +17,10 @@ public class dogood extends BaseAction implements Action
 	private int targetid;
 	private String ptoken;
 	private int ptuserid;
+	@Override
+	public boolean needInterceptCheck() {
+		return true;
+	}
 	public String getPtoken() {
 		return ptoken;
 	}

@@ -23,7 +23,7 @@ public class submitmess extends BaseAction implements Action
 
 	@Override
 	public boolean needInterceptCheck() {
-		return false;
+		return true;
 	}
 	public messService getMess() {
 		return mess;

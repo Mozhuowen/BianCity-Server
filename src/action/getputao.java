@@ -37,7 +37,7 @@ public class getputao extends BaseAction implements Action
 	}
 	@Override
 	public boolean needInterceptCheck() {
-		return false;
+		return true;
 	}
 	public putaoService getPutao() {
 		return putao;
@@ -55,7 +55,7 @@ public class getputao extends BaseAction implements Action
 	public String execute() throws Exception {
 		ResponsePutao resobj = putao.getPutao(townid,position);
 		jsonstr = new Gson().toJson(resobj);
-		System.out.println("getputao response info:"+jsonstr);
+//		System.out.println("getputao response info:"+jsonstr);
 		return SUCCESS;
 	}
 	

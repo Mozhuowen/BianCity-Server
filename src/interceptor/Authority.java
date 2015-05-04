@@ -56,9 +56,9 @@ public class Authority extends AbstractInterceptor
 		
 		//校验
 		if (targetaction.needInterceptCheck()) {
-			System.out.println("Enter interceptor,userid: "+userid+" token: "+token);
+			LogUtil.v("Enter interceptor,userid: "+userid+" token: "+token);
 			if (!user.checkUserid(userid)) {		
-				System.out.println("not pass auth check! userid not exist!");
+				LogUtil.v("not pass auth check! userid not exist!");
 				res.setStat(false);
 				res.setErrcode(NetErrorUtil.NAME_NOTEXIST);
 				
@@ -66,7 +66,7 @@ public class Authority extends AbstractInterceptor
 				ServletActionContext.getResponse().getOutputStream().print(jsonstr);
 				return null;
 			} else if(!user.checkToken(userid, token)) {
-				System.out.println("net pass auth check! token not correct!");
+				LogUtil.v("net pass auth check! token not correct!");
 				res.setStat(false);
 				res.setErrcode(NetErrorUtil.LOGIN_ANOTHERPLACE);
 				
@@ -74,7 +74,7 @@ public class Authority extends AbstractInterceptor
 				ServletActionContext.getResponse().getOutputStream().print(jsonstr);
 				return null;
 			} else {
-				System.out.println("pass authority check!");
+				LogUtil.v("pass authority check!");
 				return arg0.invoke();
 			}
 		} else {

@@ -22,7 +22,7 @@ public class MsgCrypt {
 	static byte[] encrypt(String time, String text) throws AesException {
 		aesKey = Base64.decodeBase64(encodingAesKey + "=");
 //		aesKey = Base64.decode(encodingAesKey + "=", Base64.DEFAULT);
-		System.out.println(aesKey.length);
+//		System.out.println(aesKey.length);
 		
 		ByteGroup byteCollector = new ByteGroup();
 		byte[] timestamp = time.getBytes(CHARSET);

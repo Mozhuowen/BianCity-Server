@@ -18,7 +18,7 @@ public class dofavorite extends BaseAction implements Action
 
 	@Override
 	public boolean needInterceptCheck() {
-		return false;
+		return true;
 	}
 	public favoriteService getFavorite() {
 		return favorite;
