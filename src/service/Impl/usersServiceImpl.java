@@ -577,9 +577,9 @@ public class usersServiceImpl implements usersService
 			at.setCreatetime(getFormatDate(t.getCreatetime()));
 			at.setGeoinfo(new ResGeoInfo(t.getGeo()));
 			at.setGood(t.getGoods());
-			at.setUserid(u.getUsersid());		
-			at.setUsername(u.getName());
-			at.setUsercover(u.getCover());
+			at.setUserid(t.getOwner().getUsersid());		
+			at.setUsername(t.getOwner().getName());
+			at.setUsercover(t.getOwner().getCover());
 			at.setStorycount(t.getPutao().size());
 			returnlist.add(at);
 		} 
