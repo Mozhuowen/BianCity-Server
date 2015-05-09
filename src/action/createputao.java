@@ -24,7 +24,7 @@ public class createputao extends BaseAction implements Action
 
 	@Override
 	public boolean needInterceptCheck() {
-		return false;
+		return true;
 	}
 	public putaoService getPutao() {
 		return putao;

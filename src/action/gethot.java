@@ -38,7 +38,7 @@ public class gethot extends BaseAction implements Action
 	
 	@Override
 	public boolean needInterceptCheck() {
-		return false;
+		return true;
 	}
 	public townService getTown() {
 		return town;

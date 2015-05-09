@@ -74,6 +74,10 @@ public class townServiceImpl implements townService
 				resobj.setGeoinfo(geoinfo);
 				resobj.setCreatetime(getFormatDate(t.getCreatetime()));
 				resobj.setStorycount(0);
+				resobj.setUserid(u.getUsersid());
+				resobj.setUsername(u.getName());
+				resobj.setUsercover(u.getCover());
+				resobj.setGood(0);
 			} else {
 				resobj.setErrcode(NetErrorUtil.SERVER_ERROR);
 				resobj.setStat(false);

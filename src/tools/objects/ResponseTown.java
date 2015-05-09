@@ -17,6 +17,10 @@ public class ResponseTown
 	private GeoInfo geoinfo;
 	private boolean dosubscri;
 	private int storycount;
+	private int userid;			//边城创建者id
+	private String username;	//边城创建者用户名
+	private String usercover;	//边城创建者封面
+	private int good;			//边城获赞数
 	public void setDosubscri(boolean s) {
 		this.dosubscri = s;
 	}
@@ -82,6 +86,30 @@ public class ResponseTown
 	}
 	public void setStorycount(int storycount) {
 		this.storycount = storycount;
+	}
+	public int getUserid() {
+		return userid;
+	}
+	public void setUserid(int userid) {
+		this.userid = userid;
+	}
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	public String getUsercover() {
+		return usercover;
+	}
+	public void setUsercover(String usercover) {
+		this.usercover = usercover;
+	}
+	public int getGood() {
+		return good;
+	}
+	public void setGood(int good) {
+		this.good = good;
 	}
 	
 	

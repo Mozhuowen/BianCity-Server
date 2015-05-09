@@ -39,7 +39,7 @@ public class JsonCheck extends JSONInterceptor
 		String result = "";
 		if (timestamp != null && signature != null)
 			result = MsgCrypt.encryptMsg(timestamp.trim(),toread.trim());
-		LogUtil.v(toread + " " + timestamp +" "+ signature +" "+result);
+		LogUtil.v(toread + toread.length() + " " + timestamp +" "+ signature +" "+result);
 		
 		if (signature == null || !result.equals(signature)) {
 			LogUtil.v("not pass sinature check!");

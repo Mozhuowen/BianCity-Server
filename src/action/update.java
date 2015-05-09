@@ -13,7 +13,7 @@ public class update extends BaseAction implements Action
 	public String jsonstr;
 	@Override
 	public boolean needInterceptCheck() {
-		return false;
+		return true;
 	}
 
 	@Override

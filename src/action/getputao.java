@@ -1,6 +1,7 @@
 package action;
 
 import service.putaoService;
+import tools.LogUtil;
 import tools.objects.ResponsePutao;
 
 import com.google.gson.Gson;
@@ -55,7 +56,7 @@ public class getputao extends BaseAction implements Action
 	public String execute() throws Exception {
 		ResponsePutao resobj = putao.getPutao(townid,position);
 		jsonstr = new Gson().toJson(resobj);
-//		System.out.println("getputao response info:"+jsonstr);
+		LogUtil.v("getputao response info:"+jsonstr);
 		return SUCCESS;
 	}
 	
