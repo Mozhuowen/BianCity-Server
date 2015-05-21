@@ -1,8 +1,10 @@
 package action;
 
 import java.util.List;
+
 import service.putaoService;
 import tools.objects.ResponsePutao;
+
 import com.google.gson.Gson;
 import com.opensymphony.xwork2.Action;
 
@@ -13,8 +15,8 @@ public class createputao extends BaseAction implements Action
 	private putaoService putao;
 	
 	private int townid;
-	private int userid;
-	private String token;
+	private String ptoken;
+	private int ptuserid;
 	private String title;
 	private String cover;
 	private String content;
@@ -40,22 +42,6 @@ public class createputao extends BaseAction implements Action
 
 	public void setTownid(int townid) {
 		this.townid = townid;
-	}
-
-	public int getUserid() {
-		return userid;
-	}
-
-	public void setUserid(int userid) {
-		this.userid = userid;
-	}
-
-	public String getToken() {
-		return token;
-	}
-
-	public void setToken(String token) {
-		this.token = token;
 	}
 
 	public String getTitle() {
@@ -99,6 +85,18 @@ public class createputao extends BaseAction implements Action
 		ResponsePutao resobj = putao.create(townid, title, cover, content, images);
 		jsonstr = new Gson().toJson(resobj);
 		return SUCCESS;
+	}
+	public String getPtoken() {
+		return ptoken;
+	}
+	public void setPtoken(String ptoken) {
+		this.ptoken = ptoken;
+	}
+	public int getPtuserid() {
+		return ptuserid;
+	}
+	public void setPtuserid(int ptuserid) {
+		this.ptuserid = ptuserid;
 	}
 	
 }

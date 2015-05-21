@@ -242,5 +242,13 @@ public class townServiceImpl implements townService
 		
 		return resobj;
 	}
+	@Override
+	public List<town> getTownByTime(int position) {	
+		return this.towndao.getTownByTime(position);
+	}
+	@Override
+	public Long getTownCount() {		
+		return this.towndao.getTownCount();
+	}
 	
 }

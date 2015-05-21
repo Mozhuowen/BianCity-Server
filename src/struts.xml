@@ -13,6 +13,28 @@
 	<constant name="struts.enable.DynamicMethodInvocation" value="true"/>
 	<constant name="struts.multipart.maxSize" value="5242880"/>
 	
+	<package name="webmanager" extends="struts-default" namespace="/webmanager">
+		<action name="tologin" class="tologin_action">
+   		<result name="success">/WEB-INF/jsp/login.jsp</result>
+   		<result name="loginok" type="httpheader">
+				<param name="status">302</param>
+				<param name="headers.Location">manager</param>
+   		</result>
+   	</action>
+   	<action name="manager" class="manager_action">
+			<result name="success">/WEB-INF/jsp/manager.jsp</result>
+			<result name="error">/WEB-INF/jsp/error.jsp</result>
+		</action>
+		<action name="checkTown" class="checkTown_action">
+			<result name="success">/WEB-INF/jsp/checkTown.jsp</result>
+			<result name="error">/WEB-INF/jsp/error2.jsp</result>
+		</action>
+   	<action name="*">
+			<result>/WEB-INF/jsp/{1}.jsp</result>
+		</action>
+	</package>
+	
+	
 	<package name="mo" extends="struts-default" namespace="/">
 	<!-- 配置拦截器 -->
 	<interceptors>
@@ -241,6 +263,5 @@
 	</action>
 	
 	</package>
-
 
 </struts>

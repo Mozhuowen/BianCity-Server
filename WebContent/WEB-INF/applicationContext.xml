@@ -218,6 +218,14 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 	<bean id="invisible_action" class="action.invisible" scope="prototype">
 		<property name="tools" ref="generalService"/>
 	</bean>
+	<bean id="tologin_action" class="action.web.tologin" scope="prototype">
+	</bean>
+	<bean id="manager_action" class="action.web.manager" scope="prototype">
+	</bean>
+	<bean id="checkTown_action" class="action.web.checkTown" scope="prototype">
+		<property name="townx" ref="townService"/>
+		<property name="genseral" ref="generalService"/>
+	</bean>
 	
 	<!-- 配置事务相关 -->
 	<bean id="transactionManager" 

@@ -19,4 +19,6 @@ public interface townDao
 	List<TownSort> getHotTownByFans();
 	List<TownSort> getNearTown(String geohash);
 	List<town> getTargetTown(List<SortTownAction.SortData> targetdata);	
+	List<town> getTownByTime(int position);
+	Long getTownCount();
 }

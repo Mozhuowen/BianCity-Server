@@ -11,6 +11,8 @@ public class update extends BaseAction implements Action
 	private versionService version;
 	private String versioncode;
 	public String jsonstr;
+	private String ptoken;
+	private int ptuserid;
 	@Override
 	public boolean needInterceptCheck() {
 		return true;
@@ -21,6 +23,19 @@ public class update extends BaseAction implements Action
 		ResponseVersion res = version.getLastestVersion();
 		jsonstr = new Gson().toJson(res);
 		return SUCCESS;
+	}
+	
+	public String getPtoken() {
+		return ptoken;
+	}
+	public void setPtoken(String ptoken) {
+		this.ptoken = ptoken;
+	}
+	public int getPtuserid() {
+		return ptuserid;
+	}
+	public void setPtuserid(int ptuserid) {
+		this.ptuserid = ptuserid;
 	}
 
 	public versionService getVersion() {

@@ -74,7 +74,9 @@ public class registe implements Action
 	
 	@Override
 	public String execute() throws Exception {
-		LogUtil.v("registeQQinfo: "+registqqInfo.getOpenid());
+		if (registqqInfo != null ) {
+			LogUtil.v("registeQQinfo: "+registqqInfo.getOpenid());
+		}
 		ResponseRegiste resobj = null;
 		if (logintype == 0)
 			resobj = user.regByWb(registInfo, ptuserid);

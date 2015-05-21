@@ -162,5 +162,19 @@ public class townDaoImpl extends HibernateDaoSupport implements townDao
 		});
 		return t;
 	}
+
+	@Override
+	public List<town> getTownByTime(int position) {
+		DetachedCriteria criteria = DetachedCriteria.forClass(town.class);
+		criteria.add(Restrictions.eq("exist", 0))
+			.addOrder(Order.desc("createtime"));
+		List<town> list = this.getHibernateTemplate().findByCriteria(criteria, position, 10);
+		return list;
+	}
+
+	@Override
+	public Long getTownCount() {
+		return (Long)this.getHibernateTemplate().find("select count(*) from town").get(0);
+	}
 	
 }

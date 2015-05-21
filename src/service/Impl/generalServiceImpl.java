@@ -99,5 +99,24 @@ public class generalServiceImpl implements generalService
 	public void setMess(MessBoardDao mess) {
 		this.mess = mess;
 	}
+
+	@Override
+	public boolean setInvisible(int type, int id) {
+		switch(type) {
+		case 0:	//town
+			town t = townx.get(id);
+			t.setExist(1);
+			townx.update(t);
+			break;
+		case 1:
+			putao p = putaox.get(id);
+			p.setVisible(1);
+			putaox.update(p);
+			break;
+		default:
+			return false;
+		}
+		return true;
+	}
 	
 }
