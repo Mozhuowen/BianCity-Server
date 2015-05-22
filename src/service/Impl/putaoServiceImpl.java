@@ -120,5 +120,13 @@ public class putaoServiceImpl implements putaoService
 		res.setPutao(putaolist);
 		return res;
 	}
+	@Override
+	public List<putao> getStoryByTime(int position) {
+		return this.putaox.getStoryByTime(position);
+	}
+	@Override
+	public Long getStoryCount() {
+		return this.putaox.getStoryCount();
+	}
 
 }

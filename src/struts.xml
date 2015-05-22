@@ -29,6 +29,14 @@
 			<result name="success">/WEB-INF/jsp/checkTown.jsp</result>
 			<result name="error">/WEB-INF/jsp/error2.jsp</result>
 		</action>
+		<action name="checkStory" class="checkStory_action">
+			<result name="success">/WEB-INF/jsp/checkStory.jsp</result>
+			<result name="error">/WEB-INF/jsp/error2.jsp</result>
+		</action>
+		<action name="createStory" class="createStory_action">
+			<result name="success">/WEB-INF/jsp/createStory.jsp</result>
+			<result name="error">/WEB-INF/jsp/error2.jsp</result>
+		</action>
    	<action name="*">
 			<result>/WEB-INF/jsp/{1}.jsp</result>
 		</action>

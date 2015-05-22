@@ -226,6 +226,13 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 		<property name="townx" ref="townService"/>
 		<property name="genseral" ref="generalService"/>
 	</bean>
+	<bean id="checkStory_action" class="action.web.checkStory" scope="prototype">
+		<property name="putaox" ref="putaoService"/>
+		<property name="genseral" ref="generalService"/>
+	</bean>
+	<bean id="createStory_action" class="action.web.createStory" scope="prototype">
+		<property name="putaox" ref="putaoService"/>
+	</bean>
 	
 	<!-- 配置事务相关 -->
 	<bean id="transactionManager" 

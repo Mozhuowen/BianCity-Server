@@ -13,4 +13,6 @@ public interface putaoDao
 	boolean checkPutao(int putaoid);
 	List<putao> loadMorePutao(town townx,int position);
 	Integer getgoods(int putaoid);
+	List<putao> getStoryByTime(int position);
+	Long getStoryCount();
 }

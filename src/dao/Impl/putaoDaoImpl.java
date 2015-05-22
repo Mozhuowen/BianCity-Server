@@ -57,4 +57,18 @@ public class putaoDaoImpl extends HibernateDaoSupport implements putaoDao
 		Integer good = (Integer)this.getHibernateTemplate().find("select goods from putao p where p.putaoid=?", putaoid).get(0);
 		return good;
 	}
+
+	@Override
+	public List<putao> getStoryByTime(int position) {
+		DetachedCriteria criteria = DetachedCriteria.forClass(putao.class);
+		criteria.add(Restrictions.eq("visible", 0))
+					.addOrder(Order.desc("createtime"));
+		List<putao> list = this.getHibernateTemplate().findByCriteria(criteria, position, 10);
+		return list;
+	}
+
+	@Override
+	public Long getStoryCount() {
+		return (Long)this.getHibernateTemplate().find("select count(*) from putao").get(0);
+	}
 }
