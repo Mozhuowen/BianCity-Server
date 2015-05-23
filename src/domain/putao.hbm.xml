@@ -11,7 +11,7 @@
 		<generator class="identity"/>
 	</id>
 	<property name="title" type="string"/>
-	<property name="content" type="string"/>
+	<property name="content" type="text"/>
 	<property name="cover" type="string"/>
 	<property name="createtime" type="calendar"/>
 	<property name="goods" type="integer"/>
