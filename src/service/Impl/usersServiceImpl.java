@@ -231,6 +231,8 @@ public class usersServiceImpl implements usersService
 					at.setGeoinfo(new ResGeoInfo(t.getGeo()));
 					at.setGood(t.getGoods());
 					at.setUserid(u.getUsersid());
+					at.setUsername(u.getName());
+					at.setUsercover(u.getCover());
 					returnlist.add(at);
 				}
 				resobj.setMytowns(returnlist);
@@ -315,6 +317,8 @@ public class usersServiceImpl implements usersService
 					at.setGeoinfo(new ResGeoInfo(t.getGeo()));
 					at.setGood(t.getGoods());
 					at.setUserid(u.getUsersid());
+					at.setUsercover(u.getCover());
+					at.setUsername(u.getName());
 					returnlist.add(at);
 				}
 				resobj.setMytowns(returnlist);

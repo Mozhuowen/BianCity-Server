@@ -1,6 +1,7 @@
 package action;
 
 import service.usersService;
+import tools.LogUtil;
 import tools.objects.ResponseCName;
 
 import com.google.gson.Gson;
@@ -43,6 +44,7 @@ public class cname extends BaseAction implements Action
 	public String execute() throws Exception {
 		ResponseCName resobj = user.cname(ptuserid, username);
 		this.jsonstr = new Gson().toJson(resobj);
+		LogUtil.v("cname action response: "+this.jsonstr);
 		return SUCCESS;
 	}
 	
