@@ -74,14 +74,14 @@
 		<many-to-many class="MessBoard" column="messboard_id"/>
 	</set>
 	<!-- 影射订阅的town -->
-	<set name="subscritown" table="pt_subscri_users_town" order-by="createtime desc" where="exist=0">
+	<set name="subscritown" table="pt_subscri_users_town">
 		<key column="users_id"/>
-		<many-to-many class="town" column="town_id"/>
+		<many-to-many class="town" column="town_id"  order-by="createtime desc" where="exist=0"/>
 	</set>
 	<!-- 影射收藏的putao -->
-	<set name="favorite" table="pt_favorite_users_putao" order-by="createtime desc" where="visible=0">
+	<set name="favorite" table="pt_favorite_users_putao" >
 		<key column="users_id"/>
-		<many-to-many class="putao" column="putao_id"/>
+		<many-to-many class="putao" column="putao_id" order-by="createtime desc" where="visible=0"/>
 	</set>
 	<!-- 影射我创建的葡萄 -->
 	<set name="myputao" inverse="true" order-by="createtime desc" where="visible=0">

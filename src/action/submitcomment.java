@@ -15,6 +15,7 @@ public class submitcomment extends BaseAction implements Action
 	private String content;
 	private String ptoken;
 	private int ptuserid;
+	private int replyid;
 	public String jsonstr;
 	
 	@Override
@@ -71,9 +72,15 @@ public class submitcomment extends BaseAction implements Action
 	@Override
 	public String execute() throws Exception {
 //		LogUtil.v("submitcomment info: content:"+content+" putaoid:"+putaoid+" userid:"+userid+" townid:"+townid);
-		ResponseComment resobj = comment.submitComment(townid, putaoid, ptuserid, content);
+		ResponseComment resobj = comment.submitComment(townid, putaoid, ptuserid, content,replyid);
 		jsonstr = new Gson().toJson(resobj);
 		return SUCCESS;
+	}
+	public int getReplyid() {
+		return replyid;
+	}
+	public void setReplyid(int replyid) {
+		this.replyid = replyid;
 	}
 	
 }

@@ -16,6 +16,8 @@ public class PackageComment implements Serializable
 	private boolean dogood;
 	private int commentid;
 	private int commentposition;
+	private int replyid;	//被回复者id
+	private String replyname;	//被回复者用户名
 	
 	public void setCommentposition(int c) {
 		this.commentposition = c;
@@ -88,5 +90,17 @@ public class PackageComment implements Serializable
 	}
 	public void setDogood(boolean dogood) {
 		this.dogood = dogood;
+	}
+	public int getReplyid() {
+		return replyid;
+	}
+	public void setReplyid(int replyid) {
+		this.replyid = replyid;
+	}
+	public String getReplyname() {
+		return replyname;
+	}
+	public void setReplyname(String replyname) {
+		this.replyname = replyname;
 	}
 }

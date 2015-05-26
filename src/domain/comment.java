@@ -14,6 +14,7 @@ public class comment
 	private town townx;
 	public Set<users> dogoodusers;
 	private int visible;
+	private comment replycomment;
 	public void setVisible(int v) {
 		this.visible = v;
 	}
@@ -67,6 +68,12 @@ public class comment
 	}
 	public void setTownx(town townx) {
 		this.townx = townx;
+	}
+	public comment getReplycomment() {
+		return replycomment;
+	}
+	public void setReplycomment(comment replycomment) {
+		this.replycomment = replycomment;
 	}
 	
 }

@@ -25,5 +25,7 @@
 		<key column="comment_id"/>
 		<many-to-many class="users" column="users_id"/>
 	</set>
+	<!-- 指向被回复的comment,1-1单向 -->
+	<many-to-one name="replycomment" class="comment" column="replycomment_id"/>
 	</class>
 </hibernate-mapping>

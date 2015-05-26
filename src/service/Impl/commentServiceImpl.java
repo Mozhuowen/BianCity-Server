@@ -54,7 +54,7 @@ public class commentServiceImpl implements commentService
 
 	@Override
 	public ResponseComment submitComment(int townid, int putaoid, int userid,
-			String content) {
+			String content,int replyid) {
 		ResponseComment res = new ResponseComment();
 		town t = townx.get(townid);
 		putao p = putaox.get(putaoid);
@@ -65,6 +65,10 @@ public class commentServiceImpl implements commentService
 		c.setTownx(t);
 		c.setContent(content);
 		c.setTime(Calendar.getInstance());
+		//判断是否是回复
+		if (replyid > 0) {
+			c.setReplycomment(commentx.get(replyid));
+		}
 		if (commentx.save(c)>0) {
 			res.setStat(true);
 			List<PackageComment> commentlist = new ArrayList<PackageComment>();
@@ -85,6 +89,12 @@ public class commentServiceImpl implements commentService
 					pc.setDogood(true);
 				else
 					pc.setDogood(false);
+				//处理回复
+				comment recom = cm.getReplycomment();
+				if (recom != null ) {
+					pc.setReplyid(recom.getCommentid());
+					pc.setReplyname(recom.getUser().getName());
+				}
 				commentlist.add(pc);
 			}
 			res.setComments(commentlist);
@@ -122,6 +132,12 @@ public class commentServiceImpl implements commentService
 					pc.setDogood(true);
 				else
 					pc.setDogood(false);
+				//处理回复
+				comment recom = cm.getReplycomment();
+				if (recom != null ) {
+					pc.setReplyid(recom.getCommentid());
+					pc.setReplyname(recom.getUser().getName());
+				}
 				commentlist.add(pc);
 			}
 			res.setComments(commentlist);
@@ -155,6 +171,12 @@ public class commentServiceImpl implements commentService
 					pc.setDogood(true);					
 				else
 					pc.setDogood(false);
+				//处理回复
+				comment recom = cm.getReplycomment();
+				if (recom != null ) {
+					pc.setReplyid(recom.getCommentid());
+					pc.setReplyname(recom.getUser().getName());
+				}
 				commentlist.add(pc);
 			}
 			res.setComments(commentlist);
