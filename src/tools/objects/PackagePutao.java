@@ -1,6 +1,11 @@
 package tools.objects;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import tools.TimeUtil;
+import domain.Image;
+import domain.putao;
 
 public class PackagePutao
 {
@@ -15,6 +20,28 @@ public class PackagePutao
 	private List<String> imagenames;
 	private int goods;
 	private int userid;
+	
+	public static PackagePutao build(putao p) {
+		PackagePutao pt = new PackagePutao();
+		pt.setTownid(p.getParenttown().getTownid());
+		pt.setPutaoid(p.getPutaoid());
+		pt.setTitle(p.getTitle());
+		pt.setCover(p.getCover());
+		pt.setContent(p.getContent());
+		pt.setUsercover(p.getCover());
+		pt.setUsername(p.getParenttown().getOwner().getName());
+		pt.setCreatetime(TimeUtil.getFormatDate(p.getCreatetime()));
+		pt.setUserid(p.getParenttown().getOwner().getUsersid());
+		//处理包含的图片
+		List <String> imagenames = new ArrayList<String>();
+		List<Image> is = p.getImages();
+		for (int j=0;j<is.size();j++) {
+			imagenames.add(is.get(j).getImagename());
+		}
+		pt.setImagenames(imagenames);
+		return pt;
+	}
+	
 	public int getUserid() {
 		return userid;
 	}

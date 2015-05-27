@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.struts2.ServletActionContext;
 
 import push.CommentPushRunnable;
+import tools.LogUtil;
 
 import com.opensymphony.xwork2.Action;
 
@@ -29,7 +30,8 @@ public class tologin implements Action
 		session.setAttribute("username", this.getUsername());
 		
 		//testcode
-		new Thread(new CommentPushRunnable()).start();
+		LogUtil.v("test tologin!");
+//		new Thread(new CommentPushRunnable()).start();
 		return LOGIN_OK;
 	}
 

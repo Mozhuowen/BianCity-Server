@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import push.CommentPushRunnable;
 import dao.commentDao;
 import dao.putaoDao;
 import dao.townDao;
@@ -17,6 +18,7 @@ import service.commentService;
 import tools.LogUtil;
 import tools.NetErrorUtil;
 import tools.objects.PackageComment;
+import tools.objects.PackagePutao;
 import tools.objects.ResponseComment;
 
 public class commentServiceImpl implements commentService
@@ -55,6 +57,7 @@ public class commentServiceImpl implements commentService
 	@Override
 	public ResponseComment submitComment(int townid, int putaoid, int userid,
 			String content,int replyid) {
+		PackageComment targetcomment = null;
 		ResponseComment res = new ResponseComment();
 		town t = townx.get(townid);
 		putao p = putaox.get(putaoid);
@@ -65,9 +68,11 @@ public class commentServiceImpl implements commentService
 		c.setTownx(t);
 		c.setContent(content);
 		c.setTime(Calendar.getInstance());
+		comment bereplycomment = null;
 		//判断是否是回复
 		if (replyid > 0) {
-			c.setReplycomment(commentx.get(replyid));
+			bereplycomment = commentx.get(replyid);
+			c.setReplycomment(bereplycomment);
 		}
 		if (commentx.save(c)>0) {
 			res.setStat(true);
@@ -95,6 +100,8 @@ public class commentServiceImpl implements commentService
 					pc.setReplyid(recom.getCommentid());
 					pc.setReplyname(recom.getUser().getName());
 				}
+				if (pc.getCommentid() == c.getCommentid())
+					targetcomment = pc;
 				commentlist.add(pc);
 			}
 			res.setComments(commentlist);
@@ -102,6 +109,10 @@ public class commentServiceImpl implements commentService
 			res.setStat(false);
 			res.setErrcode(NetErrorUtil.SERVER_ERROR);
 		}
+		//push mess
+		if (bereplycomment != null)
+			new Thread(new CommentPushRunnable(targetcomment,PackagePutao.build(p),bereplycomment.getUser().getUsersid())).start();
+		
 		return res;
 	}
 	public String getFormatDate(Calendar time) {
