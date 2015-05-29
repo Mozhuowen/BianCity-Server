@@ -111,7 +111,9 @@ public class commentServiceImpl implements commentService
 		}
 		//push mess
 		if (bereplycomment != null)
-			new Thread(new CommentPushRunnable(targetcomment,PackagePutao.build(p),bereplycomment.getUser().getUsersid())).start();
+			new Thread(new CommentPushRunnable(targetcomment,PackagePutao.build(p),bereplycomment.getUser().getUsersid(),t.getOwner().getUsersid())).start();
+		else
+			new Thread(new CommentPushRunnable(targetcomment,PackagePutao.build(p),0,t.getOwner().getUsersid())).start();
 		
 		return res;
 	}

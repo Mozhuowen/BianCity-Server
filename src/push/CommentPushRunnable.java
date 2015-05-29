@@ -18,12 +18,14 @@ public class CommentPushRunnable implements Runnable
 	PackageComment comment;
 	PackagePutao story;
 	int bereplyuserid;
+	int storyownerid;
 	
-	public CommentPushRunnable(PackageComment comment,PackagePutao story,int bereplyuserid)
+	public CommentPushRunnable(PackageComment comment,PackagePutao story,int bereplyuserid,int storyownerid)
 	{
 		this.comment = comment;
 		this.story = story;
 		this.bereplyuserid = bereplyuserid;
+		this.storyownerid = storyownerid;
 	}
 
 	@Override
@@ -40,7 +42,14 @@ public class CommentPushRunnable implements Runnable
 		ModelPushComment pushcomment = new ModelPushComment();
 		pushcomment.parse(story, comment);
 		ModelPush pushmess = new ModelPush();
-		pushmess.setType(0);
+		if (this.bereplyuserid != 0) {
+			pushmess.setType(1);
+			pushcomment.setRetype(1);
+		} else{
+			pushcomment.setRetype(0);
+			pushmess.setType(0);
+		}
+		
 		pushmess.setMess(pushcomment);
 		
      String PACKAGENAME = "com.putaotown";
@@ -60,9 +69,9 @@ public class CommentPushRunnable implements Runnable
 		LogUtil.v("start to send message!");		
 		
 	    Message message = buildMessage();
-	    LogUtil.v("Message info: bereplyuserid: "+bereplyuserid+" message content: "+message.getPayload());
+	    LogUtil.v("Message info: storyownerid: "+storyownerid+" message content: "+message.getPayload());
 	    Sender sender = new Sender("DxBCH7FvGmmESAzSr0/WqA==");
-	    Result result = sender.sendToAlias(message, String.valueOf(this.bereplyuserid), 0); //根据alias，发送消息到指定设备上，不重试。
+	    Result result = sender.sendToAlias(message, String.valueOf(this.storyownerid), 2); //根据alias，发送消息到指定设备上，不重试。
 	    LogUtil.v("Server response: " + "MessageId: " + result.getMessageId()
                 + " ErrorCode: " + result.getErrorCode().toString()
                 + " Reason: " + result.getReason());

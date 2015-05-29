@@ -8,6 +8,7 @@ public class ModelPushComment
 	private String content;
 	private int commentid;
 	private PackagePutao story;
+	private int retype;	//类型 0-评论 1-回复
 	
 	public void parse(PackagePutao s,PackageComment c) {
 		this.usercover = c.getCover();
@@ -53,5 +54,13 @@ public class ModelPushComment
 	}
 	public void setStory(PackagePutao story) {
 		this.story = story;
+	}
+
+	public int getRetype() {
+		return retype;
+	}
+
+	public void setRetype(int retype) {
+		this.retype = retype;
 	}
 }
