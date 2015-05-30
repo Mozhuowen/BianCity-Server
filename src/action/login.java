@@ -15,7 +15,7 @@ public class login implements Action
 	private usersService user;
 	
 	//http param
-	/**登录类型，0微博 1QQ 2微信*/
+	/**登录类型，0微博 1QQ 2微信 3边城帐号*/
 	private int logintype;
 	private int ptuserid;
 	private String ptoken;
@@ -26,6 +26,8 @@ public class login implements Action
 	private String sv;
 	private String phonemodel;
 	private String brand;
+	private String username;	//边城帐号
+	private String password;	//边城帐号密码
 	
 	//VIEW
 	public String jsonstr;
@@ -118,9 +120,23 @@ public class login implements Action
 			resobj = user.checkloginByWb(uid, token,exp, imei, sv, phonemodel, brand);
 		else if (logintype == 1)
 			resobj = user.checkloginByQQ(uid, token, exp, imei, sv, phonemodel, brand);
+		else if (logintype ==2)
+			resobj = user.checkloginByBian(username, password, imei, sv, phonemodel, brand);
 		if (resobj != null)
 			this.jsonstr = new Gson().toJson(resobj);
 		return SUCCESS;
+	}
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String name) {
+		this.username = name;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	
 }

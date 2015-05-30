@@ -21,6 +21,7 @@ public class ResponseLogin
 	private String location;
 	private boolean needcname;
 	private String wallimage;	//墙纸
+	
 	public void setWallimage(String w) {
 		this.wallimage = w;
 	}

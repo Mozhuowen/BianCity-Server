@@ -32,6 +32,8 @@
 	<property name="logintype" type="integer"/>
 	<property name="fans" type="integer"/>
 	<property name="wallimage" type="string"/>
+	<property name="sex" type="string"/>
+	<property name="location" type="string"/>
 	<!-- 影射town集合 -->
 	<set name="mytowns" inverse="true" order-by="createtime desc" where="exist=0">
 		<!-- 关联的外键列 -->

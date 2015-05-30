@@ -520,9 +520,12 @@ public class usersServiceImpl implements usersService
 			if (u.getLogintype() == 0) {
 				mu.setSex(u.getWeibo().getGender());
 				mu.setLocation(u.getWeibo().getLocation());
-			} else {
+			} else if (u.getLogintype() == 1){
 				mu.setSex(u.getQqinfo().getGender());
 				mu.setLocation(u.getQqinfo().getCity());
+			} else if (u.getLogintype() == 2){
+				mu.setSex(u.getSex());
+				mu.setLocation(u.getLocation());
 			}
 			mu.setTowncount(u.getMytowns().size());
 			mu.setPutaocount(u.getMyputao().size());
@@ -652,13 +655,17 @@ public class usersServiceImpl implements usersService
 				if (location !=null && location.length() > 0)
 					if (u.getLogintype() == 0)
 						u.getWeibo().setLocation(location);
-					else
+					else if (u.getLogintype() == 1)
 						u.getQqinfo().setCity(location);
+					else if (u.getLogintype() == 2)
+						u.setLocation(location);
 				if (sex != null && sex.length()>0)
 					if (u.getLogintype() ==0)
 						u.getWeibo().setGender(sex);
-					else
+					else if (u.getLogintype() ==1 )
 						u.getQqinfo().setGender(sex);
+					else if (u.getLogintype() == 2)
+						u.setSex(sex);
 				user.update(u);
 			}catch(Exception e) {
 				res.setStat(false);
@@ -667,6 +674,106 @@ public class usersServiceImpl implements usersService
 		}
 		
 		return res;
+	}
+	@Override
+	public ResponseRegiste regByBian(String username, String password,
+			String emei, String sv, String phonemodel, String brand) {
+		// TODO Auto-generated method stub
+		ResponseRegiste resobj = new ResponseRegiste();
+		if (!checkUsername(username)) {
+			resobj.setErrcode(NetErrorUtil.NAME_EXIST);
+			resobj.setStat(false);
+		} else {
+			String token = CharacterUtil.getRandomString(32);
+			Calendar registetime = Calendar.getInstance();
+			users u = new users();
+			u.setName(username);
+			u.setPassword(password);
+			u.setPtoken(token);
+			u.setSv(sv);
+			u.setBrand(brand);
+			u.setPhonemodel(phonemodel);
+			u.setRegistetime(registetime);
+			u.setLastlogin(registetime);
+			u.setCover("dZKh76BpEyPQuak3ILctrUUXtKwFI8qQ");
+			u.setSex("f");
+			u.setLocation("未知");
+			u.setLogintype(2);
+			
+			if(user.save(u)>0){
+				resobj.setPtuserid(u.getUsersid());
+				resobj.setStat(true);
+				resobj.setName(username);
+				resobj.setCover("dZKh76BpEyPQuak3ILctrUUXtKwFI8qQ");
+				resobj.setPtoken(token);
+				resobj.setSex("f");
+				resobj.setLocation("未知");
+			}
+			else{
+				resobj.setErrcode(NetErrorUtil.SERVER_ERROR);
+				resobj.setStat(false);
+			}
+		}		
+		return resobj;
+	}
+	@Override
+	public ResponseLogin checkloginByBian(String username, String password,
+			String emei, String sv, String phonemodel, String brand) {
+		// TODO Auto-generated method stub
+		ResponseLogin resobj = new ResponseLogin();
+		String cover = null;
+		String email = null;
+		users u = user.getByUsername(username);
+		if (u == null) {
+			resobj.setStat(false);
+			resobj.setErrcode(NetErrorUtil.NAME_NOTEXIST);
+		} else if (!password.equals(u.getPassword())) {
+			resobj.setStat(false);
+			resobj.setErrcode(NetErrorUtil.PASSWORD_ERROR);
+		} else {
+			cover = u.getCover();
+			email = u.getEmail();
+			String token = CharacterUtil.getRandomString(32);
+			Calendar currtime = Calendar.getInstance();
+			//更新user
+			u.setPtoken(token);
+			u.setImei(emei);
+			u.setSv(sv);
+			u.setBrand(brand);
+			u.setPhonemodel(phonemodel);
+			u.setLastlogin(currtime);
+			u.setLogintype(2);
+			
+			user.update(u);
+			resobj.setPtuserid(u.getUsersid());
+			resobj.setStat(true);
+			resobj.setName(username);
+			resobj.setCover(cover);
+			resobj.setPtoken(token);
+			resobj.setSex(u.getSex());
+			resobj.setLocation(u.getLocation());
+			List<town> townlist = new ArrayList<town>(u.getMytowns());
+			//遍历处理整合出town列表
+			List<ApplyTown> returnlist  = new ArrayList<ApplyTown>();
+			for (int i=0;i<townlist.size();i++) {
+				ApplyTown at = new ApplyTown();
+				town t = townlist.get(i);
+				at.setTownid(t.getTownid());
+				at.setTownname(t.getName());
+				at.setCover(t.getCover());
+				at.setDescri(t.getDescri());
+				at.setCreatetime(getFormatDate(t.getCreatetime()));
+				at.setGeoinfo(new ResGeoInfo(t.getGeo()));
+				at.setGood(t.getGoods());
+				at.setUserid(u.getUsersid());
+				at.setUsercover(u.getCover());
+				at.setUsername(u.getName());
+				returnlist.add(at);
+			}
+			resobj.setMytowns(returnlist);
+		}
+		
+		return resobj;
 	}
 	
 }

@@ -27,8 +27,10 @@ public interface usersService
 	
 	public ResponseLogin checkloginByWb(String uid,String wbtoken,Calendar expire,String emei,String sv,String phonemodel,String brand);
 	public ResponseLogin checkloginByQQ(String openid,String qqtoken,Calendar expire,String emei,String sv,String phonemodel,String brand);
+	public ResponseLogin checkloginByBian(String useranme,String password,String emei,String sv,String phonemodel,String brand);
 	public ResponseRegiste regByWb(ModelRegisteWb userinfo,int puid);
 	public ResponseRegiste regByQQ(ModelRegisteQQ userinfo,int puid);
+	public ResponseRegiste regByBian(String useranme,String password,String emei,String sv,String phonemodel,String brand);
 	public boolean checkPtoken(int puid,String ptoken);
 	public ResponseCName cname(int puid,String name);
 	public int getFans(int userid);

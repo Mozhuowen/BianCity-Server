@@ -27,6 +27,12 @@ public class registe implements Action
 	public int logintype;
 	public ModelRegisteWb registInfo;	
 	public ModelRegisteQQ registqqInfo;
+	public String username;		//用户名
+	public String password;		//密码
+	private String imei;
+	private String sv;
+	private String phonemodel;
+	private String brand;
 	//VIEW
 	public String jsonstr;
 	public void setRegistqqInfo(ModelRegisteQQ m) {
@@ -82,10 +88,48 @@ public class registe implements Action
 			resobj = user.regByWb(registInfo, ptuserid);
 		else if (logintype == 1)
 			resobj = user.regByQQ(registqqInfo, ptuserid);
+		else if (logintype ==2)
+			resobj = user.regByBian(username, password, imei, sv, phonemodel, brand);
 		if (resobj != null)
 			this.jsonstr = new Gson().toJson(resobj);
 		return SUCCESS;
 
+	}
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	public String getImei() {
+		return imei;
+	}
+	public void setImei(String imei) {
+		this.imei = imei;
+	}
+	public String getSv() {
+		return sv;
+	}
+	public void setSv(String sv) {
+		this.sv = sv;
+	}
+	public String getPhonemodel() {
+		return phonemodel;
+	}
+	public void setPhonemodel(String phonemodel) {
+		this.phonemodel = phonemodel;
+	}
+	public String getBrand() {
+		return brand;
+	}
+	public void setBrand(String brand) {
+		this.brand = brand;
 	}
 	
 }

@@ -41,6 +41,8 @@ public class users
 	private int fans;
 	private Set<putao> myputao;	//1-N双向
 	private String wallimage;	//墙纸
+	private String sex;
+	private String location;
 	
 	public QQUser getQqinfo() {
 		return qqinfo;
@@ -252,6 +254,18 @@ public class users
 	}
 	public void setMytowns(Set<town> mytowns) {
 		this.mytowns = mytowns;
+	}
+	public String getSex() {
+		return sex;
+	}
+	public void setSex(String sex) {
+		this.sex = sex;
+	}
+	public String getLocation() {
+		return location;
+	}
+	public void setLocation(String location) {
+		this.location = location;
 	}
 	
 	

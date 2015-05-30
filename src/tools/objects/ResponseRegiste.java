@@ -13,6 +13,8 @@ public class ResponseRegiste
 	private List<ApplyTown> mytowns;
 	private String sex;
 	private String location;	
+	private int ptuserid;	//注册时需要用到这两个
+	private String ptoken;	//注册时需要用到这两个
 	
 	public String getSex() {
 		return sex;
@@ -67,6 +69,18 @@ public class ResponseRegiste
 	}
 	public void setMytowns(List<ApplyTown> mytowns) {
 		this.mytowns = mytowns;
+	}
+	public int getPtuserid() {
+		return ptuserid;
+	}
+	public void setPtuserid(int ptuserid) {
+		this.ptuserid = ptuserid;
+	}
+	public String getPtoken() {
+		return ptoken;
+	}
+	public void setPtoken(String ptoken) {
+		this.ptoken = ptoken;
 	}
 	
 }
