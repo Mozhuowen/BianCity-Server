@@ -39,4 +39,7 @@ public interface usersService
 	public ResponsePutao getFavorite(int userid);
 	public ResponseSimple cwall(int userid,String wall);
 	public ResponseSimple cuserinfo(int userid,String cover,String username,String location,String sex);
+	public int getLoginType(int userid);	//获取用户登陆类型 0-weibo 1-qq
+	public int getLoginDevice(int userid);	//获取用户登陆设备 0-android 1-iphone
+	
 }

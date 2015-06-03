@@ -21,4 +21,10 @@ public class LogUtil{
 			System.out.println(msg);
 		}
 	}
+	public static void v(Object object,String msg) {
+		if (LEVEL <= VERBOSE) {
+			String classname = object.getClass().getName();
+			System.out.println(classname + " "+msg);
+		}		
+	}
 }

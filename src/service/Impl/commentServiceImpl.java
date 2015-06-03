@@ -15,6 +15,7 @@ import domain.putao;
 import domain.town;
 import domain.users;
 import service.commentService;
+import service.usersService;
 import tools.LogUtil;
 import tools.NetErrorUtil;
 import tools.objects.PackageComment;
@@ -28,6 +29,7 @@ public class commentServiceImpl implements commentService
 	private usersDao user;
 	private putaoDao putaox;
 	private townDao townx;
+	private usersService userservice;
 	public commentDao getCommentx() {
 		return commentx;
 	}
@@ -109,11 +111,19 @@ public class commentServiceImpl implements commentService
 			res.setStat(false);
 			res.setErrcode(NetErrorUtil.SERVER_ERROR);
 		}
-		//push mess
-		if (bereplycomment != null)
-			new Thread(new CommentPushRunnable(targetcomment,PackagePutao.build(p),bereplycomment.getUser().getUsersid(),t.getOwner().getUsersid())).start();
-		else
-			new Thread(new CommentPushRunnable(targetcomment,PackagePutao.build(p),0,t.getOwner().getUsersid())).start();
+		//push mess,需要注意处理单纯评论和回复评论两种情况
+		if (bereplycomment != null)	//回复
+			new Thread(new CommentPushRunnable(targetcomment
+					,PackagePutao.build(p)
+					,bereplycomment.getUser().getUsersid()
+					,bereplycomment.getUser().getUsersid()
+					,userservice.getLoginDevice(bereplycomment.getUser().getUsersid()))).start();
+		else	//评论
+			new Thread(new CommentPushRunnable(targetcomment
+					,PackagePutao.build(p)
+					,0
+					,t.getOwner().getUsersid()
+					,userservice.getLoginDevice(t.getOwner().getUsersid()))).start();
 		
 		return res;
 	}
@@ -198,5 +208,11 @@ public class commentServiceImpl implements commentService
 			res.setErrcode(NetErrorUtil.SERVER_ERROR);
 		}
 		return res;
+	}
+	public usersService getUserservice() {
+		return userservice;
+	}
+	public void setUserservice(usersService userservice) {
+		this.userservice = userservice;
 	}
 }

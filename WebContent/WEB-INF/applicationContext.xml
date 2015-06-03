@@ -62,7 +62,7 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 			hibernate.show_sql=false
 			hibernate.dialect=org.hibernate.dialect.MySQLInnoDBDialect
 			<!-- hibernate.dialect=org.hibernate.dialect.MySQLDialect -->
-			hibernate.hbm2ddl.auto=update
+			hibernate.hbm2ddl.auto=validate
 			hibernate.format_sql=true;
 			</value>
 		</property>
@@ -99,6 +99,7 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 		<property name="putaox" ref="putaoDao"/>
 		<property name="commentx" ref="commentDao"/>
 		<property name="user" ref="usersDao"/>
+		<property name="userservice" ref="usersService"/>
 	</bean>
 	<bean id="messService" class="service.Impl.messServiceImpl">
 		<property name="townx" ref="townDao"/>

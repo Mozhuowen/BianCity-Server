@@ -9,6 +9,7 @@ public class ModelPushComment
 	private int commentid;
 	private PackagePutao story;
 	private int retype;	//类型 0-评论 1-回复
+	private long time;
 	
 	public void parse(PackagePutao s,PackageComment c) {
 		this.usercover = c.getCover();
@@ -62,5 +63,13 @@ public class ModelPushComment
 
 	public void setRetype(int retype) {
 		this.retype = retype;
+	}
+
+	public long getTime() {
+		return time;
+	}
+
+	public void setTime(long time) {
+		this.time = time;
 	}
 }

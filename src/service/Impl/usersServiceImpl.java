@@ -775,5 +775,19 @@ public class usersServiceImpl implements usersService
 		
 		return resobj;
 	}
+	@Override
+	public int getLoginType(int userid) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	@Override
+	public int getLoginDevice(int userid) {
+		users u = user.get(userid);
+		String brand = u.getBrand().toLowerCase();
+		if ("iphone".equals(brand))
+			return 1;
+		else
+			return 0;
+	}
 	
 }
