@@ -2,13 +2,15 @@ package tools.objects;
 
 public class ModelPushGood
 {
-	private int goodtype;
+	private int goodtype;	// 0-story 1-town 2-comment
 	private int userid;
 	private String username;
 	private String usercover;
 	private PackagePutao story;
 	private ApplyTown town;
 	private PackageComment comment;
+	private long time;
+	
 	public int getGoodtype() {
 		return goodtype;
 	}
@@ -50,5 +52,11 @@ public class ModelPushGood
 	}
 	public void setComment(PackageComment comment) {
 		this.comment = comment;
+	}
+	public long getTime() {
+		return time;
+	}
+	public void setTime(long time) {
+		this.time = time;
 	}
 }

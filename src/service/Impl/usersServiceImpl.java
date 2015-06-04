@@ -199,6 +199,10 @@ public class usersServiceImpl implements usersService
 				u.setPtoken(token);
 				u.setLogintype(1);
 				u.setLastlogin(Calendar.getInstance());
+				u.setImei(imei);
+				u.setSv(sv);
+				u.setBrand(brand);
+				u.setPhonemodel(phonemodel);
 				user.update(u);
 				resobj.setStat(true);
 				resobj.setNeedregiste(false);
@@ -285,6 +289,10 @@ public class usersServiceImpl implements usersService
 				u.setPtoken(token);
 				u.setLogintype(0);
 				u.setLastlogin(Calendar.getInstance());
+				u.setImei(imei);
+				u.setSv(sv);
+				u.setBrand(brand);
+				u.setPhonemodel(phonemodel);
 				user.update(u);
 				resobj.setStat(true);
 				resobj.setNeedregiste(false);

@@ -11,6 +11,7 @@ import tools.objects.PackageComment;
 import tools.objects.PackagePutao;
 
 import com.google.gson.Gson;
+import com.xiaomi.xmpush.server.Constants;
 import com.xiaomi.xmpush.server.Message;
 import com.xiaomi.xmpush.server.Result;
 import com.xiaomi.xmpush.server.Sender;
@@ -37,7 +38,6 @@ public class CommentPushRunnable implements Runnable
 		try {
 			sendMessageToAlias();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -93,15 +93,17 @@ public class CommentPushRunnable implements Runnable
              .badge(1)               // 数字角标
              .category("action")     // 快速回复类别
              .extra("type", type+"")  // 自定义键值对
-             .extra("mess", messMain)
+             .extra("content", messMain)
              .build();
 		
 		return message;
 	}
 	
 	private void sendMessageToAlias() throws Exception {
-		LogUtil.v("start to send message!");
+		LogUtil.v(this,"start to send message!");
 		LogUtil.v(this, "login device: "+this.logindevice);
+		//ios测试环境
+//		Constants.useOfficial();
 		Message message = null;
 		//判断消息发送类型，android or IOS
 		if (this.logindevice == 0)	//android
@@ -109,8 +111,14 @@ public class CommentPushRunnable implements Runnable
 		else								//ios
 			message = buildIOSMessage();
 	   LogUtil.v("Message info: storyownerid: "+storyownerid+" message content: "+message.getPayload());
-	   Sender sender = new Sender("DxBCH7FvGmmESAzSr0/WqA==");
-	   Result result = sender.sendToAlias(message, String.valueOf(this.storyownerid), 2); //根据alias，发送消息到指定设备上，不重试。
+	   Sender sender = null;
+	   if (this.logindevice == 0)
+		   sender = new Sender("DxBCH7FvGmmESAzSr0/WqA==");
+	   else{
+		   LogUtil.v(this, "send to iphone");
+		   sender = new Sender("bJZyK19S50InYa2LySf25Q==");
+	   }
+	   Result result = sender.sendToAlias(message, String.valueOf(this.storyownerid), 2); //根据alias，发送消息到指定设备上，重试2次。
 	   LogUtil.v("Server response: " + "MessageId: " + result.getMessageId()
 	            + " ErrorCode: " + result.getErrorCode().toString()
 	            + " Reason: " + result.getReason());

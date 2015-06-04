@@ -4,6 +4,7 @@ import java.util.Set;
 
 import org.apache.catalina.User;
 
+import push.GoodPushRunnable;
 import dao.MessBoardDao;
 import dao.commentDao;
 import dao.putaoDao;
@@ -15,7 +16,10 @@ import domain.putao;
 import domain.town;
 import domain.users;
 import service.goodService;
+import service.usersService;
+import tools.objects.ApplyTown;
 import tools.objects.ModelGood;
+import tools.objects.PackagePutao;
 import tools.objects.ResponseGood;
 
 public class goodServiceImpl implements goodService
@@ -25,6 +29,7 @@ public class goodServiceImpl implements goodService
 	private commentDao commentx;
 	private MessBoardDao mess;
 	private usersDao user;
+	private usersService userservice;
 	public void setUser(usersDao u) {
 		this.user = u;
 	}
@@ -120,6 +125,8 @@ public class goodServiceImpl implements goodService
 				t.setDogoodusers(set);
 				townx.update(t);
 				goods = t.getGoods();
+				if (action == 0)
+					this.PushGoodMess(1, u, t);
 				break;
 			case 1:			//do good for putao
 				putao p = (putao)putaox.get(id);
@@ -138,6 +145,9 @@ public class goodServiceImpl implements goodService
 				p.setDogoodusers(setp);
 				putaox.update(p);
 				goods = p.getGoods();
+				if (action == 0)
+					//消息推送
+					this.PushGoodMess(0, u, p);
 				break;
 			case 2:		//do good for comment
 				comment c = (comment)commentx.get(id);
@@ -156,6 +166,8 @@ public class goodServiceImpl implements goodService
 				c.setDogoodusers(setc);
 				commentx.update(c);
 				goods = c.getGoods();
+				if (action == 0)
+					this.PushGoodMess(2, u, c.getPutaox());
 				break;
 			case 3:		//do good for mess
 				MessBoard m = (MessBoard)mess.get(id);
@@ -183,6 +195,58 @@ public class goodServiceImpl implements goodService
 		mg.setGoods(goods);
 		resobj.setGood(mg);
 		return resobj;
+	}
+	/**推送消息*/
+	private void PushGoodMess(int type,users user,Object object) {
+		int logindevice = 0;
+		int besenduserid = 0;
+		switch(type) {
+		case 0:	//赞故事
+			PackagePutao story = PackagePutao.build((putao)object);
+			besenduserid = story.getUserid();
+			logindevice = this.userservice.getLoginDevice(besenduserid);
+			new Thread(new GoodPushRunnable(0
+					,user.getUsersid()
+					,user.getName()
+					,user.getCover()
+					,besenduserid
+					,logindevice
+					,story
+					,null)).start();
+			break;
+		case 1:	//赞边城
+			ApplyTown town = ApplyTown.build((town)object);
+			besenduserid = town.getUserid();
+			logindevice = this.userservice.getLoginDevice(besenduserid);
+			new Thread(new GoodPushRunnable(1
+					,user.getUsersid()
+					,user.getName()
+					,user.getCover()
+					,besenduserid
+					,logindevice
+					,null
+					,town)).start();
+			break;
+		case 2:	//赞评论
+			PackagePutao story2 = PackagePutao.build((putao)object);
+			besenduserid = story2.getUserid();
+			logindevice = this.userservice.getLoginDevice(besenduserid);
+			new Thread(new GoodPushRunnable(2
+					,user.getUsersid()
+					,user.getName()
+					,user.getCover()
+					,besenduserid
+					,logindevice
+					,story2
+					,null)).start();
+			break;
+		}
+	}
+	public usersService getUserservice() {
+		return userservice;
+	}
+	public void setUserservice(usersService userservice) {
+		this.userservice = userservice;
 	}
 	
 }

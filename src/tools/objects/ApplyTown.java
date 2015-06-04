@@ -1,9 +1,11 @@
 package tools.objects;
 
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import domain.GeoInfo;
+import domain.town;
 /**
  * 该类和android端request一致，用于返回到android端的town列表
  * @author root
@@ -24,6 +26,24 @@ public class ApplyTown
 	private String username;
 	private String usercover;
 	private int storycount;
+	
+	public static ApplyTown build(town t) {
+		ApplyTown at = new ApplyTown();
+		at.townid = t.getTownid();
+		at.townname = t.getName();
+		at.descri = t.getDescri();
+		at.cover = t.getCover();
+		at.createtime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(t.getCreatetime().getTime());
+		at.subscriptions = t.getSubscris();
+		at.geoinfo = new ResGeoInfo(t.getGeo());
+		at.good = t.getGoods();
+		at.userid = t.getOwner().getUsersid();
+		at.username = t.getOwner().getName();
+		at.usercover = t.getOwner().getCover();
+		at.storycount = t.getPutao().size();
+		return at;
+	}
+	
 	public String getUsername() {
 		return username;
 	}

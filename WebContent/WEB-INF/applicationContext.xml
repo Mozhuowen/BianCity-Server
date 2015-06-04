@@ -112,6 +112,7 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 		<property name="putaox" ref="putaoDao"/>
 		<property name="commentx" ref="commentDao"/>
 		<property name="user" ref="usersDao"/>
+		<property name="userservice" ref="usersService"/>
 	</bean>
 	<bean id="subscriService" class="service.Impl.subscriServiceImpl">
 		<property name="user" ref="usersDao"/>
