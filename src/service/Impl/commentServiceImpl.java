@@ -112,13 +112,13 @@ public class commentServiceImpl implements commentService
 			res.setErrcode(NetErrorUtil.SERVER_ERROR);
 		}
 		//push mess,需要注意处理单纯评论和回复评论两种情况
-		if (bereplycomment != null)	//回复
+		if (bereplycomment != null )	//回复
 			new Thread(new CommentPushRunnable(targetcomment
 					,PackagePutao.build(p)
 					,bereplycomment.getUser().getUsersid()
 					,bereplycomment.getUser().getUsersid()
 					,userservice.getLoginDevice(bereplycomment.getUser().getUsersid()))).start();
-		else	//评论
+		else if (t.getOwner().getUsersid() != userid)	//评论
 			new Thread(new CommentPushRunnable(targetcomment
 					,PackagePutao.build(p)
 					,0

@@ -6,6 +6,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Set;
 
+import push.SysPushRunnable;
 import dao.*;
 import service.*;
 import tools.CharacterUtil;
@@ -440,7 +441,8 @@ public class usersServiceImpl implements usersService
 			resobj.setSex(userinfo.getGender());
 			resobj.setLocation(userinfo.getCity());
 		}
-		
+		//推送欢迎消息
+		this.pushWelcomeMessage(puid);
 		return resobj;
 	}
 	@Override
@@ -476,7 +478,8 @@ public class usersServiceImpl implements usersService
 			resobj.setSex(userinfo.getGender());
 			resobj.setLocation(userinfo.getLocation());
 		}
-		
+		//推送欢迎消息
+		this.pushWelcomeMessage(puid);
 		return resobj;
 	}
 	/**检查是否需要修改用户名*/
@@ -796,6 +799,11 @@ public class usersServiceImpl implements usersService
 			return 1;
 		else
 			return 0;
+	}
+	
+	private void pushWelcomeMessage(int besenduserid) {
+		String welcomcontent = "欢迎来到边城，用心创建一座你的边城吧!";
+		new Thread(new SysPushRunnable(1,besenduserid,welcomcontent,this.getLoginDevice(besenduserid))).start();;
 	}
 	
 }

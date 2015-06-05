@@ -2,9 +2,10 @@ package tools.objects;
 
 public class ModelPush
 {
-	private int type;	//0-评论 1-回复 2-赞
+	private int type;	//0-评论 1-回复 2-赞 3-系统消息
 	private Object mess;
 	private ModelPushGood goodmess;
+	private ModelPushSys sysmess;
 	private int messid;
 	public int getType() {
 		return type;
@@ -29,5 +30,11 @@ public class ModelPush
 	}
 	public void setGoodmess(ModelPushGood goodmess) {
 		this.goodmess = goodmess;
+	}
+	public ModelPushSys getSysmess() {
+		return sysmess;
+	}
+	public void setSysmess(ModelPushSys sysmess) {
+		this.sysmess = sysmess;
 	}
 }

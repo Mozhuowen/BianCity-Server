@@ -85,6 +85,7 @@ public class CommentPushRunnable implements Runnable
 			type = 0;
 		}
 		String messMain = new Gson().toJson(pushcomment);
+		LogUtil.v(this, "pushmess content is: "+messMain+" lenght: "+messMain.length());
 		
 		String description = "收到一条信息";
 		Message message = new Message.IOSBuilder()
@@ -106,10 +107,14 @@ public class CommentPushRunnable implements Runnable
 //		Constants.useOfficial();
 		Message message = null;
 		//判断消息发送类型，android or IOS
-		if (this.logindevice == 0)	//android
+		if (this.logindevice == 0){	//android
+			Constants.useOfficial();
 			message = buildMessage();
-		else								//ios
+		}
+		else{								//ios
+			Constants.useSandbox();
 			message = buildIOSMessage();
+		}
 	   LogUtil.v("Message info: storyownerid: "+storyownerid+" message content: "+message.getPayload());
 	   Sender sender = null;
 	   if (this.logindevice == 0)
