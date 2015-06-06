@@ -440,9 +440,10 @@ public class usersServiceImpl implements usersService
 			resobj.setUid(userinfo.getOpenid());
 			resobj.setSex(userinfo.getGender());
 			resobj.setLocation(userinfo.getCity());
+			//推送欢迎消息
+			this.pushWelcomeMessage(puid);
 		}
-		//推送欢迎消息
-		this.pushWelcomeMessage(puid);
+		
 		return resobj;
 	}
 	@Override
@@ -477,9 +478,9 @@ public class usersServiceImpl implements usersService
 			resobj.setUid(userinfo.getId());
 			resobj.setSex(userinfo.getGender());
 			resobj.setLocation(userinfo.getLocation());
-		}
-		//推送欢迎消息
-		this.pushWelcomeMessage(puid);
+			//推送欢迎消息
+			this.pushWelcomeMessage(puid);
+		}		
 		return resobj;
 	}
 	/**检查是否需要修改用户名*/
@@ -509,6 +510,8 @@ public class usersServiceImpl implements usersService
 			user.update(us);
 			resobj.setStat(true);
 			resobj.setName(name);
+			//推送欢迎消息
+			this.pushWelcomeMessage(puid);
 		} else {
 			resobj.setStat(false);
 		}
@@ -793,8 +796,10 @@ public class usersServiceImpl implements usersService
 	}
 	@Override
 	public int getLoginDevice(int userid) {
+		LogUtil.v(this, "get logindevice userid: "+userid);
 		users u = user.get(userid);
 		String brand = u.getBrand().toLowerCase();
+		LogUtil.v(this,"get login brand: "+brand);
 		if ("iphone".equals(brand))
 			return 1;
 		else

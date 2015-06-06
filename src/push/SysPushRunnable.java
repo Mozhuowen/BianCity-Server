@@ -24,7 +24,7 @@ public class SysPushRunnable implements Runnable
 		this.systype = systype;
 		this.besendid = besendid;
 		this.content = content;
-		this.logindevice = logindevice;
+		this.logindevice = lodgindevice;
 	}
 
 	@Override

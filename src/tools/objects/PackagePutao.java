@@ -28,7 +28,7 @@ public class PackagePutao
 		pt.setTitle(p.getTitle());
 		pt.setCover(p.getCover());
 		pt.setContent(p.getContent());
-		pt.setUsercover(p.getCover());
+		pt.setUsercover(p.getParenttown().getOwner().getCover());
 		pt.setUsername(p.getParenttown().getOwner().getName());
 		pt.setCreatetime(TimeUtil.getFormatDate(p.getCreatetime()));
 		pt.setUserid(p.getParenttown().getOwner().getUsersid());

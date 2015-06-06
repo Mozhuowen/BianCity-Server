@@ -126,7 +126,7 @@ public class goodServiceImpl implements goodService
 				townx.update(t);
 				goods = t.getGoods();
 				if (action == 0)
-					this.PushGoodMess(1, u, t);
+					this.PushGoodMess(1, u, t,0);
 				break;
 			case 1:			//do good for putao
 				putao p = (putao)putaox.get(id);
@@ -147,7 +147,7 @@ public class goodServiceImpl implements goodService
 				goods = p.getGoods();
 				if (action == 0)
 					//消息推送
-					this.PushGoodMess(0, u, p);
+					this.PushGoodMess(0, u, p,0);
 				break;
 			case 2:		//do good for comment
 				comment c = (comment)commentx.get(id);
@@ -167,7 +167,7 @@ public class goodServiceImpl implements goodService
 				commentx.update(c);
 				goods = c.getGoods();
 				if (action == 0)
-					this.PushGoodMess(2, u, c.getPutaox());
+					this.PushGoodMess(2, u, c.getPutaox(),c.getUser().getUsersid());
 				break;
 			case 3:		//do good for mess
 				MessBoard m = (MessBoard)mess.get(id);
@@ -197,7 +197,7 @@ public class goodServiceImpl implements goodService
 		return resobj;
 	}
 	/**推送消息*/
-	private void PushGoodMess(int type,users user,Object object) {
+	private void PushGoodMess(int type,users user,Object object,int sendcomuserid) {
 		int logindevice = 0;
 		int besenduserid = 0;
 		switch(type) {
@@ -228,17 +228,18 @@ public class goodServiceImpl implements goodService
 					,town)).start();
 			break;
 		case 2:	//赞评论
-			PackagePutao story2 = PackagePutao.build((putao)object);
-			besenduserid = story2.getUserid();
-			logindevice = this.userservice.getLoginDevice(besenduserid);
-			new Thread(new GoodPushRunnable(2
-					,user.getUsersid()
-					,user.getName()
-					,user.getCover()
-					,besenduserid
-					,logindevice
-					,story2
-					,null)).start();
+			if (sendcomuserid>0) {
+				PackagePutao story2 = PackagePutao.build((putao)object);
+				logindevice = this.userservice.getLoginDevice(sendcomuserid);
+				new Thread(new GoodPushRunnable(2
+						,user.getUsersid()
+						,user.getName()
+						,user.getCover()
+						,sendcomuserid
+						,logindevice
+						,story2
+						,null)).start();
+				}
 			break;
 		}
 	}
