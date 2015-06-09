@@ -62,5 +62,10 @@
 		<key column="town_id"/>
 		<many-to-many class="users" column="users_id"/>
 	</set>
+	<!-- 影射社区主题贴 -->
+	<set name="communityties" inverse="true">
+		<key column="town_id"/>
+		<one-to-many class="TieTheme"/>
+	</set>
 	</class>
 </hibernate-mapping>

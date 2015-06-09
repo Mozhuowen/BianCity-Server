@@ -23,6 +23,8 @@ public class town
 	private Set<users> subscriusers;
 	private int subscris;
 	private String geohash;
+	private Set<users> communitymembers;
+	private Set<TieTheme> communityties;	//社区主题贴
 	
 	public void setGeohash(String g) {
 		this.geohash = g;
@@ -140,6 +142,18 @@ public class town
 
 	public void setOwner(users owner) {
 		this.owner = owner;
+	}
+	public Set<users> getCommunitymembers() {
+		return communitymembers;
+	}
+	public void setCommunitymembers(Set<users> comunitymembers) {
+		this.communitymembers = comunitymembers;
+	}
+	public Set<TieTheme> getCommunityties() {
+		return communityties;
+	}
+	public void setCommunityties(Set<TieTheme> communityties) {
+		this.communityties = communityties;
 	}
 	
 	

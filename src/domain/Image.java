@@ -9,6 +9,7 @@ public class Image
 	private int viewtimes;
 	private int isvisible = 0;	//默认0可见
 	private putao p;
+	private TieTheme tiet;
 	private int list_index;
 	
 	public void setList_index(int l) {
@@ -58,6 +59,12 @@ public class Image
 	}
 	public void setIsvisible(int isvisible) {
 		this.isvisible = isvisible;
+	}
+	public TieTheme getTiet() {
+		return tiet;
+	}
+	public void setTiet(TieTheme tiet) {
+		this.tiet = tiet;
 	}
 	
 	

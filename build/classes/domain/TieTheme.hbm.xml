@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 指定Hibernate的DTD信息 -->
+<!DOCTYPE hibernate-mapping
+	PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="domain">
+	<class name="putao" table="pt_putao">
+	<!-- 映射标识属性staid -->
+	<id name="tiethemeid" column="tietheme_id">
+		<!-- 定义主键生成器策略 -->
+		<generator class="identity"/>
+	</id>
+	<property name="time" type="calendar"/>
+	<property name="lastretime" type="calendar"/>
+	<property name="goodcou" type="integer"/>
+	<property name="commentcou" type="integer"/>
+	<property name="top" type="integer"/>
+	<property name="imagecou" type="integer"/>
+	<property name="title" type="string"/>
+	<property name="content" type="text"/>
+	<!-- 影射list集合 inverse="false"才能自动维护index??!! -->
+	<list name="images" table="image" cascade="all" inverse="true">
+		<!-- 影射集合属性数据表的外键列 -->
+		<key column="tiethemeid"/>
+		<!-- 影射集合属性数据表的集合索引列 -->
+		<list-index column="list_index"/> 
+		<one-to-many class="Image"/>
+	</list> 
+	</class>
+</hibernate-mapping>
