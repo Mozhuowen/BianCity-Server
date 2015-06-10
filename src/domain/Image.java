@@ -10,6 +10,7 @@ public class Image
 	private int isvisible = 0;	//默认0可见
 	private putao p;
 	private TieTheme tiet;
+	private Tie tie;
 	private int list_index;
 	
 	public void setList_index(int l) {
@@ -65,6 +66,12 @@ public class Image
 	}
 	public void setTiet(TieTheme tiet) {
 		this.tiet = tiet;
+	}
+	public Tie getTie() {
+		return tie;
+	}
+	public void setTie(Tie tie) {
+		this.tie = tie;
 	}
 	
 	

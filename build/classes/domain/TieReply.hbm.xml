@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 指定Hibernate的DTD信息 -->
+<!DOCTYPE hibernate-mapping
+	PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="domain">
+	<class name="TieReply" table="pt_tiereply">
+	<!-- 映射标识属性staid -->
+	<id name="tiereplyid" column="tiereply_id">
+		<!-- 定义主键生成器策略 -->
+		<generator class="identity"/>
+	</id>
+	<property name="time" type="calendar"/>
+	<property name="content" type="text"/>
+	<property name="visible" type="integer"/>
+	<!-- 关联发帖者 -->
+	<many-to-one name="user" class="users" column="users_id" not-null="true"/>
+	<!-- 关联普通贴 -->
+	<many-to-one name="tie" class="Tie" column="tie_id" not-null="true"/>
+	<!-- 关联town -->
+	<many-to-one name="parentown" class="town" column="town_id" not-null="true"/>
+	</class>
+</hibernate-mapping>

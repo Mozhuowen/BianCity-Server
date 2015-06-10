@@ -43,6 +43,11 @@ public class users
 	private String wallimage;	//墙纸
 	private String sex;
 	private String location;
+	private town joincommunity;		//加入的社区,n-1双向
+	private Set<TieTheme> tiethemes;	//发表的主题贴,1-N双向
+	private Set<TieTheme> dogoodtieth;	//点赞的主题贴 N-n双向
+	private Set<Tie> ties;				//发表的普通贴 1-N双向
+	private Set<TieReply> tiereplys;	//发表的回复贴 1-N双向
 	
 	public QQUser getQqinfo() {
 		return qqinfo;
@@ -266,6 +271,36 @@ public class users
 	}
 	public void setLocation(String location) {
 		this.location = location;
+	}
+	public Set<TieTheme> getTiethemes() {
+		return tiethemes;
+	}
+	public void setTiethemes(Set<TieTheme> tiethemes) {
+		this.tiethemes = tiethemes;
+	}
+	public Set<TieTheme> getDogoodtieth() {
+		return dogoodtieth;
+	}
+	public void setDogoodtieth(Set<TieTheme> dogoodtieth) {
+		this.dogoodtieth = dogoodtieth;
+	}
+	public Set<Tie> getTies() {
+		return ties;
+	}
+	public void setTies(Set<Tie> ties) {
+		this.ties = ties;
+	}
+	public Set<TieReply> getTiereplys() {
+		return tiereplys;
+	}
+	public void setTiereplys(Set<TieReply> tiereplys) {
+		this.tiereplys = tiereplys;
+	}
+	public town getJoincommunity() {
+		return joincommunity;
+	}
+	public void setJoincommunity(town joincommunity) {
+		this.joincommunity = joincommunity;
 	}
 	
 	

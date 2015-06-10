@@ -16,7 +16,8 @@
 	<property name="viewtimes" type="integer"/>
 	<property name="isvisible" type="integer"/>
 	<property name="list_index" type="integer"/>
-	<many-to-one name="p" class="putao" column="putao_id" not-null="true"/>
-	<many-to-one name="tiet" class="TieTheme" column="tiethemeid" not-null="true"/>
+	<many-to-one name="p" class="putao" column="putao_id" not-null="false"/>
+	<many-to-one name="tiet" class="TieTheme" column="tietheme_id" not-null="false"/>
+	<many-to-one name="tie" class="Tie" column="tie_id" not-null="false"/>
 	</class>
 </hibernate-mapping> 

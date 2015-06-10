@@ -52,6 +52,9 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 				<value>domain/MessBoard.hbm.xml</value>
 				<value>domain/QQUser.hbm.xml</value>
 				<value>domain/Version.hbm.xml</value>
+				<value>domain/TieTheme.hbm.xml</value>
+				<value>domain/Tie.hbm.xml</value>
+				<value>domain/TieReply.hbm.xml</value>
 			</list>
 		</property>
 		<!-- 定义Hibernate的SessionFactory的属性 -->
@@ -61,8 +64,8 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 			hibernate.use_sql_comments=true
 			hibernate.show_sql=false
 			hibernate.dialect=org.hibernate.dialect.MySQLInnoDBDialect
-			<!-- hibernate.dialect=org.hibernate.dialect.MySQLDialect -->
-			hibernate.hbm2ddl.auto=update
+		   <!-- hibernate.dialect=org.hibernate.dialect.MySQLDialect -->
+			hibernate.hbm2ddl.auto=validate
 			hibernate.format_sql=true;
 			</value>
 		</property>
@@ -79,6 +82,9 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 	<bean id="MessBoardDao" class="dao.Impl.MessBoardDaoImpl" parent="daoTemplate"/>
 	<bean id="QQUserDao" class="dao.Impl.QQUserDaoImpl" parent="daoTemplate"/>
 	<bean id="VersionDao" class="dao.Impl.VersionDaoImpl" parent="daoTemplate"/>
+	<bean id="TieThemeDao" class="dao.Impl.TieThemeDaoImpl" parent="daoTemplate"/>
+	<bean id="TieDao" class="dao.Impl.TieDaoImpl" parent="daoTemplate"/>
+	<bean id="TieReplyDao" class="dao.Impl.TieReplyDaoImpl" parent="daoTemplate"/>
 	
 	<!-- 定义service业务逻辑组件，并注入dao -->
 	<bean id="usersService" class="service.Impl.usersServiceImpl">
@@ -131,6 +137,16 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 		<property name="putaox" ref="putaoDao"/>
 		<property name="commentx" ref="commentDao"/>
 		<property name="userx" ref="usersDao"/>
+	</bean>
+	<bean id="tiethemeService" class="service.Impl.TieThemeServiceImpl">
+		<property name="user" ref="usersDao"/>
+		<property name="tieth" ref="TieThemeDao" />
+		<property name="townx" ref="townDao"/>
+	</bean>
+	<bean id="communityService" class="service.Impl.TieThemeServiceImpl">
+		<property name="user" ref="usersDao"/>
+		<property name="tieth" ref="TieThemeDao"/>
+		<property name="townx" ref="townDao"/>
 	</bean>
 	
 	<!-- Spring 管理action并为其注入业务组件  -->
@@ -234,6 +250,9 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 	</bean>
 	<bean id="createStory_action" class="action.web.createStory" scope="prototype">
 		<property name="putaox" ref="putaoService"/>
+	</bean>
+	<bean id="submitieth_action" class="action.submitieth" scope="prototype">
+		<property name="tieth" ref="tiethemeService"/>
 	</bean>
 	
 	<!-- 配置事务相关 -->

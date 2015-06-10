@@ -162,5 +162,16 @@ public class usersDaoImpl extends HibernateDaoSupport implements usersDao
 		else
 			return true;
 	}
+
+	@Override
+	public Boolean checkIfJoinCommunity(int townid, int userid) {
+		// TODO Auto-generated method stub
+		List list = null;
+		list = this.getHibernateTemplate().find("select 1 from users u,town t where t.townid=? and u.usersid = ? and u in elements(t.communitymembers)",townid,userid);
+		if (list.size()>0)
+			return true;
+		else
+			return false;
+	}
 	
 }

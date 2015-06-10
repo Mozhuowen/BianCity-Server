@@ -92,5 +92,33 @@
 		<!-- 影射到的关联类属性 -->
 		<one-to-many class="putao"/>
 	</set>
+	<!-- 发表的主题贴 -->
+	<set name="tiethemes" inverse="true" order-by="time desc" where="visible=0">
+		<!-- 关联的外键列 -->
+		<key column="users_id"/>
+		<!-- 影射到的关联类属性 -->
+		<one-to-many class="TieTheme"/>
+	</set>
+	<!-- 影射点赞的主题贴 -->
+	<set name="dogoodtieth" table="pt_dogood_users_tieth">
+		<key column="users_id"/>
+		<many-to-many class="TieTheme" column="tietheme_id"/>
+	</set>
+	<!-- 发表的普通贴 -->
+	<set name="ties" inverse="true" order-by="time desc" where="visible=0">
+		<!-- 关联的外键列 -->
+		<key column="users_id"/>
+		<!-- 影射到的关联类属性 -->
+		<one-to-many class="Tie"/>
+	</set>
+	<!-- 发表的回复贴 -->
+	<set name="tiereplys" inverse="true" order-by="time desc" where="visible=0">
+		<!-- 关联的外键列 -->
+		<key column="users_id"/>
+		<!-- 影射到的关联类属性 -->
+		<one-to-many class="TieReply"/>
+	</set>
+	<!-- 影射加入的社区 -->
+	<many-to-one name="joincommunity" class="town" column="town_id" not-null="false"/>
 	</class>
 </hibernate-mapping>

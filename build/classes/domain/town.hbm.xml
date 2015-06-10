@@ -19,6 +19,8 @@
 	<property name="subscris" type="integer"/>
 	<property name="createtime" type="calendar"/>
 	<property name="geohash" />
+	<property name="membercount" type="integer"/>
+	<property name="tiecount" type="integer"/>
 	<!-- 关联users -->
 	<many-to-one name="owner" class="users" column="users_id" not-null="true"/>
 	<!-- 关联putao集合 -->
@@ -63,9 +65,24 @@
 		<many-to-many class="users" column="users_id"/>
 	</set>
 	<!-- 影射社区主题贴 -->
-	<set name="communityties" inverse="true">
+	<set name="communitytieths" inverse="true">
 		<key column="town_id"/>
 		<one-to-many class="TieTheme"/>
+	</set>
+	<!-- 影射社区普通贴 -->
+	<set name="communityties" inverse="true">
+		<key column="town_id"/>
+		<one-to-many class="Tie"/>
+	</set>
+	<!-- 影射社区回复贴 -->
+	<set name="communityreplys" inverse="true">
+		<key column="town_id"/>
+		<one-to-many class="TieReply"/>
+	</set>
+	<!-- 影射社区成员 -->
+	<set name="communitymembers" inverse="true">
+		<key column="town_id"/>
+		<one-to-many class="users"/>
 	</set>
 	</class>
 </hibernate-mapping>

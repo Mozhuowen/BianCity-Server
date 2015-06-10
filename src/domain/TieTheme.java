@@ -18,8 +18,9 @@ public class TieTheme
 	private Calendar lastretime;	//最新回复时间
 	private users user;		//楼主 N-1双向
 	private List<Image> images;	//包含的图片，上传时用
-	private Set<users> dogoodusers;	//点赞用户	 1-N双向
+	private Set<users> dogoodusers;	//点赞用户	 N-N双向
 	private Set<Tie> replytie;	//回复的帖子	1-N双向
+	private int visible;
 
 	public Calendar getTime() {
 		return time;
@@ -104,6 +105,12 @@ public class TieTheme
 	}
 	public void setTiethemeid(int tiethemeid) {
 		this.tiethemeid = tiethemeid;
+	}
+	public int getVisible() {
+		return visible;
+	}
+	public void setVisible(int visible) {
+		this.visible = visible;
 	}
 	
 }

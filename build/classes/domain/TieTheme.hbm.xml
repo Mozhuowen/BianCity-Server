@@ -4,7 +4,7 @@
 	PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping package="domain">
-	<class name="putao" table="pt_putao">
+	<class name="TieTheme" table="pt_tietheme">
 	<!-- 映射标识属性staid -->
 	<id name="tiethemeid" column="tietheme_id">
 		<!-- 定义主键生成器策略 -->
@@ -18,13 +18,28 @@
 	<property name="imagecou" type="integer"/>
 	<property name="title" type="string"/>
 	<property name="content" type="text"/>
+	<property name="visible" type="integer"/>
 	<!-- 影射list集合 inverse="false"才能自动维护index??!! -->
 	<list name="images" table="image" cascade="all" inverse="true">
 		<!-- 影射集合属性数据表的外键列 -->
-		<key column="tiethemeid"/>
+		<key column="tietheme_id"/>
 		<!-- 影射集合属性数据表的集合索引列 -->
 		<list-index column="list_index"/> 
 		<one-to-many class="Image"/>
 	</list> 
+	<!-- 关联楼主 -->
+	<many-to-one name="user" class="users" column="users_id" not-null="true"/>
+	<!-- 关联town -->
+	<many-to-one name="parentown" class="town" column="town_id" not-null="true"/>
+	<!-- 影射点赞的用户 -->
+	<set name="dogoodusers" table="pt_dogood_users_tieth">
+		<key column="tietheme_id"/>
+		<many-to-many class="users" column="users_id"/>
+	</set>
+	<!-- 影射回复的普通贴 -->
+	<set name="replytie" inverse="true" order-by="time desc" where="visible=0">
+		<key column="tietheme_id"/>
+		<one-to-many class="Tie" />
+	</set>
 	</class>
 </hibernate-mapping>

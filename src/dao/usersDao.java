@@ -20,4 +20,5 @@ public interface usersDao
 	Boolean checkOwnPutao(int userid,int putaoid);
 	Boolean checkOwnComment(int userid,int commentid);
 	Boolean checkOwnMess(int userid,int messid);
+	Boolean checkIfJoinCommunity(int townid,int userid);
 }

@@ -23,8 +23,12 @@ public class town
 	private Set<users> subscriusers;
 	private int subscris;
 	private String geohash;
-	private Set<users> communitymembers;
-	private Set<TieTheme> communityties;	//社区主题贴
+	private Set<users> communitymembers;	//社区成员 1-N双向
+	private Set<TieTheme> communitytieths;	//社区主题贴
+	private Set<Tie> communityties;		//社区普通贴
+	private Set<TieReply> communityreplys;//社区回复贴
+	private int tiecount;	//帖子数量
+	private int membercount;	//成员数量
 	
 	public void setGeohash(String g) {
 		this.geohash = g;
@@ -149,11 +153,35 @@ public class town
 	public void setCommunitymembers(Set<users> comunitymembers) {
 		this.communitymembers = comunitymembers;
 	}
-	public Set<TieTheme> getCommunityties() {
+	public Set<TieTheme> getCommunitytieths() {
+		return communitytieths;
+	}
+	public void setCommunitytieths(Set<TieTheme> communityties) {
+		this.communitytieths = communityties;
+	}
+	public Set<Tie> getCommunityties() {
 		return communityties;
 	}
-	public void setCommunityties(Set<TieTheme> communityties) {
+	public void setCommunityties(Set<Tie> communityties) {
 		this.communityties = communityties;
+	}
+	public Set<TieReply> getCommunityreplys() {
+		return communityreplys;
+	}
+	public void setCommunityreplys(Set<TieReply> communityreplys) {
+		this.communityreplys = communityreplys;
+	}
+	public int getTiecount() {
+		return tiecount;
+	}
+	public void setTiecount(int tiecount) {
+		this.tiecount = tiecount;
+	}
+	public int getMembercount() {
+		return membercount;
+	}
+	public void setMembercount(int membercount) {
+		this.membercount = membercount;
 	}
 	
 	

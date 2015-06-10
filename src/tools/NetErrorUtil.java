@@ -11,6 +11,7 @@ public class NetErrorUtil
 	public static final int TOWNNAME_EXIST = 106;
 	public static final int TOKEN_ERROR = 107;
 	public static final int SIGNATURE_ERROR = 108;
+	public static final int NOTJOIN_COMMUNITY = 109;
 	
 	public static final int SERVER_ERROR = 201;
 	
