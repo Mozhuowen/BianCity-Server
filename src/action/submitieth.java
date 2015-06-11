@@ -2,6 +2,7 @@ package action;
 
 import java.util.List;
 
+import service.TieThemeService;
 import service.Impl.TieThemeServiceImpl;
 import tools.objects.ResponseSimple;
 
@@ -12,7 +13,7 @@ import domain.Image;
 
 public class submitieth extends BaseAction implements Action
 {
-	private TieThemeServiceImpl tieth;
+	private TieThemeService tieth;
 	private String ptoken;
 	private int ptuserid;
 	private String title;
@@ -33,12 +34,12 @@ public class submitieth extends BaseAction implements Action
 	public boolean needInterceptCheck() {
 		return true;
 	}
-	public TieThemeServiceImpl getTieth() {
+	public TieThemeService getTieth() {
 		return tieth;
 	}
 
 
-	public void setTieth(TieThemeServiceImpl tieth) {
+	public void setTieth(TieThemeService tieth) {
 		this.tieth = tieth;
 	}
 

@@ -62,7 +62,7 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 			<!-- 配置Hibernate属性 -->
 			<value>
 			hibernate.use_sql_comments=true
-			hibernate.show_sql=false
+			hibernate.show_sql=true
 			hibernate.dialect=org.hibernate.dialect.MySQLInnoDBDialect
 		   <!-- hibernate.dialect=org.hibernate.dialect.MySQLDialect -->
 			hibernate.hbm2ddl.auto=validate
@@ -143,7 +143,7 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 		<property name="tieth" ref="TieThemeDao" />
 		<property name="townx" ref="townDao"/>
 	</bean>
-	<bean id="communityService" class="service.Impl.TieThemeServiceImpl">
+	<bean id="communityService" class="service.Impl.CommunityServiceImpl">
 		<property name="user" ref="usersDao"/>
 		<property name="tieth" ref="TieThemeDao"/>
 		<property name="townx" ref="townDao"/>
@@ -253,6 +253,15 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 	</bean>
 	<bean id="submitieth_action" class="action.submitieth" scope="prototype">
 		<property name="tieth" ref="tiethemeService"/>
+	</bean>
+	<bean id="getcommunityheader_action" class="action.getcommunityheader" scope="prototype">
+		<property name="community" ref="communityService"/>
+	</bean>
+	<bean id="getcommunitytieth_action" class="action.getcommunitytieth" scope="prototype">
+		<property name="community" ref="communityService"/>
+	</bean>
+	<bean id="joincommunity_action" class="action.joincommunity" scope="prototype">
+		<property name="community" ref="communityService"/>
 	</bean>
 	
 	<!-- 配置事务相关 -->

@@ -7,8 +7,10 @@ import dao.townDao;
 import dao.usersDao;
 import domain.TieTheme;
 import domain.town;
+import domain.users;
 import service.CommunityService;
 import tools.NetErrorUtil;
+import tools.objects.ResponseSimple;
 import tools.objects.community.ModelCommuHeader;
 import tools.objects.community.ResCommunityHeader;
 import tools.objects.community.ResCommunityTieTh;
@@ -57,5 +59,48 @@ public class CommunityServiceImpl implements CommunityService
 		}
 		return res;
 	}
+	
+	@Override
+	public ResponseSimple joinCommunity(int townid, int userid) {
+		ResponseSimple res = new ResponseSimple();
+		try{
+			town t = townx.get(townid);
+			users u = user.get(userid);
+			u.setJoincommunity(t);
+//			user.update(u);
+			res.setStat(true);
+		} catch (Exception e) {
+			res.setStat(false);
+			res.setErrcode(NetErrorUtil.SERVER_ERROR);
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
+
+	public townDao getTownx() {
+		return townx;
+	}
+
+	public void setTownx(townDao townx) {
+		this.townx = townx;
+	}
+
+	public usersDao getUser() {
+		return user;
+	}
+
+	public void setUser(usersDao user) {
+		this.user = user;
+	}
+
+	public TieThemeDao getTieth() {
+		return tieth;
+	}
+
+	public void setTieth(TieThemeDao tieth) {
+		this.tieth = tieth;
+	}
+
 	
 }

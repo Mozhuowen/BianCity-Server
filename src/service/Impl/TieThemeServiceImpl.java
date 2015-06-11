@@ -35,11 +35,14 @@ public class TieThemeServiceImpl implements TieThemeService
 			tie.setTime(Calendar.getInstance());
 			tie.setLastretime(Calendar.getInstance());
 			tie.setImagecou(images.size());
+			tie.setImages(images);
 			for (int i=0;i<images.size();i++) {
 				images.get(i).setTiet(tie);
 			}
 			tie.setUser(u);
 			tie.setParentown(t);
+			int count = t.getTiecount();
+			t.setTiecount(++count);
 			if (tieth.save(tie) > 0) {
 				res.setStat(true);
 			} else {

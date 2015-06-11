@@ -262,7 +262,39 @@
        <result name="success">/WEB-INF/jsp/success.jsp</result>
 		 <result name="error">/WEB-INF/jsp/error.jsp</result>
 	</action>
-	
+	<action name="submitieth" class="submitieth_action">
+		<interceptor-ref name="jsoncheck">
+            <param name="contentType">application/json</param>
+       </interceptor-ref>
+       <interceptor-ref name="authority"/>
+       <result name="success">/WEB-INF/jsp/success.jsp</result>
+		 <result name="error">/WEB-INF/jsp/error.jsp</result>
+	</action>
+	<action name="getcommunityheader" class="getcommunityheader_action">
+		<interceptor-ref name="jsoncheck">
+            <param name="contentType">application/json</param>
+       </interceptor-ref>
+       <interceptor-ref name="authority"/>
+       <result name="success">/WEB-INF/jsp/success.jsp</result>
+		 <result name="error">/WEB-INF/jsp/error.jsp</result>
+	</action>
+	<action name="getcommunitytieth" class="getcommunitytieth_action">
+		<interceptor-ref name="jsoncheck">
+            <param name="contentType">application/json</param>
+       </interceptor-ref>
+       <interceptor-ref name="authority"/>
+       <result name="success">/WEB-INF/jsp/success.jsp</result>
+		 <result name="error">/WEB-INF/jsp/error.jsp</result>
+	</action>
+	<action name="joincommunity" class="joincommunity_action">
+		<interceptor-ref name="jsoncheck">
+            <param name="contentType">application/json</param>
+       </interceptor-ref>
+       <interceptor-ref name="authority"/>
+       <result name="success">/WEB-INF/jsp/success.jsp</result>
+		 <result name="error">/WEB-INF/jsp/error.jsp</result>
+	</action>
+		
 	<action name="">
    		<result name="success">/WEB-INF/jsp/index.jsp</result>
    </action>
