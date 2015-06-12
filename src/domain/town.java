@@ -23,7 +23,7 @@ public class town
 	private Set<users> subscriusers;
 	private int subscris;
 	private String geohash;
-	private Set<users> communitymembers;	//社区成员 1-N双向
+	private Set<users> communitymembers;	//社区成员 N-N双向
 	private Set<TieTheme> communitytieths;	//社区主题贴
 	private Set<Tie> communityties;		//社区普通贴
 	private Set<TieReply> communityreplys;//社区回复贴

@@ -9,6 +9,7 @@ import java.util.List;
 public class ModelCommuHeader
 {
 	private int communityid;	//社区id
+	private int adminid;		//管理员id
 	private String communityname;	//社区名
 	private String cover;		//封面照片
 	private int tiecount;		//帖子总数
@@ -63,5 +64,11 @@ public class ModelCommuHeader
 	}
 	public void setCommunityname(String communityname) {
 		this.communityname = communityname;
+	}
+	public int getAdminid() {
+		return adminid;
+	}
+	public void setAdminid(int adminid) {
+		this.adminid = adminid;
 	}
 }

@@ -14,6 +14,7 @@ public class ModelTie
 	private String username;	//楼主用户名
 	private String usercover;	//楼主头像
 	private long time;			//发帖时间
+	private long lastreturntime; 	//最新回复时间
 	private int goodcou;		//赞数量
 	private String content;		//内容
 	private int imagecou;		//包含的图片数量
@@ -85,5 +86,11 @@ public class ModelTie
 	}
 	public void setReplys(List<ModelTieReply> replys) {
 		this.replys = replys;
+	}
+	public long getLastreturntime() {
+		return lastreturntime;
+	}
+	public void setLastreturntime(long lastreturntime) {
+		this.lastreturntime = lastreturntime;
 	}
 }

@@ -43,7 +43,7 @@ public class users
 	private String wallimage;	//墙纸
 	private String sex;
 	private String location;
-	private town joincommunity;		//加入的社区,n-1双向
+	private Set<town> joincommunity;		//加入的社区,n-n双向
 	private Set<TieTheme> tiethemes;	//发表的主题贴,1-N双向
 	private Set<TieTheme> dogoodtieth;	//点赞的主题贴 N-n双向
 	private Set<Tie> ties;				//发表的普通贴 1-N双向
@@ -296,10 +296,10 @@ public class users
 	public void setTiereplys(Set<TieReply> tiereplys) {
 		this.tiereplys = tiereplys;
 	}
-	public town getJoincommunity() {
+	public Set<town> getJoincommunity() {
 		return joincommunity;
 	}
-	public void setJoincommunity(town joincommunity) {
+	public void setJoincommunity(Set<town> joincommunity) {
 		this.joincommunity = joincommunity;
 	}
 	

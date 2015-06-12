@@ -119,6 +119,9 @@
 		<one-to-many class="TieReply"/>
 	</set>
 	<!-- 影射加入的社区 -->
-	<many-to-one name="joincommunity" class="town" column="town_id" not-null="false"/>
+	<set name="joincommunity" table="pt_community_member">
+		<key column="users_id"/>
+		<many-to-many class="town" column="town_id" order-by="createtime desc" where="exist=0"/>
+	</set>
 	</class>
 </hibernate-mapping>

@@ -28,6 +28,7 @@ public class CommunityServiceImpl implements CommunityService
 		try{
 			town t = townx.get(townid);
 			header.setCommunityid(t.getTownid());
+			header.setAdminid(t.getOwner().getUsersid());
 			header.setCommunityname(t.getName());
 			header.setCover(t.getCover());
 			header.setMemberscount(t.getMembercount());
@@ -66,8 +67,11 @@ public class CommunityServiceImpl implements CommunityService
 		try{
 			town t = townx.get(townid);
 			users u = user.get(userid);
-			u.setJoincommunity(t);
-//			user.update(u);
+			t.getCommunitymembers().add(u);
+			int count = t.getMembercount();
+			t.setMembercount(++count);
+			townx.update(t);
+			user.update(u);
 			res.setStat(true);
 		} catch (Exception e) {
 			res.setStat(false);

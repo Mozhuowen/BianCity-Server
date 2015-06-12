@@ -80,9 +80,9 @@
 		<one-to-many class="TieReply"/>
 	</set>
 	<!-- 影射社区成员 -->
-	<set name="communitymembers" inverse="true">
+	<set name="communitymembers" table="pt_community_member">
 		<key column="town_id"/>
-		<one-to-many class="users"/>
+		<many-to-many class="users" column="users_id"/>
 	</set>
 	</class>
 </hibernate-mapping>
