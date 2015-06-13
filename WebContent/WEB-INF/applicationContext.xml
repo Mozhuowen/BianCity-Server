@@ -63,9 +63,9 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 			<value>
 			hibernate.use_sql_comments=true
 			hibernate.show_sql=true
-			<!-- hibernate.dialect=org.hibernate.dialect.MySQLInnoDBDialect -->
-		   hibernate.dialect=org.hibernate.dialect.MySQLDialect
-			hibernate.hbm2ddl.auto=update
+			hibernate.dialect=org.hibernate.dialect.MySQLInnoDBDialect
+		   <!-- hibernate.dialect=org.hibernate.dialect.MySQLDialect -->
+			hibernate.hbm2ddl.auto=validate
 			hibernate.format_sql=true;
 			</value>
 		</property>
@@ -146,6 +146,13 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 	<bean id="communityService" class="service.Impl.CommunityServiceImpl">
 		<property name="user" ref="usersDao"/>
 		<property name="tieth" ref="TieThemeDao"/>
+		<property name="tie" ref="TieDao"/>
+		<property name="townx" ref="townDao"/>
+	</bean>
+	<bean id="TieServiceImpl" class="service.Impl.TieServiceImpl">
+		<property name="user" ref="usersDao"/>
+		<property name="tieth" ref="TieThemeDao" />
+		<property name="tie" ref="TieDao"/>
 		<property name="townx" ref="townDao"/>
 	</bean>
 	
@@ -261,6 +268,12 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 		<property name="community" ref="communityService"/>
 	</bean>
 	<bean id="joincommunity_action" class="action.joincommunity" scope="prototype">
+		<property name="community" ref="communityService"/>
+	</bean>
+	<bean id="submitie_action" class="action.submitie" scope="prototype">
+		<property name="tie" ref="TieServiceImpl"/>
+	</bean>
+	<bean id="getcommunitytie_action" class="action.getcommunitytie" scope="prototype">
 		<property name="community" ref="communityService"/>
 	</bean>
 	

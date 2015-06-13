@@ -2,6 +2,7 @@ package service.Impl;
 
 import java.util.List;
 
+import dao.TieDao;
 import dao.TieThemeDao;
 import dao.townDao;
 import dao.usersDao;
@@ -13,6 +14,7 @@ import tools.NetErrorUtil;
 import tools.objects.ResponseSimple;
 import tools.objects.community.ModelCommuHeader;
 import tools.objects.community.ResCommunityHeader;
+import tools.objects.community.ResCommunityTie;
 import tools.objects.community.ResCommunityTieTh;
 
 public class CommunityServiceImpl implements CommunityService
@@ -20,6 +22,7 @@ public class CommunityServiceImpl implements CommunityService
 	private townDao townx;
 	private usersDao user;
 	private TieThemeDao tieth;
+	private TieDao tie;
 	
 	@Override
 	public ResCommunityHeader getCommunityHeader(int townid,int userid) {
@@ -60,6 +63,21 @@ public class CommunityServiceImpl implements CommunityService
 		}
 		return res;
 	}
+	@Override
+	public ResCommunityTie getCommunityTie(int zhulouid) {
+		ResCommunityTie res = new ResCommunityTie();
+		try{
+			res.setTies(tie.getTies(tieth.get(zhulouid)));
+			res.setStat(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+			res.setStat(false);
+			res.setErrcode(NetErrorUtil.SERVER_ERROR);
+		}
+		
+		return res;
+	}
+
 	
 	@Override
 	public ResponseSimple joinCommunity(int townid, int userid) {
@@ -104,6 +122,13 @@ public class CommunityServiceImpl implements CommunityService
 
 	public void setTieth(TieThemeDao tieth) {
 		this.tieth = tieth;
+	}
+	public TieDao getTie() {
+		return tie;
+	}
+
+	public void setTie(TieDao tie) {
+		this.tie = tie;
 	}
 
 	

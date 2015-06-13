@@ -1,6 +1,9 @@
 package tools.objects.community;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import domain.Tie;
 
 /**
  * 普通回复贴模型
@@ -21,6 +24,22 @@ public class ModelTie
 	private List<String> imagenames;	//包含的图片名，接收用
 	private int floot;			//帖子楼层
 	private List<ModelTieReply> replys;	//本帖包含的快速回复
+	
+	public ModelTie(Tie t) {
+		this.tieid = t.getTieid();
+		this.userid = t.getUser().getUsersid();
+		this.username = t.getUser().getName();
+		this.usercover = t.getUser().getCover();
+		this.time = t.getTime().getTimeInMillis();
+		this.goodcou = t.getGoodcou();
+		this.content = t.getContent();
+		this.imagenames = new ArrayList<String>();
+		for (int i=0;i<t.getImages().size();i++)
+			imagenames.add(t.getImages().get(i).getImagename());
+		this.imagecou = t.getImages().size();
+		this.replys = new ArrayList(t.getReplys());
+	}
+	
 	public int getTieid() {
 		return tieid;
 	}
