@@ -64,10 +64,10 @@ public class CommunityServiceImpl implements CommunityService
 		return res;
 	}
 	@Override
-	public ResCommunityTie getCommunityTie(int zhulouid) {
+	public ResCommunityTie getCommunityTie(int zhulouid,int position) {
 		ResCommunityTie res = new ResCommunityTie();
 		try{
-			res.setTies(tie.getTies(tieth.get(zhulouid)));
+			res.setTies(tie.getTies(tieth.get(zhulouid),position));
 			res.setStat(true);
 		} catch (Exception e) {
 			e.printStackTrace();

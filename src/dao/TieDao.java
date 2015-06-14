@@ -11,5 +11,5 @@ public interface TieDao
 	Tie get(Integer id);
 	Integer save(Tie tie);
 	void update(Tie tie);
-	List<ModelTie> getTies(TieTheme tieth);
+	List<ModelTie> getTies(TieTheme tieth,int position);
 }

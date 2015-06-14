@@ -47,6 +47,8 @@ public class TieServiceImpl implements TieService
 			ti.setTime(Calendar.getInstance());
 			int count = tiet.getCommentcou();
 			tiet.setCommentcou(++count);
+			count = t.getTiecount();
+			t.setTiecount(++count);
 			if (tie.save(ti) > 0) {
 				res.setStat(true);
 			} else {

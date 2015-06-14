@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import domain.Tie;
+import domain.TieReply;
 
 /**
  * 普通回复贴模型
@@ -37,7 +38,12 @@ public class ModelTie
 		for (int i=0;i<t.getImages().size();i++)
 			imagenames.add(t.getImages().get(i).getImagename());
 		this.imagecou = t.getImages().size();
-		this.replys = new ArrayList(t.getReplys());
+		List<ModelTieReply> list = new ArrayList<ModelTieReply>();
+		List<TieReply> replys = new ArrayList(t.getReplys());
+		for (int i=0;i<t.getReplys().size();i++) {
+			list.add(new ModelTieReply(replys.get(i)));
+		}
+		this.replys = list;
 	}
 	
 	public int getTieid() {

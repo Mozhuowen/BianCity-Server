@@ -1,8 +1,12 @@
 package dao.Impl;
 
+import java.util.List;
+
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
+import tools.objects.community.ModelTieReply;
 import dao.TieReplyDao;
+import domain.Tie;
 import domain.TieReply;
 
 public class TieReplyDaoImpl extends HibernateDaoSupport implements TieReplyDao
@@ -21,6 +25,11 @@ public class TieReplyDaoImpl extends HibernateDaoSupport implements TieReplyDao
 	@Override
 	public void update(TieReply tie) {
 		this.getHibernateTemplate().update(tie);
+	}
+
+	@Override
+	public List<ModelTieReply> getreplys(Tie tie) {		
+		return (List<ModelTieReply>)this.getHibernateTemplate().find("select tools.objects.community.ModelTieReply(tr) from TieReply tr where tr.tie=? order by time asc", tie);
 	}
 	
 }

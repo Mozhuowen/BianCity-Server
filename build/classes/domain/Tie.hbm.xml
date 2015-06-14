@@ -30,7 +30,7 @@
 	<!-- 关联楼主贴 -->
 	<many-to-one name="tieth" class="TieTheme" column="tietheme_id" not-null="true"/>
 	<!-- 影射回复贴 -->
-	<set name="replys" inverse="true" order-by="time desc" where="visible=0">
+	<set name="replys" inverse="true" order-by="time asc" where="visible=0">
 		<key column="tie_id"/>
 		<one-to-many class="TieReply" />
 	</set>

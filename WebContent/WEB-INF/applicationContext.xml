@@ -155,6 +155,12 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 		<property name="tie" ref="TieDao"/>
 		<property name="townx" ref="townDao"/>
 	</bean>
+	<bean id="TieReplyService" class="service.Impl.TieReplyServiceImpl">
+		<property name="user" ref="usersDao"/>
+		<property name="tie" ref="TieDao"/>
+		<property name="townx" ref="townDao"/>
+		<property name="tiereply" ref="TieReplyDao"/>
+	</bean>
 	
 	<!-- Spring 管理action并为其注入业务组件  -->
 	<bean id="hello_action" class="action.hello"/>
@@ -275,6 +281,9 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 	</bean>
 	<bean id="getcommunitytie_action" class="action.getcommunitytie" scope="prototype">
 		<property name="community" ref="communityService"/>
+	</bean>
+	<bean id="submitiereply_action" class="action.submitiereply" scope="prototype">
+		<property name="tiereply" ref="TieReplyService"/>
 	</bean>
 	
 	<!-- 配置事务相关 -->

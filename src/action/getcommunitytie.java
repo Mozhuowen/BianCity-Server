@@ -13,11 +13,12 @@ public class getcommunitytie extends BaseAction implements Action
 	private String ptoken;
 	private int ptuserid;
 	private int zhulouid;
+	private int position;
 	public String jsonstr;
 
 	@Override
 	public String execute() throws Exception {
-		ResCommunityTie res = community.getCommunityTie(zhulouid);
+		ResCommunityTie res = community.getCommunityTie(zhulouid,position);
 		jsonstr = new Gson().toJson(res);
 		LogUtil.v(this, "getcommunitytie json result: "+jsonstr);
 		return SUCCESS;
@@ -61,6 +62,14 @@ public class getcommunitytie extends BaseAction implements Action
 
 	public void setJsonstr(String jsonstr) {
 		this.jsonstr = jsonstr;
+	}
+
+	public int getPosition() {
+		return position;
+	}
+
+	public void setPosition(int position) {
+		this.position = position;
 	}
 	
 }

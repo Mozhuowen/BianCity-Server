@@ -27,6 +27,11 @@ public class submitie extends BaseAction implements Action
 		jsonstr = new Gson().toJson(res);
 		return SUCCESS;
 	}
+	
+	@Override
+	public boolean needInterceptCheck() {
+		return true;
+	}
 
 	public TieService getTie() {
 		return tie;
