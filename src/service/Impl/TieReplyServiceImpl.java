@@ -13,6 +13,7 @@ import domain.TieTheme;
 import domain.town;
 import domain.users;
 import service.TieReplyService;
+import service.usersService;
 import tools.NetErrorUtil;
 import tools.objects.community.ModelTieReply;
 import tools.objects.community.ResSubmiTieReply;
@@ -23,6 +24,7 @@ public class TieReplyServiceImpl implements TieReplyService
 	private TieDao tie;
 	private townDao townx;
 	private TieReplyDao tiereply;
+	private usersService userservice;
 
 	@Override
 	public ResSubmiTieReply createNew(int parentie, int userid, int bereplyid,
@@ -30,7 +32,13 @@ public class TieReplyServiceImpl implements TieReplyService
 		ResSubmiTieReply res = new ResSubmiTieReply();
 		Tie ti = tie.get(parentie);
 		town t = ti.getParentown();
-		if (!user.checkIfJoinCommunity(t.getTownid(), userid)) {
+		boolean isJoinBBS = false;
+		if (userservice.checkUserIsTownOwner(t.getTownid(), userid))
+			isJoinBBS = true;
+		if (user.checkIfJoinCommunity(t.getTownid(), userid))
+			isJoinBBS = true;
+		
+		if (!isJoinBBS) {
 			res.setStat(false);
 			res.setErrcode(NetErrorUtil.NOTJOIN_COMMUNITY);
 		} else {
@@ -88,6 +96,14 @@ public class TieReplyServiceImpl implements TieReplyService
 
 	public void setTie(TieDao tie) {
 		this.tie = tie;
+	}
+
+	public usersService getUserservice() {
+		return userservice;
+	}
+
+	public void setUserservice(usersService userservice) {
+		this.userservice = userservice;
 	}
 	
 }

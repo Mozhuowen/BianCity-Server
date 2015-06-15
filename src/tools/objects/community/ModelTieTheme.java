@@ -24,6 +24,7 @@ public class ModelTieTheme
 	private int userid;			//楼主id
 	private String username;	//楼主用户名
 	private String usercover;	//楼主头像
+	private int top;
 	
 	public ModelTieTheme(TieTheme tie) {
 		this.communityid = tie.getParentown().getTownid();
@@ -40,6 +41,7 @@ public class ModelTieTheme
 		this.userid = tie.getUser().getUsersid();
 		this.username = tie.getUser().getName();
 		this.usercover = tie.getUser().getCover();
+		this.top = tie.getTop();
 	}
 	
 	public int getTieid() {

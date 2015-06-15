@@ -16,7 +16,7 @@ public class ModelCommuHeader
 	private int memberscount;	//成员数量
 	private boolean hasjoin;	//当前用户是否已经加入该社区
 	private long createtime;	//社区创建时间
-	private List<ModelTopTie> tops;	//置顶贴子
+	private List<ModelTieTheme> tops;	//置顶贴子
 	public int getCommunityid() {
 		return communityid;
 	}
@@ -53,12 +53,6 @@ public class ModelCommuHeader
 	public void setCreatetime(long createtime) {
 		this.createtime = createtime;
 	}
-	public List<ModelTopTie> getTops() {
-		return tops;
-	}
-	public void setTops(List<ModelTopTie> tops) {
-		this.tops = tops;
-	}
 	public String getCommunityname() {
 		return communityname;
 	}
@@ -70,5 +64,11 @@ public class ModelCommuHeader
 	}
 	public void setAdminid(int adminid) {
 		this.adminid = adminid;
+	}
+	public List<ModelTieTheme> getTops() {
+		return tops;
+	}
+	public void setTops(List<ModelTieTheme> tops) {
+		this.tops = tops;
 	}
 }

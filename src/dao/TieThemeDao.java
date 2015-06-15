@@ -12,6 +12,6 @@ public interface TieThemeDao
 	TieTheme get(Integer id);
 	Integer save(TieTheme tie);
 	void update(TieTheme tie);
-	List<ModelTopTie> getTopTie(town t);
+	List<ModelTieTheme> getTopTie(town t);
 	List<ModelTieTheme> getTies(town t);
 }

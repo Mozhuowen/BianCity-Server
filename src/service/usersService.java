@@ -41,5 +41,5 @@ public interface usersService
 	public ResponseSimple cuserinfo(int userid,String cover,String username,String location,String sex);
 	public int getLoginType(int userid);	//获取用户登陆类型 0-weibo 1-qq
 	public int getLoginDevice(int userid);	//获取用户登陆设备 0-android 1-iphone
-	
+	public boolean checkUserIsTownOwner(int townid,int userid);	//检查用户是否是边城社区拥有者	
 }

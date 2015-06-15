@@ -11,4 +11,5 @@ public interface CommunityService
 	ResCommunityTieTh getCommunityTieTh(int townid);
 	ResponseSimple joinCommunity(int townid,int userid);
 	ResCommunityTie getCommunityTie(int zhulouid,int position);
+	ResponseSimple toTop(int titthid,int userid);
 }

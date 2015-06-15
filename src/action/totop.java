@@ -6,25 +6,21 @@ import tools.objects.ResponseSimple;
 import com.google.gson.Gson;
 import com.opensymphony.xwork2.Action;
 
-public class joincommunity extends BaseAction implements Action
+public class totop extends BaseAction implements Action
 {
 	private CommunityService community;
 	private String ptoken;
 	private int ptuserid;
-	private int communityid;
+	private int zhulouid;
 	public String jsonstr;
 
 	@Override
 	public String execute() throws Exception {
-		ResponseSimple res = community.joinCommunity(communityid, ptuserid);
+		ResponseSimple res = community.toTop(zhulouid, ptuserid);
 		jsonstr = new Gson().toJson(res);
 		return SUCCESS;
 	}
 
-	@Override
-	public boolean needInterceptCheck() {
-		return true;
-	}
 	public CommunityService getCommunity() {
 		return community;
 	}
@@ -49,12 +45,12 @@ public class joincommunity extends BaseAction implements Action
 		this.ptuserid = ptuserid;
 	}
 
-	public int getCommunityid() {
-		return communityid;
+	public int getZhulouid() {
+		return zhulouid;
 	}
 
-	public void setCommunityid(int communityid) {
-		this.communityid = communityid;
+	public void setZhulouid(int zhulouid) {
+		this.zhulouid = zhulouid;
 	}
 
 	public String getJsonstr() {

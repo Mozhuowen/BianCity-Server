@@ -89,6 +89,7 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 	<!-- 定义service业务逻辑组件，并注入dao -->
 	<bean id="usersService" class="service.Impl.usersServiceImpl">
 		<property name="user" ref="usersDao"/>
+		<property name="townx" ref="townDao"/>
 		<property name="weibo" ref="WeiboUserDao"/>
 		<property name="qquser" ref="QQUserDao"/>
 	</bean>
@@ -142,24 +143,28 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 		<property name="user" ref="usersDao"/>
 		<property name="tieth" ref="TieThemeDao" />
 		<property name="townx" ref="townDao"/>
+		<property name="userservice" ref="usersService"/>
 	</bean>
 	<bean id="communityService" class="service.Impl.CommunityServiceImpl">
 		<property name="user" ref="usersDao"/>
 		<property name="tieth" ref="TieThemeDao"/>
 		<property name="tie" ref="TieDao"/>
 		<property name="townx" ref="townDao"/>
+		<property name="userservice" ref="usersService"/>
 	</bean>
 	<bean id="TieServiceImpl" class="service.Impl.TieServiceImpl">
 		<property name="user" ref="usersDao"/>
 		<property name="tieth" ref="TieThemeDao" />
 		<property name="tie" ref="TieDao"/>
 		<property name="townx" ref="townDao"/>
+		<property name="userservice" ref="usersService"/>
 	</bean>
 	<bean id="TieReplyService" class="service.Impl.TieReplyServiceImpl">
 		<property name="user" ref="usersDao"/>
 		<property name="tie" ref="TieDao"/>
 		<property name="townx" ref="townDao"/>
 		<property name="tiereply" ref="TieReplyDao"/>
+		<property name="userservice" ref="usersService"/>
 	</bean>
 	
 	<!-- Spring 管理action并为其注入业务组件  -->
@@ -284,6 +289,9 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 	</bean>
 	<bean id="submitiereply_action" class="action.submitiereply" scope="prototype">
 		<property name="tiereply" ref="TieReplyService"/>
+	</bean>
+	<bean id="totop_action" class="action.totop" scope="prototype">
+		<property name="community" ref="communityService"/>
 	</bean>
 	
 	<!-- 配置事务相关 -->

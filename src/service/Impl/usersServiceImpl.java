@@ -36,6 +36,7 @@ public class usersServiceImpl implements usersService
 	private usersDao user;
 	private WeiboUserDao weibo;
 	private QQUserDao qquser;
+	private townDao townx;
 	
 	public void setQquser(QQUserDao q){
 		this.qquser = q;
@@ -809,6 +810,21 @@ public class usersServiceImpl implements usersService
 	private void pushWelcomeMessage(int besenduserid) {
 		String welcomcontent = "欢迎来到边城，用心创建一座你的边城吧!";
 		new Thread(new SysPushRunnable(1,besenduserid,welcomcontent,this.getLoginDevice(besenduserid))).start();;
+	}
+	@Override
+	public boolean checkUserIsTownOwner(int townid, int userid) {
+		// TODO Auto-generated method stub
+		town t = townx.get(townid);
+		if (t.getOwner().getUsersid() == userid)
+			return true;
+		else
+			return false;
+	}
+	public townDao getTownx() {
+		return townx;
+	}
+	public void setTownx(townDao townx) {
+		this.townx = townx;
 	}
 	
 }

@@ -11,6 +11,7 @@ import domain.TieTheme;
 import domain.town;
 import domain.users;
 import service.TieThemeService;
+import service.usersService;
 import tools.NetErrorUtil;
 import tools.objects.ResponseSimple;
 
@@ -19,11 +20,18 @@ public class TieThemeServiceImpl implements TieThemeService
 	private usersDao user;
 	private TieThemeDao tieth;
 	private townDao townx;
+	private usersService userservice;
 	@Override
 	public ResponseSimple createNew(int townid, int userid, String title,
 			String content, List<Image> images) {
 		ResponseSimple res = new ResponseSimple();
-		if (!user.checkIfJoinCommunity(townid, userid)) {
+		boolean isJoinBBS = false;
+		if (userservice.checkUserIsTownOwner(townid, userid))
+			isJoinBBS = true;
+		if (user.checkIfJoinCommunity(townid, userid))
+			isJoinBBS = true;
+		
+		if (!isJoinBBS) {
 			res.setStat(false);
 			res.setErrcode(NetErrorUtil.NOTJOIN_COMMUNITY);
 		} else {
@@ -69,6 +77,12 @@ public class TieThemeServiceImpl implements TieThemeService
 	}
 	public void setTownx(townDao town) {
 		this.townx = town;
+	}
+	public usersService getUserservice() {
+		return userservice;
+	}
+	public void setUserservice(usersService userservice) {
+		this.userservice = userservice;
 	}
 	
 }

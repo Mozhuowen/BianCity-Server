@@ -1,5 +1,6 @@
 package service.Impl;
 
+import java.util.Calendar;
 import java.util.List;
 
 import dao.TieDao;
@@ -10,6 +11,7 @@ import domain.TieTheme;
 import domain.town;
 import domain.users;
 import service.CommunityService;
+import service.usersService;
 import tools.NetErrorUtil;
 import tools.objects.ResponseSimple;
 import tools.objects.community.ModelCommuHeader;
@@ -23,6 +25,7 @@ public class CommunityServiceImpl implements CommunityService
 	private usersDao user;
 	private TieThemeDao tieth;
 	private TieDao tie;
+	private usersService userservice;
 	
 	@Override
 	public ResCommunityHeader getCommunityHeader(int townid,int userid) {
@@ -99,6 +102,25 @@ public class CommunityServiceImpl implements CommunityService
 		
 		return res;
 	}
+	@Override
+	public ResponseSimple toTop(int tiethid, int userid) {
+		ResponseSimple res = new ResponseSimple();
+		TieTheme tt = tieth.get(tiethid);
+		if (!userservice.checkUserIsTownOwner(tt.getParentown().getTownid(), userid)) {
+			res.setStat(false);
+			res.setErrcode(NetErrorUtil.NOTJOIN_COMMUNITY);
+		} else {
+			int i = tt.getTop();
+			if (i==0) {
+				tt.setTop(1);
+				tt.setTime(Calendar.getInstance());
+			}else
+				tt.setTop(0);
+			res.setStat(true);
+		}
+		
+		return res;
+	}
 
 	public townDao getTownx() {
 		return townx;
@@ -129,6 +151,14 @@ public class CommunityServiceImpl implements CommunityService
 
 	public void setTie(TieDao tie) {
 		this.tie = tie;
+	}
+
+	public usersService getUserservice() {
+		return userservice;
+	}
+
+	public void setUserservice(usersService userservice) {
+		this.userservice = userservice;
 	}
 
 	

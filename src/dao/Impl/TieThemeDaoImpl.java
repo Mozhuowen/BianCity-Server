@@ -29,13 +29,12 @@ public class TieThemeDaoImpl extends HibernateDaoSupport implements TieThemeDao
 	}
 
 	@Override
-	public List<ModelTopTie> getTopTie(town t) {		
-		return (List<ModelTopTie>)this.getHibernateTemplate().find("select new tools.objects.community.ModelTopTie(t.tiethemeid,t.title,t.time) from TieTheme t where t.parentown=? and t.top=1 order by time desc",t);
+	public List<ModelTieTheme> getTopTie(town t) {		
+		return (List<ModelTieTheme>)this.getHibernateTemplate().find("select new tools.objects.community.ModelTieTheme(t) from TieTheme t where t.parentown=? and t.top=1 order by time desc",t);
 	}
 
 	@Override
 	public List<ModelTieTheme> getTies(town t) {
-		return (List<ModelTieTheme>)this.getHibernateTemplate().find("select new tools.objects.community.ModelTieTheme(t) from TieTheme t where t.parentown=? order by time desc", t);
-	}
-	
+		return (List<ModelTieTheme>)this.getHibernateTemplate().find("select new tools.objects.community.ModelTieTheme(t) from TieTheme t where t.parentown=? and t.top=0 order by time desc", t);
+	}	
 }
