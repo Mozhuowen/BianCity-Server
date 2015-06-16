@@ -8,6 +8,12 @@ import java.util.List;
  */
 public class ModelUser
 {
+	public int getBbscount() {
+		return bbscount;
+	}
+	public void setBbscount(int bbscount) {
+		this.bbscount = bbscount;
+	}
 	private String name;
 	private String cover;
 	private List<ApplyTown> mytowns;
@@ -22,6 +28,7 @@ public class ModelUser
 	private int userid;			//当前用户的ptuserid
 	private boolean onlystatis = false;	//是否只获取统计数据
 	private String wallimage;	//墙纸
+	private int bbscount;	//加入的社区数量
 	
 	public void setWallimage(String w) {
 		this.wallimage = w;

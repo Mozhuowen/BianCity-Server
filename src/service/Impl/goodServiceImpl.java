@@ -6,11 +6,13 @@ import org.apache.catalina.User;
 
 import push.GoodPushRunnable;
 import dao.MessBoardDao;
+import dao.TieThemeDao;
 import dao.commentDao;
 import dao.putaoDao;
 import dao.townDao;
 import dao.usersDao;
 import domain.MessBoard;
+import domain.TieTheme;
 import domain.comment;
 import domain.putao;
 import domain.town;
@@ -29,6 +31,7 @@ public class goodServiceImpl implements goodService
 	private commentDao commentx;
 	private MessBoardDao mess;
 	private usersDao user;
+	private TieThemeDao tieth;
 	private usersService userservice;
 	public void setUser(usersDao u) {
 		this.user = u;
@@ -82,6 +85,9 @@ public class goodServiceImpl implements goodService
 				break;
 			case 3:
 				goods = mess.getGoods(id);
+				break;
+			case 4:
+				goods = tieth.get(id).getGoodcou();
 				break;
 			}
 		}catch(Exception e) {
@@ -187,6 +193,22 @@ public class goodServiceImpl implements goodService
 				mess.update(m);
 				goods = m.getGoods();
 				break;
+			case 4:		//do good for tieth
+				TieTheme tt = tieth.get(id);
+				Set<users> settt = tt.getDogoodusers();
+				if (user.checkdoGood(4, userid, id)) {
+					settt.remove(u);
+					int count = tt.getGoodcou();
+					tt.setGoodcou(--count);
+					mg.setDogood(false);
+				}  else {
+					settt.add(u);
+					int count = tt.getGoodcou();
+					tt.setGoodcou(++count);
+					mg.setDogood(true);
+				}
+				goods = tt.getGoodcou();
+				break;
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -248,6 +270,12 @@ public class goodServiceImpl implements goodService
 	}
 	public void setUserservice(usersService userservice) {
 		this.userservice = userservice;
+	}
+	public TieThemeDao getTieth() {
+		return tieth;
+	}
+	public void setTieth(TieThemeDao tieth) {
+		this.tieth = tieth;
 	}
 	
 }

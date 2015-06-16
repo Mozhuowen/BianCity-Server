@@ -21,4 +21,5 @@ public interface usersDao
 	Boolean checkOwnComment(int userid,int commentid);
 	Boolean checkOwnMess(int userid,int messid);
 	Boolean checkIfJoinCommunity(int townid,int userid);
+	Boolean checkIfGoodForTieth(int tieid,int userid);
 }

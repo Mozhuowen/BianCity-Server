@@ -60,6 +60,20 @@ public class TieThemeServiceImpl implements TieThemeService
 		}
 		return res;
 	}
+	@Override
+	public ResponseSimple delete(int userid, int tieid) {
+		ResponseSimple res = new ResponseSimple();
+		TieTheme tie = tieth.get(tieid);
+		if (!userservice.checkUserIsTownOwner(tie.getParentown().getTownid(), userid)) {
+			res.setStat(false);
+			res.setErrcode(NetErrorUtil.NO_PERMISSION);
+		} else {
+			tie.setVisible(1);
+			res.setStat(true);
+		}
+		
+		return res;
+	}
 	public usersDao getUser() {
 		return user;
 	}

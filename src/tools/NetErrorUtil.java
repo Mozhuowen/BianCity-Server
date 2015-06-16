@@ -12,6 +12,7 @@ public class NetErrorUtil
 	public static final int TOKEN_ERROR = 107;
 	public static final int SIGNATURE_ERROR = 108;
 	public static final int NOTJOIN_COMMUNITY = 109;
+	public static final int NO_PERMISSION = 110;
 	
 	public static final int SERVER_ERROR = 201;
 	

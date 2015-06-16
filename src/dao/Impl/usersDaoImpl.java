@@ -71,6 +71,9 @@ public class usersDaoImpl extends HibernateDaoSupport implements usersDao
 		case 3:
 			list = this.getHibernateTemplate().find("select 1 from users u,MessBoard m where m.messboardid=? and u.usersid = ? and u in elements(m.dogoodusers)",id,userid);
 			break;
+		case 4:
+			list = this.getHibernateTemplate().find("select 1 from users u,TieTheme t where t.tiethemeid=? and u.usersid = ? and u in elements(t.dogoodusers)",id,userid);
+			break;
 		}
 		if (list.size()==0)
 			return false;
@@ -168,6 +171,17 @@ public class usersDaoImpl extends HibernateDaoSupport implements usersDao
 		// TODO Auto-generated method stub
 		List list = null;
 		list = this.getHibernateTemplate().find("select 1 from users u,town t where t.townid=? and u.usersid = ? and u in elements(t.communitymembers)",townid,userid);
+		if (list.size()>0)
+			return true;
+		else
+			return false;
+	}
+
+	@Override
+	public Boolean checkIfGoodForTieth(int tieid, int userid) {
+		// TODO Auto-generated method stub
+		List list = null;
+		list = this.getHibernateTemplate().find("select 1 from users u,TieTheme t where t.tiethemeid=? and u.usersid = ? and u in elements(t.dogoodusers)",tieid,userid);
 		if (list.size()>0)
 			return true;
 		else

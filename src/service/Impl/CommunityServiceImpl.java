@@ -1,6 +1,8 @@
 package service.Impl;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Iterator;
 import java.util.List;
 
 import dao.TieDao;
@@ -12,9 +14,16 @@ import domain.town;
 import domain.users;
 import service.CommunityService;
 import service.usersService;
+import tools.LogUtil;
+import tools.ModelSort;
 import tools.NetErrorUtil;
+import tools.SortAction;
+import tools.SortTownAction;
+import tools.SortAction.SortData;
+import tools.objects.ApplyTown;
 import tools.objects.ResponseSimple;
 import tools.objects.community.ModelCommuHeader;
+import tools.objects.community.ModelTieTheme;
 import tools.objects.community.ResCommunityHeader;
 import tools.objects.community.ResCommunityTie;
 import tools.objects.community.ResCommunityTieTh;
@@ -54,10 +63,41 @@ public class CommunityServiceImpl implements CommunityService
 	}
 
 	@Override
-	public ResCommunityTieTh getCommunityTieTh(int townid) {
+	public ResCommunityTieTh getCommunityTieTh(int townid,List<Integer> Rejectids) {
 		ResCommunityTieTh res = new ResCommunityTieTh();
 		try {
-			res.setTies(tieth.getTies(townx.get(townid)));
+			town t = townx.get(townid);
+			List<ModelSort> s1 = tieth.sortByTime(t);
+			List<ModelSort> s2 = tieth.sortByGoodCou(t);
+			List<ModelSort> s3 = tieth.sortByReply(t);
+			List<SortAction.SortData> sortdata = new SortAction(s1,s2,s3).sort();
+			//排除客户端已经显示的内容
+			if (Rejectids.size() != 0 ){
+				for (Iterator<SortAction.SortData> it = sortdata.iterator();it.hasNext();) {
+					SortAction.SortData tmpdata = it.next();
+					for (int j=0;j < Rejectids.size(); j++) {
+						if (Rejectids.get(j).intValue() == tmpdata.getTownid()){
+							LogUtil.v("removing id： "+Rejectids.get(j).intValue());
+							it.remove();
+						}
+					}
+				}
+			}
+			//获取指定的tiethemelist集合
+			List<TieTheme> datalist = null;
+			if(sortdata.size() == 0)
+				datalist = new ArrayList<TieTheme>();
+			else if (sortdata.size() < 10)
+				datalist = tieth.getTargetTie(sortdata);
+			else
+				datalist = tieth.getTargetTie(sortdata.subList(0, 10));
+			//转换
+			List<ModelTieTheme> returnlist  = new ArrayList<ModelTieTheme>();
+			for (int i=0;i<datalist.size();i++) {
+				returnlist.add(new ModelTieTheme(datalist.get(i)));
+			}
+			
+			res.setTies(returnlist);
 			res.setStat(true);		
 		} catch (Exception e ) {
 			e.printStackTrace();

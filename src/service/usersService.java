@@ -12,6 +12,8 @@ import tools.objects.ResponseSimple;
 import tools.objects.ResponseSubscri;
 import tools.objects.ResponseTown;
 import tools.objects.ResponseUser;
+import tools.objects.community.ResCommunity;
+import tools.objects.community.ResSimple;
 import domain.*;
 import dao.*;
 import dao.Impl.*;
@@ -42,4 +44,5 @@ public interface usersService
 	public int getLoginType(int userid);	//获取用户登陆类型 0-weibo 1-qq
 	public int getLoginDevice(int userid);	//获取用户登陆设备 0-android 1-iphone
 	public boolean checkUserIsTownOwner(int townid,int userid);	//检查用户是否是边城社区拥有者	
+	public ResCommunity getJoinCommunity(int userid);	//获取用户加入的社区
 }

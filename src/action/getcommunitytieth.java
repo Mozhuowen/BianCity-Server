@@ -1,5 +1,7 @@
 package action;
 
+import java.util.List;
+
 import service.CommunityService;
 import tools.objects.community.ResCommunityTieTh;
 
@@ -12,11 +14,12 @@ public class getcommunitytieth extends BaseAction implements Action
 	private String ptoken;
 	private int ptuserid;
 	private int communityid;
+	private List<Integer> rejectids;
 	public String jsonstr;
 	
 	@Override
 	public String execute() throws Exception {
-		ResCommunityTieTh res = community.getCommunityTieTh(communityid);
+		ResCommunityTieTh res = community.getCommunityTieTh(communityid,rejectids);
 		jsonstr = new Gson().toJson(res);
 		return SUCCESS;
 	}
@@ -59,6 +62,14 @@ public class getcommunitytieth extends BaseAction implements Action
 
 	public void setJsonstr(String jsonstr) {
 		this.jsonstr = jsonstr;
+	}
+
+	public List<Integer> getRejectids() {
+		return this.rejectids;
+	}
+
+	public void setRejectids(List<Integer> rejectids) {
+		this.rejectids = rejectids;
 	}
 	
 }

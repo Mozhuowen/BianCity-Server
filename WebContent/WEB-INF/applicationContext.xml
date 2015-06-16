@@ -119,6 +119,7 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 		<property name="putaox" ref="putaoDao"/>
 		<property name="commentx" ref="commentDao"/>
 		<property name="user" ref="usersDao"/>
+		<property name="tieth" ref="TieThemeDao"/>
 		<property name="userservice" ref="usersService"/>
 	</bean>
 	<bean id="subscriService" class="service.Impl.subscriServiceImpl">
@@ -292,6 +293,9 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 	</bean>
 	<bean id="totop_action" class="action.totop" scope="prototype">
 		<property name="community" ref="communityService"/>
+	</bean>
+	<bean id="deltie_action" class="action.deltie" scope="prototype">
+		<property name="tieth" ref="tiethemeService"/>
 	</bean>
 	
 	<!-- 配置事务相关 -->

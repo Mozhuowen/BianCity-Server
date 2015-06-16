@@ -1,14 +1,15 @@
 package action;
 
 import service.CommunityService;
+import service.TieThemeService;
 import tools.objects.ResponseSimple;
 
 import com.google.gson.Gson;
 import com.opensymphony.xwork2.Action;
 
-public class totop extends BaseAction implements Action
+public class deltie extends BaseAction implements Action
 {
-	private CommunityService community;
+	private TieThemeService tieth;
 	private String ptoken;
 	private int ptuserid;
 	private int zhulouid;
@@ -16,21 +17,14 @@ public class totop extends BaseAction implements Action
 
 	@Override
 	public String execute() throws Exception {
-		ResponseSimple res = community.toTop(zhulouid, ptuserid);
+		ResponseSimple res = tieth.delete(ptuserid, zhulouid);
 		jsonstr = new Gson().toJson(res);
 		return SUCCESS;
 	}
-
+	
 	@Override
 	public boolean needInterceptCheck() {
 		return true;
-	}
-	public CommunityService getCommunity() {
-		return community;
-	}
-
-	public void setCommunity(CommunityService community) {
-		this.community = community;
 	}
 
 	public String getPtoken() {
@@ -57,12 +51,12 @@ public class totop extends BaseAction implements Action
 		this.zhulouid = zhulouid;
 	}
 
-	public String getJsonstr() {
-		return jsonstr;
+	public TieThemeService getTieth() {
+		return tieth;
 	}
 
-	public void setJsonstr(String jsonstr) {
-		this.jsonstr = jsonstr;
+	public void setTieth(TieThemeService tieth) {
+		this.tieth = tieth;
 	}
 	
 }

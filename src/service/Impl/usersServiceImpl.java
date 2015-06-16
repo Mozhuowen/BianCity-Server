@@ -28,6 +28,9 @@ import tools.objects.ResponseSimple;
 import tools.objects.ResponseSubscri;
 import tools.objects.ResponseTown;
 import tools.objects.ResponseUser;
+import tools.objects.community.ModelCommunity;
+import tools.objects.community.ResCommunity;
+import tools.objects.community.ResSimple;
 import dao.Impl.*;
 import domain.*;
 
@@ -37,7 +40,14 @@ public class usersServiceImpl implements usersService
 	private WeiboUserDao weibo;
 	private QQUserDao qquser;
 	private townDao townx;
+	private TieThemeDao tieth;
 	
+	public TieThemeDao getTieth() {
+		return tieth;
+	}
+	public void setTieth(TieThemeDao tieth) {
+		this.tieth = tieth;
+	}
 	public void setQquser(QQUserDao q){
 		this.qquser = q;
 	}
@@ -548,6 +558,7 @@ public class usersServiceImpl implements usersService
 			mu.setSubscricount(u.getSubscritown().size());
 			mu.setFavoritecount(u.getFavorite().size());
 			mu.setBegoodcount(user.getBegoodCount(userid));
+			mu.setBbscount(u.getJoincommunity().size());
 			mu.setWallimage(u.getWallimage());
 			if (!onlystatis) {
 				//整理创建的小镇
@@ -825,6 +836,24 @@ public class usersServiceImpl implements usersService
 	}
 	public void setTownx(townDao townx) {
 		this.townx = townx;
+	}
+	@Override
+	public ResCommunity getJoinCommunity(int userid) {
+		ResCommunity res = new ResCommunity();
+		try{
+			List<town> townlist = new ArrayList(user.get(userid).getJoincommunity());
+			List<ModelCommunity> returnlist = new ArrayList<ModelCommunity>();
+			for (int i=0;i<townlist.size();i++) {
+				returnlist.add(new ModelCommunity(townlist.get(i)));
+			}
+			res.setStat(true);
+			res.setComunity(returnlist);
+		} catch (Exception e) {
+			res.setStat(false);
+			res.setErrcode(NetErrorUtil.SERVER_ERROR);
+		}
+		
+		return res;
 	}
 	
 }
