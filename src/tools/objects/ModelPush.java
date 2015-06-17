@@ -6,6 +6,7 @@ public class ModelPush
 	private Object mess;
 	private ModelPushGood goodmess;
 	private ModelPushSys sysmess;
+	private ModelPushTie tiemess;	//社区消息
 	private int messid;
 	public int getType() {
 		return type;
@@ -36,5 +37,11 @@ public class ModelPush
 	}
 	public void setSysmess(ModelPushSys sysmess) {
 		this.sysmess = sysmess;
+	}
+	public ModelPushTie getTiemess() {
+		return tiemess;
+	}
+	public void setTiemess(ModelPushTie tiemess) {
+		this.tiemess = tiemess;
 	}
 }

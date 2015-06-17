@@ -25,7 +25,7 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 		<!-- 指定连接数据库的密码 -->
 		<property name="password" value="0603"/>
 		<!-- 指定连接数据库连接池的最大连接数 -->
-		<property name="maxPoolSize" value="50"/>
+		<property name="maxPoolSize" value="200"/>
 		<!-- 指定连接数据库连接池的最小连接数 -->
 		<property name="minPoolSize" value="1"/>
 		<!-- 指定连接数据库连接池的初始化连接数 -->
@@ -62,7 +62,7 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 			<!-- 配置Hibernate属性 -->
 			<value>
 			hibernate.use_sql_comments=true
-			hibernate.show_sql=true
+			hibernate.show_sql=false
 			hibernate.dialect=org.hibernate.dialect.MySQLInnoDBDialect
 		   <!-- hibernate.dialect=org.hibernate.dialect.MySQLDialect -->
 			hibernate.hbm2ddl.auto=validate
@@ -96,6 +96,7 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 	<bean id="townService" class="service.Impl.townServiceImpl">
 		<property name="user" ref="usersDao"/>
 		<property name="towndao" ref="townDao"/>
+		<property name="community" ref="communityService"/>
 	</bean>
 	<bean id="putaoService" class="service.Impl.putaoServiceImpl">
 		<property name="townx" ref="townDao"/>
@@ -296,6 +297,9 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 	</bean>
 	<bean id="deltie_action" class="action.deltie" scope="prototype">
 		<property name="tieth" ref="tiethemeService"/>
+	</bean>
+	<bean id="getcommunitylist_action" class="action.getcommunitylist" scope="prototype">
+		<property name="userservice" ref="usersService"/>
 	</bean>
 	
 	<!-- 配置事务相关 -->

@@ -2,6 +2,7 @@ package service.Impl;
 
 import java.util.Calendar;
 
+import push.TiePushRunnable;
 import dao.TieDao;
 import dao.TieReplyDao;
 import dao.TieThemeDao;
@@ -15,7 +16,9 @@ import domain.users;
 import service.TieReplyService;
 import service.usersService;
 import tools.NetErrorUtil;
+import tools.objects.community.ModelTie;
 import tools.objects.community.ModelTieReply;
+import tools.objects.community.ModelTieTheme;
 import tools.objects.community.ResSubmiTieReply;
 
 public class TieReplyServiceImpl implements TieReplyService
@@ -57,6 +60,9 @@ public class TieReplyServiceImpl implements TieReplyService
 			if (tiereply.save(tr) > 0) {
 				res.setStat(true);
 				res.setTiereply(new ModelTieReply(tr));
+				//推送消息
+				if (ti.getUser().getUsersid() != userid)
+				new Thread(new TiePushRunnable(null,new ModelTie(ti),1,0,ti.getUser().getUsersid(),userservice.getLoginDevice(ti.getUser().getUsersid()),t.getOwner().getUsersid())).start();
 			} else {
 				res.setStat(false);
 				res.setErrcode(NetErrorUtil.SERVER_ERROR);

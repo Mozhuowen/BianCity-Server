@@ -334,6 +334,14 @@
        <result name="success">/WEB-INF/jsp/success.jsp</result>
 		 <result name="error">/WEB-INF/jsp/error.jsp</result>
 	</action>
+	<action name="getcommunitylist" class="getcommunitylist_action">
+		<interceptor-ref name="jsoncheck">
+            <param name="contentType">application/json</param>
+       </interceptor-ref>
+       <interceptor-ref name="authority"/>
+       <result name="success">/WEB-INF/jsp/success.jsp</result>
+		 <result name="error">/WEB-INF/jsp/error.jsp</result>
+	</action>
 	
 		
 	<action name="">

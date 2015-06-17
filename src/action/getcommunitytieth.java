@@ -24,6 +24,10 @@ public class getcommunitytieth extends BaseAction implements Action
 		return SUCCESS;
 	}
 
+	@Override
+	public boolean needInterceptCheck() {
+		return true;
+	}
 	public CommunityService getCommunity() {
 		return community;
 	}

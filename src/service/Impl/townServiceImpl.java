@@ -11,7 +11,9 @@ import dao.usersDao;
 import domain.GeoInfo;
 import domain.town;
 import domain.users;
+import service.CommunityService;
 import service.townService;
+import service.usersService;
 import tools.Geohash;
 import tools.LogUtil;
 import tools.NetErrorUtil;
@@ -28,6 +30,7 @@ public class townServiceImpl implements townService
 	private final int HOTONCESHOW = 16;	//控制每次请求传送多少个小镇
 	private usersDao user;
 	private townDao towndao;
+	private CommunityService community;
 	
 	public void setTowndao(townDao t) {
 		this.towndao = t;
@@ -61,11 +64,14 @@ public class townServiceImpl implements townService
 			t.setCover(cover);
 			t.setGeo(geoinfo);
 			t.setCreatetime(Calendar.getInstance());
+			t.setMembercount(1);
 			//geohash
 			String geohash = new Geohash().encode(t.getGeo().getLatitude(), t.getGeo().getLongitude());
 			t.setGeohash(geohash);
 			
 			if (towndao.save(t)>0) {
+				//把自己加入社区
+				u.getJoincommunity().add(t);
 				resobj.setStat(true);
 				resobj.setTownname(townname);
 				resobj.setDescri(descri);
@@ -249,6 +255,12 @@ public class townServiceImpl implements townService
 	@Override
 	public Long getTownCount() {		
 		return this.towndao.getTownCount();
+	}
+	public CommunityService getCommunity() {
+		return community;
+	}
+	public void setCommunity(CommunityService community) {
+		this.community = community;
 	}
 	
 }

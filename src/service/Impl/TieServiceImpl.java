@@ -3,6 +3,7 @@ package service.Impl;
 import java.util.Calendar;
 import java.util.List;
 
+import push.TiePushRunnable;
 import dao.TieDao;
 import dao.TieThemeDao;
 import dao.townDao;
@@ -16,6 +17,7 @@ import service.TieService;
 import service.usersService;
 import tools.NetErrorUtil;
 import tools.objects.ResponseSimple;
+import tools.objects.community.ModelTieTheme;
 
 public class TieServiceImpl implements TieService
 {
@@ -60,6 +62,9 @@ public class TieServiceImpl implements TieService
 			t.setTiecount(++count);
 			if (tie.save(ti) > 0) {
 				res.setStat(true);
+				//推送消息
+				if (tiet.getUser().getUsersid() != userid)
+				new Thread(new TiePushRunnable(new ModelTieTheme(tiet),null,0,0,tiet.getUser().getUsersid(),userservice.getLoginDevice(tiet.getUser().getUsersid()),t.getOwner().getUsersid())).start();
 			} else {
 				res.setStat(false);
 				res.setErrcode(NetErrorUtil.SERVER_ERROR);
