@@ -342,6 +342,22 @@
        <result name="success">/WEB-INF/jsp/success.jsp</result>
 		 <result name="error">/WEB-INF/jsp/error.jsp</result>
 	</action>
+	<action name="getkeyword" class="getkeyword_action">
+		<interceptor-ref name="jsoncheck">
+            <param name="contentType">application/json</param>
+       </interceptor-ref>
+       <interceptor-ref name="authority"/>
+       <result name="success">/WEB-INF/jsp/success.jsp</result>
+		 <result name="error">/WEB-INF/jsp/error.jsp</result>
+	</action>
+	<action name="searchtown" class="searchtown_action">
+		<interceptor-ref name="jsoncheck">
+            <param name="contentType">application/json</param>
+       </interceptor-ref>
+       <interceptor-ref name="authority"/>
+       <result name="success">/WEB-INF/jsp/success.jsp</result>
+		 <result name="error">/WEB-INF/jsp/error.jsp</result>
+	</action>
 	
 		
 	<action name="">

@@ -4,6 +4,7 @@ import java.util.List;
 
 import tools.SortTownAction;
 import tools.TownSort;
+import tools.objects.ApplyTown;
 import domain.town;
 
 public interface townDao
@@ -21,4 +22,6 @@ public interface townDao
 	List<town> getTargetTown(List<SortTownAction.SortData> targetdata);	
 	List<town> getTownByTime(int position);
 	Long getTownCount();
+	List<String> getNameLike(String keyword);
+	List<ApplyTown> search(String towname);
 }

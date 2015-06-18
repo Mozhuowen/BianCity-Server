@@ -43,7 +43,21 @@ public class ApplyTown
 		at.storycount = t.getPutao().size();
 		return at;
 	}
-	
+
+	public ApplyTown(town t) {
+		this.townid = t.getTownid();
+		this.townname = t.getName();
+		this.descri = t.getDescri();
+		this.cover = t.getCover();
+		this.createtime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(t.getCreatetime().getTime());
+		this.subscriptions = t.getSubscris();
+		this.geoinfo = new ResGeoInfo(t.getGeo());
+		this.good = t.getGoods();
+		this.userid = t.getOwner().getUsersid();
+		this.username = t.getOwner().getName();
+		this.usercover = t.getOwner().getCover();
+		this.storycount = t.getPutao().size();
+	}
 	public String getUsername() {
 		return username;
 	}

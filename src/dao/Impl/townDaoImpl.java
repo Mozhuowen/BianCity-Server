@@ -14,6 +14,7 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import tools.LogUtil;
 import tools.SortTownAction.SortData;
 import tools.TownSort;
+import tools.objects.ApplyTown;
 import domain.*;
 import dao.*;
 
@@ -175,6 +176,43 @@ public class townDaoImpl extends HibernateDaoSupport implements townDao
 	@Override
 	public Long getTownCount() {
 		return (Long)this.getHibernateTemplate().find("select count(*) from town").get(0);
+	}
+
+	@Override
+	public List<String> getNameLike(final String keyword) {		
+		final String hql = "select t.name from town t where t.name like :keyword order by t.goods desc";
+		@SuppressWarnings("unchecked")
+		List<String> list = this.getHibernateTemplate().executeFind(new HibernateCallback(){
+			@Override
+			public Object doInHibernate(Session session)
+					throws HibernateException, SQLException {
+				List<String> result = session.createQuery(hql)
+						.setString("keyword", keyword+"%")
+						.setMaxResults(50)
+						.list();
+				return result;
+			}			
+		});
+		return list;
+	}
+
+	@Override
+	public List<ApplyTown> search(final String towname) {
+		final String hql = "select new tools.objects.ApplyTown(t) from town t where t.name like :keyword order by t.goods desc";
+		@SuppressWarnings("unchecked")
+		List<ApplyTown> list = this.getHibernateTemplate().executeFind(new HibernateCallback(){
+			@Override
+			public Object doInHibernate(Session session)
+					throws HibernateException, SQLException {
+				List<ApplyTown> result = session.createQuery(hql)
+						.setString("keyword", "%"+towname+"%")
+						.setMaxResults(100)
+						.list();
+				return result;
+			}			
+		});
+		
+		return list;
 	}
 	
 }

@@ -168,6 +168,9 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 		<property name="tiereply" ref="TieReplyDao"/>
 		<property name="userservice" ref="usersService"/>
 	</bean>
+	<bean id="SearchService" class="service.Impl.SearchServiceImpl">
+		<property name="townx" ref="townDao"/>
+	</bean>
 	
 	<!-- Spring 管理action并为其注入业务组件  -->
 	<bean id="hello_action" class="action.hello"/>
@@ -300,6 +303,12 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 	</bean>
 	<bean id="getcommunitylist_action" class="action.getcommunitylist" scope="prototype">
 		<property name="userservice" ref="usersService"/>
+	</bean>
+	<bean id="getkeyword_action" class="action.getkeyword" scope="prototype">
+		<property name="search" ref="SearchService"/>
+	</bean>
+	<bean id="searchtown_action" class="action.searchtown" scope="prototype">
+		<property name="search" ref="SearchService"/>
 	</bean>
 	
 	<!-- 配置事务相关 -->
