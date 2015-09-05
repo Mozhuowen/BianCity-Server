@@ -147,8 +147,10 @@ public class GoodPushRunnable implements Runnable
 			message = buildMessage();
 		}
 		else{					//ios
-			Constants.useSandbox();
+//			Constants.useSandbox();
+			Constants.useOfficial();
 			message = buildIOSMessage();
+			LogUtil.v(this, "is going to send to iphone besenduserid "+ besenduserid);
 		}
 	   LogUtil.v(this,"Message info: " +" message content: "+message.getPayload());
 	   Sender sender = null;

@@ -32,13 +32,14 @@ public class JsonCheck extends JSONInterceptor
 		HttpServletRequest request = ServletActionContext.getRequest();
 		String signature = request.getHeader("signature");
 		String timestamp = request.getHeader("timestamp");
-		PushbackReader bf = new PushbackReader(request.getReader(),1024*8);
+		PushbackReader bf = new PushbackReader(request.getReader(),1024*16);	//16k的缓冲区应该足够了
 		//获取Post过来的json数据
 		String toread = getPostData(bf);		
 		//获取signature
 		String result = "";
 		if (timestamp != null && signature != null)
 			result = MsgCrypt.encryptMsg(timestamp.trim(),toread.trim());
+		LogUtil.v(this, "request API: "+request.getRequestURI());
 		LogUtil.v(toread + toread.length() + " " + timestamp +" "+ signature +" "+result);
 		
 		if (signature == null || !result.equals(signature)) {
@@ -71,7 +72,8 @@ public class JsonCheck extends JSONInterceptor
 	      while ((line = bufferReader.readLine()) != null)
 	        buffer.append(line);
 	    }
-	    catch (IOException e) {		      
+	    catch (IOException e) {	
+	    	e.printStackTrace();
 	    }
 
 	    return buffer.toString();

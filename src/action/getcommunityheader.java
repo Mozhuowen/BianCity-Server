@@ -1,6 +1,7 @@
 package action;
 
 import service.CommunityService;
+import tools.LogUtil;
 import tools.objects.community.ResCommunityHeader;
 
 import com.google.gson.Gson;
@@ -18,6 +19,7 @@ public class getcommunityheader extends BaseAction implements Action
 	public String execute() throws Exception {
 		ResCommunityHeader res = community.getCommunityHeader(communityid, ptuserid);
 		jsonstr = new Gson().toJson(res);
+		LogUtil.v(this, "getcoummunity response: "+jsonstr);
 		return SUCCESS;
 	}
 

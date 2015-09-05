@@ -310,6 +310,8 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 	<bean id="searchtown_action" class="action.searchtown" scope="prototype">
 		<property name="search" ref="SearchService"/>
 	</bean>
+	<!-- 新的jsoncheck v2 提供解密功能 -->
+	<bean id="jsoncheck_actionV2" class="interceptor.JsonCheckV2" scope="prototype"/>
 	
 	<!-- 配置事务相关 -->
 	<bean id="transactionManager" 

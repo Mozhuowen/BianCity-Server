@@ -75,7 +75,7 @@ public class JSONInterceptor extends AbstractInterceptor {
     private boolean excludeNullProperties;
     private String callbackParameter;
     private String contentType;
-    public PushbackReader pushbackreader;
+    public PushbackReader pushbackreader;	//用于多项检测后推回数据流
 
     @SuppressWarnings("unchecked")
     public String intercept(ActionInvocation invocation) throws Exception {

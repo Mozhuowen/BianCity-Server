@@ -96,7 +96,7 @@ public class SysPushRunnable implements Runnable
 	   	message = buildMessage();
 	   }else{
 		   LogUtil.v(this, "send to iphone");
-		   Constants.useSandbox();
+//		   Constants.useSandbox();
 		   sender = new Sender("bJZyK19S50InYa2LySf25Q==");
 		   message = buildIOSMessage();
 	   }

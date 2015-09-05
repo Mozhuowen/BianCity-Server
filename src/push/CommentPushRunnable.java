@@ -112,8 +112,9 @@ public class CommentPushRunnable implements Runnable
 			message = buildMessage();
 		}
 		else{								//ios
-			Constants.useSandbox();
+//			Constants.useSandbox();
 			message = buildIOSMessage();
+			LogUtil.v(this, "is going to send to iphone besenduserid "+ storyownerid);
 		}
 	   LogUtil.v("Message info: storyownerid: "+storyownerid+" message content: "+message.getPayload());
 	   Sender sender = null;

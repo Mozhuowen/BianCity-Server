@@ -27,6 +27,7 @@ import tools.objects.community.ModelTieTheme;
 import tools.objects.community.ResCommunityHeader;
 import tools.objects.community.ResCommunityTie;
 import tools.objects.community.ResCommunityTieTh;
+import tools.objects.community.ResJoinBBS;
 
 public class CommunityServiceImpl implements CommunityService
 {
@@ -123,8 +124,8 @@ public class CommunityServiceImpl implements CommunityService
 
 	
 	@Override
-	public ResponseSimple joinCommunity(int townid, int userid) {
-		ResponseSimple res = new ResponseSimple();
+	public ResJoinBBS joinCommunity(int townid, int userid) {
+		ResJoinBBS res = new ResJoinBBS();
 		try{
 			town t = townx.get(townid);
 			users u = user.get(userid);
@@ -134,6 +135,7 @@ public class CommunityServiceImpl implements CommunityService
 			townx.update(t);
 			user.update(u);
 			res.setStat(true);
+		    res.setMemebercount(t.getMembercount());
 		} catch (Exception e) {
 			res.setStat(false);
 			res.setErrcode(NetErrorUtil.SERVER_ERROR);

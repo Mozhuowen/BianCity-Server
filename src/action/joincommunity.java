@@ -2,6 +2,7 @@ package action;
 
 import service.CommunityService;
 import tools.objects.ResponseSimple;
+import tools.objects.community.ResJoinBBS;
 
 import com.google.gson.Gson;
 import com.opensymphony.xwork2.Action;
@@ -16,7 +17,7 @@ public class joincommunity extends BaseAction implements Action
 
 	@Override
 	public String execute() throws Exception {
-		ResponseSimple res = community.joinCommunity(communityid, ptuserid);
+		ResJoinBBS res = community.joinCommunity(communityid, ptuserid);
 		jsonstr = new Gson().toJson(res);
 		return SUCCESS;
 	}

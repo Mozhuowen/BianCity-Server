@@ -33,6 +33,7 @@ public class gethot extends BaseAction implements Action
 		
 		ResponseHotTown res = town.getHotTown(rejectid);
 		jsonstr = new Gson().toJson(res);
+		
 		return SUCCESS;
 	}
 	

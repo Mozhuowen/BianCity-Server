@@ -36,6 +36,7 @@ import domain.*;
 
 public class usersServiceImpl implements usersService
 {
+	private static final String DEFAULT_COVERE = "http://tp1.sinaimg.cn/2108468732/180/0/1";
 	private usersDao user;
 	private WeiboUserDao weibo;
 	private QQUserDao qquser;
@@ -428,9 +429,12 @@ public class usersServiceImpl implements usersService
 		qq.setPtuser(u);
 		//persist
 		qquser.save(qq);
+		if (userinfo.getFigureurl_qq_1() != null && userinfo.getFigureurl_qq_1().length() > 0)
+			u.setCover(userinfo.getFigureurl_qq_1());
+		else
+			u.setCover(DEFAULT_COVERE);
 		//检查用户名
 		if(checkNeedCName(puid,userinfo.getNickname())) {	//需要修改设置用户名
-			u.setCover(userinfo.getFigureurl_qq_1());
 			user.update(u);
 			//set response
 			resobj.setStat(true);
@@ -441,7 +445,7 @@ public class usersServiceImpl implements usersService
 			resobj.setLocation(userinfo.getCity());
 		} else {
 			u.setName(userinfo.getNickname());
-			u.setCover(userinfo.getFigureurl_qq_1());
+//			u.setCover(userinfo.getFigureurl_qq_1());
 			user.update(u);
 			//设置response用户信息
 			resobj.setStat(true);
@@ -466,9 +470,13 @@ public class usersServiceImpl implements usersService
 		wbuser.setPtuser(u);
 		//持久化weibo user
 		weibo.save(wbuser);
+		if (userinfo.getAvatar_hd() != null && userinfo.getAvatar_hd().length() > 0)
+			u.setCover(userinfo.getAvatar_hd());
+		else
+			u.setCover(DEFAULT_COVERE);
 		//检查用户名
 		if(checkNeedCName(puid,userinfo.getScreen_name())) {	//需要修改设置用户名
-			u.setCover(userinfo.getAvatar_hd());
+//			u.setCover(userinfo.getAvatar_hd());
 			user.update(u);
 			//set response
 			resobj.setStat(true);
@@ -479,7 +487,7 @@ public class usersServiceImpl implements usersService
 			resobj.setLocation(userinfo.getLocation());
 		} else {
 			u.setName(userinfo.getScreen_name());
-			u.setCover(userinfo.getAvatar_hd());
+//			u.setCover(userinfo.getAvatar_hd());
 			user.update(u);
 			//设置response用户信息
 			resobj.setStat(true);

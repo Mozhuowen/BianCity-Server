@@ -25,10 +25,13 @@ public class MsgCrypt {
 //		System.out.println(aesKey.length);
 		
 		ByteGroup byteCollector = new ByteGroup();
-		byte[] timestamp = time.getBytes(CHARSET);
+		byte[] timestamp = null;
+		if (time !=null)
+			timestamp = time.getBytes(CHARSET);
 		byte[] textBytes = text.getBytes(CHARSET);
 
-		byteCollector.addBytes(timestamp);
+		if (time != null)
+			byteCollector.addBytes(timestamp);
 		byteCollector.addBytes(textBytes);
 
 		// ... + pad: 使用自定义的填充方式对明文进行补位填充
@@ -60,6 +63,7 @@ public class MsgCrypt {
 	}
 
 	static String decrypt(String text) throws AesException {
+		aesKey = Base64.decodeBase64(encodingAesKey + "=");
 		byte[] original;
 		try {
 			// 设置解密模式为AES的CBC模式
@@ -92,6 +96,18 @@ public class MsgCrypt {
 
 		return xmlContent;
 
+	}
+	/**加密消息并进行base64编码后返回*/
+	public static String simpleEncBase64(String content) throws AesException
+	{
+		byte[] encbyte = encrypt(null,content);
+		
+		return Base64.encodeBase64String(encbyte);
+	}
+	/**对base64解码并解密*/
+	public static String simpleDecBase64(String content) throws AesException
+	{
+		return decrypt(content);
 	}
 	public static String[] encryptMsg(String content) throws AesException {
 		String timeStamp = String.valueOf(Calendar.getInstance().getTimeInMillis());

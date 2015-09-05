@@ -102,15 +102,16 @@ public class TiePushRunnable implements Runnable
 		LogUtil.v(this, "login device: "+this.logindevice);
 		//ios测试环境
 //		Constants.useSandbox();
+//		Constants.useOfficial();
 		Message message = null;		
 	   Sender sender = null;
-	   if (this.logindevice == 0) {
+	   if (this.logindevice == 0) {	
 		   Constants.useOfficial();
 		   sender = new Sender("DxBCH7FvGmmESAzSr0/WqA==");
 	   	message = buildMessage();
 	   }else{
-		   LogUtil.v(this, "send to iphone");
-		   Constants.useSandbox();
+		   LogUtil.v(this, "is going to send to iphone besenduserid "+ besenduserid);
+//		   Constants.useSandbox();
 		   sender = new Sender("bJZyK19S50InYa2LySf25Q==");
 		   message = buildIOSMessage();
 	   }

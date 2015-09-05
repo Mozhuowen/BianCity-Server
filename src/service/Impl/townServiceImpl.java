@@ -245,7 +245,8 @@ public class townServiceImpl implements townService
 			resobj.setStat(false);
 			resobj.setErrcode(tools.NetErrorUtil.SERVER_ERROR);
 		}
-		
+		//testcode
+//		resobj.setTowns(new ArrayList());
 		return resobj;
 	}
 	@Override
