@@ -10,6 +10,7 @@ public class ModelPushTie
 	private ModelTieTheme tieth;
 	private ModelTie tie;
 	private int adminid;
+	private String tieth_title;		//新增，主题贴题目
 	public int getTietype() {
 		return tietype;
 	}
@@ -45,5 +46,11 @@ public class ModelPushTie
 	}
 	public void setAdminid(int adminid) {
 		this.adminid = adminid;
+	}
+	public String getTieth_title() {
+		return tieth_title;
+	}
+	public void setTieth_title(String tieth_title) {
+		this.tieth_title = tieth_title;
 	}
 }

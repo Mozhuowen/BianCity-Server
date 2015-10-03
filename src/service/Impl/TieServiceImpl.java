@@ -17,6 +17,7 @@ import service.TieService;
 import service.usersService;
 import tools.NetErrorUtil;
 import tools.objects.ResponseSimple;
+import tools.objects.community.ModelTie;
 import tools.objects.community.ModelTieTheme;
 
 public class TieServiceImpl implements TieService
@@ -28,7 +29,7 @@ public class TieServiceImpl implements TieService
 	private usersService userservice;
 
 	@Override
-	public ResponseSimple submitTie(int townid, int tiethid, int userid,
+	public synchronized ResponseSimple submitTie(int townid, int tiethid, int userid,
 			String content, List<Image> images) {
 		ResponseSimple res = new ResponseSimple();
 		boolean isJoinBBS = false;
@@ -46,6 +47,7 @@ public class TieServiceImpl implements TieService
 			users u = user.get(userid);
 			TieTheme tiet = tieth.get(tiethid);
 			Tie ti = new Tie();
+			ti.setFloor(tie.getMaxFloot(tiet)+1);
 			ti.setContent(content);
 			ti.setImages(images);
 			ti.setImagecou(images.size());
@@ -63,8 +65,10 @@ public class TieServiceImpl implements TieService
 			if (tie.save(ti) > 0) {
 				res.setStat(true);
 				//推送消息
-				if (tiet.getUser().getUsersid() != userid)
-				new Thread(new TiePushRunnable(new ModelTieTheme(tiet),null,0,0,tiet.getUser().getUsersid(),userservice.getLoginDevice(tiet.getUser().getUsersid()),t.getOwner().getUsersid())).start();
+				if (tiet.getUser().getUsersid() != userid){
+					//新修改，发送帖子内容对象
+					new Thread(new TiePushRunnable(null,new ModelTie(ti),0,0,tiet.getUser().getUsersid(),userservice.getLoginDevice(tiet.getUser().getUsersid()),t.getOwner().getUsersid(),tiet.getTitle())).start();
+				}
 			} else {
 				res.setStat(false);
 				res.setErrcode(NetErrorUtil.SERVER_ERROR);

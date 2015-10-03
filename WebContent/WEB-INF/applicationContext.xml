@@ -85,7 +85,7 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 	<bean id="TieThemeDao" class="dao.Impl.TieThemeDaoImpl" parent="daoTemplate"/>
 	<bean id="TieDao" class="dao.Impl.TieDaoImpl" parent="daoTemplate"/>
 	<bean id="TieReplyDao" class="dao.Impl.TieReplyDaoImpl" parent="daoTemplate"/>
-	
+		
 	<!-- 定义service业务逻辑组件，并注入dao -->
 	<bean id="usersService" class="service.Impl.usersServiceImpl">
 		<property name="user" ref="usersDao"/>

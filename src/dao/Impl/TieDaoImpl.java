@@ -43,7 +43,7 @@ public class TieDaoImpl extends HibernateDaoSupport implements TieDao
 //			.add(Restrictions.eq("visible", 0))
 //			.addOrder(Order.asc("time"));
 //		return (List<ModelTie>)this.getHibernateTemplate().find("select new tools.objects.community.ModelTie(t) from Tie t where t.tieth=? order by t.time asc limit ?,15", tieth,position);
-		final String hql = "select new tools.objects.community.ModelTie(t) from Tie t where t.tieth=:tt order by t.time asc";
+		final String hql = "select new tools.objects.community.ModelTie(t) from Tie t where t.tieth=:tt and t.visible=0 order by t.time asc";
 		@SuppressWarnings("unchecked")
 		List<ModelTie> list = this.getHibernateTemplate().executeFind(new HibernateCallback(){
 			@Override
@@ -58,6 +58,11 @@ public class TieDaoImpl extends HibernateDaoSupport implements TieDao
 			}			
 		});
 		return list;
+	}
+
+	@Override
+	public int getMaxFloot(TieTheme tieth) {
+		return (Integer)this.getHibernateTemplate().find("select max(t.floor) from Tie t where t.tieth=?", tieth).get(0);
 	}
 	
 }

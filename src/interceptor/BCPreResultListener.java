@@ -1,12 +1,9 @@
 package interceptor;
 
-import org.apache.struts2.ServletActionContext;
-
 import tools.LogUtil;
 import tools.encrypt.AesException;
 import tools.encrypt.MsgCrypt;
 
-import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.interceptor.PreResultListener;
 import com.opensymphony.xwork2.util.ValueStack;

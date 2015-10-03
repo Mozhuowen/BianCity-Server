@@ -12,4 +12,5 @@ public interface TieDao
 	Integer save(Tie tie);
 	void update(Tie tie);
 	List<ModelTie> getTies(TieTheme tieth,int position);
+	int getMaxFloot(TieTheme tieth);
 }

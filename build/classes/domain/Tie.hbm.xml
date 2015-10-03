@@ -15,6 +15,7 @@
 	<property name="content" type="text"/>
 	<property name="imagecou" type="integer"/>
 	<property name="visible" type="integer"/>
+	<property name="floor" type="integer"/>
 	<!-- 影射list集合 inverse="false"才能自动维护index??!! -->
 	<list name="images" table="image" cascade="all" inverse="true">
 		<!-- 影射集合属性数据表的外键列 -->

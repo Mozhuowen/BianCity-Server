@@ -1,6 +1,7 @@
 package domain;
 
 import java.util.Calendar;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -17,6 +18,7 @@ public class Tie
 	private Set<TieReply> replys;	//本帖包含的快速回复	1-N双向
 	private TieTheme tieth;			//隶属的主题贴	 N-1双向
 	private int visible;
+	private int floor;		//新加字段，标记这个帖子的楼层
 	public int getTieid() {
 		return tieid;
 	}
@@ -66,7 +68,10 @@ public class Tie
 		this.images = images;
 	}
 	public Set<TieReply> getReplys() {
-		return replys;
+		if (replys == null)
+			return new HashSet<TieReply>();
+		else
+			return replys;
 	}
 	public void setReplys(Set<TieReply> replys) {
 		this.replys = replys;
@@ -82,5 +87,11 @@ public class Tie
 	}
 	public void setVisible(int visible) {
 		this.visible = visible;
+	}
+	public int getFloor() {
+		return floor;
+	}
+	public void setFloor(int floor) {
+		this.floor = floor;
 	}
 }

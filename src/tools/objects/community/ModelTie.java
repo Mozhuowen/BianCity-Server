@@ -35,11 +35,14 @@ public class ModelTie
 		this.goodcou = t.getGoodcou();
 		this.content = t.getContent();
 		this.imagenames = new ArrayList<String>();
+		this.floot = t.getFloor();	//帖子楼层
 		for (int i=0;i<t.getImages().size();i++)
 			imagenames.add(t.getImages().get(i).getImagename());
 		this.imagecou = t.getImages().size();
 		List<ModelTieReply> list = new ArrayList<ModelTieReply>();
 		List<TieReply> replys = new ArrayList(t.getReplys());
+		if (replys == null)
+			replys = new ArrayList<TieReply>();
 		for (int i=0;i<t.getReplys().size();i++) {
 			list.add(new ModelTieReply(replys.get(i)));
 		}

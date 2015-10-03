@@ -24,6 +24,19 @@ public class TiePushRunnable implements Runnable
 	int besenduserid;
 	int logindevice;
 	int admintId;
+	String tieth_title;
+	
+	public TiePushRunnable(ModelTieTheme tiethe,ModelTie tie,int type,int floot,int bereplyuserid,int logindevice,int adminid,String tieth_title)
+	{
+		this.tietype = type;
+		this.tieth = tiethe;
+		this.floot = floot;
+		this.tie = tie;
+		this.besenduserid = bereplyuserid;
+		this.logindevice = logindevice;
+		this.admintId = adminid;
+		this.tieth_title = tieth_title;
+	}
 	
 	public TiePushRunnable(ModelTieTheme tiethe,ModelTie tie,int type,int floot,int bereplyuserid,int logindevice,int adminid) {
 		this.tietype = type;
@@ -53,6 +66,7 @@ public class TiePushRunnable implements Runnable
 		model.setFloot(floot);
 		model.setAdminid(admintId);
 		model.setTime(Calendar.getInstance().getTimeInMillis());
+		model.setTieth_title(tieth_title);
 		
 		ModelPush pushmess = new ModelPush();
 		pushmess.setType(4);

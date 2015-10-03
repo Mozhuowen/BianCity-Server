@@ -377,6 +377,13 @@
 		<interceptor name="jsoncheck" class="jsoncheck_actionV2"/>
 		<interceptor name="authority" class="authority_action"/>
 	</interceptors>
+	<!-- 错误页面 -->
+	<global-results>
+		<result name="root">/WEB-INF/jsp/global_error.jsp</result>
+	</global-results>
+	<global-exception-mappings>
+		<exception-mapping exception="java.lang.Exception" result="root"/>
+	</global-exception-mappings>
 
 	<!-- actions -->
 	<action name="hello" class="hello_action">
