@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import dao.TieDao;
+import dao.TieReplyDao;
 import dao.TieThemeDao;
 import dao.townDao;
 import dao.usersDao;
@@ -27,6 +28,7 @@ import tools.objects.community.ModelTieTheme;
 import tools.objects.community.ResCommunityHeader;
 import tools.objects.community.ResCommunityTie;
 import tools.objects.community.ResCommunityTieTh;
+import tools.objects.community.ResGetTieReplys;
 import tools.objects.community.ResJoinBBS;
 
 public class CommunityServiceImpl implements CommunityService
@@ -34,6 +36,7 @@ public class CommunityServiceImpl implements CommunityService
 	private townDao townx;
 	private usersDao user;
 	private TieThemeDao tieth;
+	private TieReplyDao tiereply;
 	private TieDao tie;
 	private usersService userservice;
 	
@@ -121,6 +124,19 @@ public class CommunityServiceImpl implements CommunityService
 		
 		return res;
 	}
+	@Override
+	public ResGetTieReplys getTieReplys(int tieid){
+		ResGetTieReplys res = new ResGetTieReplys();
+		try{
+			res.setStat(true);
+			res.setReplys(tiereply.getreplys(tie.get(tieid)));
+		}catch(Exception e) {
+			e.printStackTrace();
+			res.setStat(false);
+			res.setErrcode(NetErrorUtil.SERVER_ERROR);
+		}
+		return res;
+	}
 
 	
 	@Override
@@ -201,6 +217,14 @@ public class CommunityServiceImpl implements CommunityService
 
 	public void setUserservice(usersService userservice) {
 		this.userservice = userservice;
+	}
+
+	public TieReplyDao getTiereply() {
+		return tiereply;
+	}
+
+	public void setTiereply(TieReplyDao tiereply) {
+		this.tiereply = tiereply;
 	}
 
 	

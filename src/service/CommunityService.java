@@ -6,6 +6,7 @@ import tools.objects.ResponseSimple;
 import tools.objects.community.ResCommunityHeader;
 import tools.objects.community.ResCommunityTie;
 import tools.objects.community.ResCommunityTieTh;
+import tools.objects.community.ResGetTieReplys;
 import tools.objects.community.ResJoinBBS;
 
 public interface CommunityService
@@ -15,4 +16,5 @@ public interface CommunityService
 	ResJoinBBS joinCommunity(int townid,int userid);
 	ResCommunityTie getCommunityTie(int zhulouid,int position);
 	ResponseSimple toTop(int titthid,int userid);
+	ResGetTieReplys getTieReplys(int tieid);
 }

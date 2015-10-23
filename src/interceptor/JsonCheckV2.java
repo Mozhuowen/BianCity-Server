@@ -31,6 +31,10 @@ public class JsonCheckV2 extends JSONInterceptor
 	{
 		HttpServletRequest request = ServletActionContext.getRequest();
 		String timestamp = request.getHeader("timestamp");
+		if (timestamp == null){
+			errReturn();
+			return null;
+		}
 		//检测timestamp
 		long time = Long.parseLong(timestamp);
 		LogUtil.v(this, "timestamp is: "+time);

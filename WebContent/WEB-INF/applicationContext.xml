@@ -153,6 +153,7 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 		<property name="tie" ref="TieDao"/>
 		<property name="townx" ref="townDao"/>
 		<property name="userservice" ref="usersService"/>
+		<property name="tiereply" ref="TieReplyDao"/>
 	</bean>
 	<bean id="TieServiceImpl" class="service.Impl.TieServiceImpl">
 		<property name="user" ref="usersDao"/>
@@ -312,6 +313,9 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 	</bean>
 	<!-- 新的jsoncheck v2 提供解密功能 -->
 	<bean id="jsoncheck_actionV2" class="interceptor.JsonCheckV2" scope="prototype"/>
+	<bean id="getcommunitytiereplys_action" class="action.getcommunitytiereplys" scope="prototype">
+		<property name="community" ref="communityService"/>
+	</bean>
 	
 	<!-- 配置事务相关 -->
 	<bean id="transactionManager" 

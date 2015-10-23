@@ -29,7 +29,7 @@ public class TieReplyDaoImpl extends HibernateDaoSupport implements TieReplyDao
 
 	@Override
 	public List<ModelTieReply> getreplys(Tie tie) {		
-		return (List<ModelTieReply>)this.getHibernateTemplate().find("select tools.objects.community.ModelTieReply(tr) from TieReply tr where tr.tie=? order by time asc", tie);
+		return (List<ModelTieReply>)this.getHibernateTemplate().find("select new tools.objects.community.ModelTieReply(tr) from TieReply tr where tr.tie=? order by time asc", tie);
 	}
 	
 }

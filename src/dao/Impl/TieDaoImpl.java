@@ -62,7 +62,11 @@ public class TieDaoImpl extends HibernateDaoSupport implements TieDao
 
 	@Override
 	public int getMaxFloot(TieTheme tieth) {
-		return (Integer)this.getHibernateTemplate().find("select max(t.floor) from Tie t where t.tieth=?", tieth).get(0);
+		try{
+			return (Integer)this.getHibernateTemplate().find("select max(t.floor) from Tie t where t.tieth=?", tieth).get(0);
+		}catch(NullPointerException e) {
+			return 0;
+		}
 	}
 	
 }
